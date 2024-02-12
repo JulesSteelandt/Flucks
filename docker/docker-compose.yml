@@ -30,7 +30,7 @@ services:
     image: 'postgres:latest'
     env_file: ./db.env
     ports:
-      - '5432:5432'
+      - '35302:5432'
     networks:
       - flucks.net
 

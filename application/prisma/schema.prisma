@@ -6,3 +6,92 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Utilisateur {
+  email                  String    @id @db.VarChar(255)
+  motDePasse             String    @db.VarChar(255)
+  pseudo                 String    @db.VarChar(255)
+  photo                  String?   @db.VarChar(255)
+  listeDeProximite       Boolean
+  refreshToken           String?   @db.VarChar(64)
+  refreshTokenExpiration DateTime?
+
+  abonnee      Abonnement[]  @relation("Abonnement_abonnee")
+  abonnement   Abonnement[]  @relation("Abonnement_abonnement")
+  commentaires Commentaire[]
+
+  likes     Like[]
+  emetteur  ListeUrgence[] @relation("UtilisateurEmetteur")
+  recepteur ListeUrgence[] @relation("UtilisateurRecepteur")
+  Diffusion Diffusion[]
+}
+
+model Abonnement {
+  id              Int         @id @default(autoincrement())
+  abonnement      Utilisateur @relation("Abonnement_abonnee", fields: [abonnementEmail], references: [email])
+  abonnementEmail String      @map("abonneur") @db.VarChar(255)
+  abonne          Utilisateur @relation("Abonnement_abonnement", fields: [abonneEmail], references: [email])
+  abonneEmail     String      @map("abonne") @db.VarChar(255)
+  notification    Boolean
+
+  @@unique([abonnementEmail, abonneEmail])
+}
+
+model Diffusion {
+  id            String        @id @db.VarChar(255)
+  direct        Boolean
+  titre         String        @db.VarChar(255)
+  vue           Int
+  description   String
+  public        Boolean
+  longitude     Float
+  latitude      Float
+  createur      Utilisateur   @relation(fields: [createurEmail], references: [email])
+  createurEmail String        @map("createur") @db.VarChar(255)
+  likes         Like[]
+  commentaires  Commentaire[]
+  tags          Tag[]
+}
+
+model Commentaire {
+  id               Int         @id @default(autoincrement())
+  utilisateur      Utilisateur @relation(fields: [utilisateurEmail], references: [email])
+  utilisateurEmail String      @map("utilisateur") @db.VarChar(255)
+  diffusion        Diffusion   @relation(fields: [diffusionId], references: [id])
+  diffusionId      String      @map("diffusion") @db.VarChar(255)
+  commentaire      String
+
+  @@index([utilisateurEmail, diffusionId], map: "commentaire_utilisateur_diffusion_unique")
+}
+
+model Like {
+  id               Int         @id @default(autoincrement())
+  utilisateur      Utilisateur @relation(fields: [utilisateurEmail], references: [email])
+  utilisateurEmail String      @map("utilisateur") @db.VarChar(255)
+  diffusion        Diffusion   @relation(fields: [diffusionId], references: [id])
+  diffusionId      String      @map("diffusion") @db.VarChar(255)
+
+  @@unique([utilisateurEmail, diffusionId], name: "unique_like_user_diffusion")
+  @@index([utilisateurEmail, diffusionId], map: "like_utilisateur_diffusion_unique")
+}
+
+model ListeUrgence {
+  id                        Int         @id @default(autoincrement())
+  utilisateurEmetteur       Utilisateur @relation("UtilisateurEmetteur", fields: [utilisateurEmetteurEmail], references: [email])
+  utilisateurEmetteurEmail  String      @map("utilisateur_emetteur") @db.VarChar(255)
+  utilisateurRecepteur      Utilisateur @relation("UtilisateurRecepteur", fields: [utilisateurRecepteurEmail], references: [email])
+  utilisateurRecepteurEmail String      @map("utilisateur_recepteur") @db.VarChar(255)
+
+  @@unique([utilisateurEmetteurEmail, utilisateurRecepteurEmail], name: "unique_liste_urgence_users")
+  @@index([utilisateurEmetteurEmail, utilisateurRecepteurEmail], map: "liste_urgence_utilisateur_emetteur_utilisateur_recepteur_unique")
+}
+
+model Tag {
+  id          Int       @id @default(autoincrement())
+  tag         String    @db.VarChar(255)
+  diffusion   Diffusion @relation(fields: [diffusionId], references: [id])
+  diffusionId String    @map("diffusion_id") @db.VarChar(255)
+
+  @@unique([tag, diffusionId], name: "unique_tag_diffusion")
+  @@index([diffusionId], map: "tag_diffusion_id_index")
+}
