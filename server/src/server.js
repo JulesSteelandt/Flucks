@@ -1,9 +1,6 @@
 import app from './app.js';
+import apiRouter from "./routes/apiRouter.js";
 
 app.listen(process.env.PORT, () => {
   console.log(`🦉 Serveur prêt sur le port ${process.env.PORT}`);
 })
-
-app.use("/routes", apiRouter)
-
-app.get("/", (req, res) => res.send("Hello depuis la racine"))
