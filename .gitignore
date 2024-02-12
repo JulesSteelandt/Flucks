@@ -39,4 +39,5 @@ next-env.d.ts
 /application/node_modules/
 
 #Server
-server/node_modules
+/server/node_modules
+/server/.env
