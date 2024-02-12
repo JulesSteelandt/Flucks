@@ -34,6 +34,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+#prisma
+/application/prisma/migrations/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
