@@ -56,6 +56,14 @@ async function main() {
     },
   });
 
+  const geo3 = await prisma.geolocalisation.create({
+    data: {
+      id: 2,
+      latitude: 48.8566,
+      longitude: 2.3521,
+    },
+  });
+
   const diffusion1 = await prisma.diffusion.upsert({
     where: { id: "8457d296-c8e6-4a75-b71b-ff2d775e6465" },
     update: {},
@@ -64,6 +72,7 @@ async function main() {
       direct: false,
       titre: "La dinguerie du chef ??",
       vue: 2,
+      urgence: false,
       description: "Completement chobkar par ce que j'ai vu",
       public: true,
       geolocalisationId: geo1.id,
@@ -79,9 +88,9 @@ async function main() {
       direct: false,
       titre: "NoScope1v1Dust2.mp4",
       vue: 347,
+      urgence: false,
       description: "wow !",
       public: true,
-      geolocalisationId: geo2.id,
       createurEmail: christian.email,
     },
   });
@@ -94,9 +103,27 @@ async function main() {
       direct: true,
       titre: "Encore quelque chose de fou..",
       vue: 4,
+      urgence: false,
       description: "Donnez votre avis",
+      geolocalisationId: geo2.id,
       public: true,
       createurEmail: alice.email,
+    },
+  });
+
+  const diffusion4 = await prisma.diffusion.upsert({
+    where: { id: "871d3376-ec0b-464f-a137-5886cc16be71" },
+    update: {},
+    create: {
+      id: "871d3376-ec0b-464f-a137-5886cc16be71",
+      direct: true,
+      titre: "Venez vite !",
+      vue: 2,
+      urgence: true,
+      description: "c'est affligeant..",
+      public: true,
+      geolocalisationId: geo3.id,
+      createurEmail: michel.email,
     },
   });
 

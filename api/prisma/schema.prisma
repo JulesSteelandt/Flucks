@@ -44,6 +44,7 @@ model Diffusion {
   vue               Int
   description       String
   public            Boolean
+  urgence           Boolean
   GeoLocalisation   geolocalisation? @relation(fields: [geolocalisationId], references: [id])
   geolocalisationId Int?             @unique
   createur          Utilisateur      @relation(fields: [createurEmail], references: [email])
