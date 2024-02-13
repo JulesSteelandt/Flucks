@@ -12,12 +12,9 @@
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
-    "@prisma/client": "^5.9.1",
-    "bcrypt": "^5.1.1",
     "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18",
-    "uuid": "^9.0.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
@@ -30,7 +27,6 @@
     "postcss": "^8",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.7",
-    "prisma": "^5.9.1",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
