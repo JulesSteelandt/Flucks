@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.flucksBlueBackground {
+    background-color: #5DA5B3;
+}
+
+.navBarBackground {
+    background-color: #394054;
+}
+
+.navBarText {
+    color: #394054;
+}
