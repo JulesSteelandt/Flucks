@@ -2,7 +2,8 @@
 
 import express from "express";
 import bodyParser from "body-parser";
-import userRoutes from "./routes/user.routes"; // Importez le routeur par défaut
+import userRoutes from "./routes/user.routes";
+import diffusionRoute from "./routes/diffusion.route"; // Importez le routeur par défaut
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 // Utilisation des routes de l'utilisateur
 app.use("/users", userRoutes); // Utilisez le routeur par défaut
+app.use("/diffusions", diffusionRoute); // Utilisez le routeur par défaut
 
 // Start server
 app.listen(PORT, () => {
