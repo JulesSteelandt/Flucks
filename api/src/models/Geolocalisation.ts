@@ -3,26 +3,24 @@ const db = require("../config/db");
 class Geolocalisation {
   static async getGeolocalisation() {
     try {
-      const geolocalisation =
+      const geolocalisations =
         await db("Geolocalisation").select("Geolocalisation.*");
 
-      const diffusions = await db("Diffusion").whereIn(
-        "geolocalisationId",
-        geolocalisation.map((loc) => loc.id),
-      );
+      // Récupérer les ID des diffusions liées à chaque géolocalisation
+      for (const geolocalisation of geolocalisations) {
+        const diffusionIds = await db("Diffusion")
+          .where("geolocalisationId", geolocalisation.id)
+          .pluck("id");
 
-      diffusions.forEach((diffusion) => {
-        const localForDiffusion = geolocalisation.find(
-          (loc) => loc.id === diffusion.geolocalisationId,
-        );
+        const diffusionId = diffusionIds.length > 0 ? diffusionIds[0] : null;
 
-        diffusion.geolocalisation = localForDiffusion || null;
-      });
+        geolocalisation.diffusionId = diffusionId;
+      }
 
-      return geolocalisation;
+      return geolocalisations;
     } catch (error) {
       console.error(
-        "Erreur lors de la récupération de la géolocalisation:",
+        "Erreur lors de la récupération des géolocalisations:",
         error,
       );
       throw error;
