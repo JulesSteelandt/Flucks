@@ -4,14 +4,16 @@ import Diffusion from "../models/Diffusion";
 export const getDiffusion = async (req: Request, res: Response) => {
   try {
     const diff = await Diffusion.getAllDiffusions();
-    console.log();
+
     const elementsARetourner = diff.map((element: any) => ({
       id: element.id,
       titre: element.titre,
       createur: element.createurPseudo,
       direct: element.direct,
       urgence: element.urgence,
+      tags: element.tags,
     }));
+
     return res.status(200).json({ data: elementsARetourner });
   } catch (error) {
     console.error("Erreur lors du retour des diffusions:", error);
@@ -31,8 +33,34 @@ export const getDiffusionById = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Diffusion non trouvée." });
     }
 
+    const elementsARetourner = {
+      id: diffusion.id,
+      titre: diffusion.titre,
+      description: diffusion.description,
+      vue: diffusion.vue,
+      createur: {
+        pseudo: diffusion.createurPseudo,
+        email: diffusion.createurEmail,
+        abonnees: diffusion.abonnementCount,
+      },
+      direct: diffusion.direct,
+      urgence: diffusion.urgence,
+      like: diffusion.likeCount,
+      geolocalisation: {
+        latitude: diffusion.latitude,
+        longitude: diffusion.longitude,
+      },
+      commentaires:
+        diffusion.commentaires.length > 0
+          ? diffusion.commentaires.map((commentaire: any) => ({
+              pseudo: commentaire.pseudo,
+              commentaire: commentaire.commentaire,
+            }))
+          : null,
+    };
+
     // Retourner la diffusion
-    return res.status(200).json({ diffusion });
+    return res.status(200).json({ data: elementsARetourner });
   } catch (error) {
     console.error(
       "Erreur lors de la récupération de la diffusion par ID:",
