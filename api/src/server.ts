@@ -1,24 +1,23 @@
-// server.ts
-
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import userRoutes from "./routes/user.routes";
-import diffusionRoute from "./routes/diffusion.route"; // Importez le routeur par défaut
+import diffusionRoute from "./routes/diffusion.route";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors()); // Activez le middleware cors
 
 // Routes
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// Utilisation des routes de l'utilisateur
-app.use("/users", userRoutes); // Utilisez le routeur par défaut
-app.use("/diffusions", diffusionRoute); // Utilisez le routeur par défaut
+app.use("/users", userRoutes);
+app.use("/diffusions", diffusionRoute);
 
 // Start server
 app.listen(PORT, () => {
