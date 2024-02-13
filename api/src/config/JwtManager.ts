@@ -10,7 +10,7 @@ class JwtManager {
    */
   static create(user) {
     const payload = {
-      iss: "pizza-shop.auth.db",
+      iss: "flucks.db",
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + parseInt(config.jwt.expiresIn),
       upr: {
