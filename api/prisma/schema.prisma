@@ -45,7 +45,7 @@ model Diffusion {
   description       String
   public            Boolean
   urgence           Boolean
-  GeoLocalisation   geolocalisation? @relation(fields: [geolocalisationId], references: [id])
+  GeoLocalisation   Geolocalisation? @relation(fields: [geolocalisationId], references: [id])
   geolocalisationId Int?             @unique
   createur          Utilisateur      @relation(fields: [createurEmail], references: [email])
   createurEmail     String           @map("createur") @db.VarChar(255)
@@ -97,7 +97,7 @@ model Tag {
   @@index([diffusionId], map: "tag_diffusion_id_index")
 }
 
-model geolocalisation {
+model Geolocalisation {
   id        Int        @id @default(autoincrement())
   latitude  Float
   longitude Float
