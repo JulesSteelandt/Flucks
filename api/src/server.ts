@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import diffusionRoute from "./routes/diffusion.route";
+import geolocalisationRoute from "./routes/geolocalisation.route";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoutes);
 app.use("/diffusions", diffusionRoute);
+app.use("/geolocalisation", geolocalisationRoute);
 
 // Start server
 app.listen(PORT, () => {
