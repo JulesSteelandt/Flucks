@@ -38,19 +38,19 @@ model Abonnement {
 }
 
 model Diffusion {
-  id            String        @id @db.VarChar(255)
-  direct        Boolean
-  titre         String        @db.VarChar(255)
-  vue           Int
-  description   String
-  public        Boolean
-  longitude     Float
-  latitude      Float
-  createur      Utilisateur   @relation(fields: [createurEmail], references: [email])
-  createurEmail String        @map("createur") @db.VarChar(255)
-  likes         Like[]
-  commentaires  Commentaire[]
-  tags          Tag[]
+  id                String           @id @db.VarChar(255)
+  direct            Boolean
+  titre             String           @db.VarChar(255)
+  vue               Int
+  description       String
+  public            Boolean
+  GeoLocalisation   geolocalisation? @relation(fields: [geolocalisationId], references: [id])
+  geolocalisationId Int?             @unique
+  createur          Utilisateur      @relation(fields: [createurEmail], references: [email])
+  createurEmail     String           @map("createur") @db.VarChar(255)
+  likes             Like[]
+  commentaires      Commentaire[]
+  tags              Tag[]
 }
 
 model Commentaire {
@@ -94,4 +94,11 @@ model Tag {
 
   @@unique([tag, diffusionId], name: "unique_tag_diffusion")
   @@index([diffusionId], map: "tag_diffusion_id_index")
+}
+
+model geolocalisation {
+  id        Int        @id @default(autoincrement())
+  latitude  Float
+  longitude Float
+  Diffusion Diffusion?
 }
