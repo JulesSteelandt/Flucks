@@ -11,17 +11,13 @@ class JwtManager {
    * @returns {string} un token jwt sous forme de string
    */
   static create(user: Utilisateur) {
+    console.log(config.jwt);
     const payload = {
-      iss: "flucks.db",
-      iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + parseInt(config.jwt.expiresIn),
-      upr: {
-        username: user.pseudo,
-        email: user.email,
-      },
+      username: user.pseudo,
+      email: user.email,
     };
 
-    return jwt.sign(payload, config.jwt.secret, { algorithm: "HS512" });
+    return jwt.sign(payload, config.jwt.secret);
   }
 
   /**

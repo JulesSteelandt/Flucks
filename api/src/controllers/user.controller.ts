@@ -4,13 +4,26 @@ import bcrypt from "bcryptjs";
 const JwtManager = require("../config/JwtManager");
 
 export const signIn = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Basic ")) {
+    return res
+      .status(400)
+      .json({ message: "En-tête d'authentification Basic manquant" });
+  }
+
+  const encodedCredentials = authHeader.split(" ")[1];
+  const decodedCredentials = Buffer.from(encodedCredentials, "base64").toString(
+    "utf-8",
+  );
+  const [email, password] = decodedCredentials.split(":");
 
   if (!email || !password) {
     return res
       .status(400)
       .json({ message: "L'email et le mot de passe sont obligatoires." });
   }
+
   try {
     const user = await Utilisateur.getUserByEmail(email);
     if (!user) {
@@ -28,5 +41,28 @@ export const signIn = async (req: Request, res: Response) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error });
+  }
+};
+
+export const validate = async (req: Request, res: Response) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(400).json({ message: "Token manquant" });
+  }
+
+  const bearer = "Bearer ";
+  if (token.startsWith(bearer)) {
+    const tokenWithoutBearer = token.slice(bearer.length);
+
+    try {
+      const data = await JwtManager.validate(tokenWithoutBearer);
+
+      return res.status(200).json({ data });
+    } catch (error) {
+      return res.status(401).json({ message: error });
+    }
+  } else {
+    return res.status(401).json({ message: "Format de token non valide" });
   }
 };
