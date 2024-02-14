@@ -1,7 +1,7 @@
 // user.routes.ts
 
 import express from "express";
-import { signIn, validate } from "../controllers/user.controller";
+import { signIn, signUp, validate } from "../controllers/user.controller";
 
 const router = express.Router();
 
