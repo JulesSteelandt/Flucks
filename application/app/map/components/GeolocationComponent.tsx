@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 
 interface Coords {
@@ -33,7 +34,7 @@ const GeolocationComponent: React.FC<GeolocationProps> = ({ onCoordsReceived }) 
     }
   };
 
-  return null; // Ce composant ne rend rien directement
+  return null;
 };
 
 export default GeolocationComponent;
