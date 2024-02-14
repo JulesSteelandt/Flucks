@@ -8,7 +8,6 @@ import {
 
 const router = express.Router();
 
-// Route pour rechercher un utilisateur par e-mail
 router.get("/", getDiffusion);
 router.get("/:id", getDiffusionById);
 
