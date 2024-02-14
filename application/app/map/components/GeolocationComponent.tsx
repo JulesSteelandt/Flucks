@@ -5,9 +5,11 @@ interface Coords {
   longitude: number;
 }
 
-const GeolocationComponent: React.FC = () => {
-  const [coords, setCoords] = useState<Coords | null>(null);
+interface GeolocationProps {
+  onCoordsReceived: (coords: Coords) => void;
+}
 
+const GeolocationComponent: React.FC<GeolocationProps> = ({ onCoordsReceived }) => {
   useEffect(() => {
     handleGeolocation();
   }, []);
@@ -16,10 +18,11 @@ const GeolocationComponent: React.FC = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setCoords({
+          const coords: Coords = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          });
+          };
+          onCoordsReceived(coords);
         },
         (error) => {
           console.error(error);
@@ -30,18 +33,7 @@ const GeolocationComponent: React.FC = () => {
     }
   };
 
-  return (
-    <div>
-      {coords ? (
-        <div>
-          <p>Latitude: {coords.latitude}</p>
-          <p>Longitude: {coords.longitude}</p>
-        </div>
-      ) : (
-        <p>Demande de géolocalisation en cours...</p>
-      )}
-    </div>
-  );
+  return null; // Ce composant ne rend rien directement
 };
 
 export default GeolocationComponent;
