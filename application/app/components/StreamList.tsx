@@ -1,19 +1,17 @@
 import Stream from "@/app/components/Stream";
-import '../globals.css';
+import {fetchDiffusionData} from "@/app/data";
 
-export default function StreamList({ nb }) {
+export default async function StreamList() {
+    const streamData = await fetchDiffusionData();
     return (
         <div>
             <p class={'font-bold p-8 text-2xl'}>Liste des streams</p>
-            <div className={'flex flex-wrap justify-evenly p-8'}>
-                <Stream/>
-                <Stream/>
-                <Stream/>
-                <Stream/>
-                <Stream/>
-                <Stream/>
-                <Stream/>
-                <Stream/>
+            <div className={'flex flex-wrap pl-8'}>
+                {streamData.data.map((stream) => {
+                    if (stream.direct) {
+                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence} />
+                    }
+                })}
             </div>
         </div>
     )
