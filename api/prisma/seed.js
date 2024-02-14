@@ -8,7 +8,7 @@ async function main() {
     create: {
       email: "alice@mail.com",
       motDePasse:
-        "$2b$12$pXPbvTz3cGJisuMAigo.vO.MBSul9jfVKYgocY/ys0VBCYhtlvYh6",
+        "$2b$12$/unaL6vg/dJkAiGCncteguVf8iyZ4hIBuf5eQuscF7MQhTwAPayv2",
       pseudo: "AliceOff",
       listeDeProximite: false,
     },
@@ -20,7 +20,7 @@ async function main() {
     create: {
       email: "michel@mail.com",
       motDePasse:
-        "$2b$12$oL2/yN8mzja1MtCcuNBWMeiGFdkg6m/V40JE.FomIBuWwrlmZasQi",
+        "$2b$12$yKRSSonVnjwYqkpkHrmnPechBgxTu5Vg56MZ91K4tmdlHfaGneebO",
       pseudo: "Bambino12",
       photo: "4c4d7ab4-541e-4a44-a653-c11ae4ccfa30",
       listeDeProximite: true,
@@ -33,7 +33,7 @@ async function main() {
     create: {
       email: "christian@mail.com",
       motDePasse:
-        "$2b$12$uidNFgJqa0OVrOTkcvnUe.VGDXKZMMZz3Phn/alWATueIL1XguuC.",
+        "$2b$12$NIFGPYH5JsKBJGmW.dvageF2IT2yfjjRWcitArH5FcEGx1QLJrEuS",
       pseudo: "ChristianVevo",
       photo: "c2285bbb-65dd-4b07-8e3f-45b2b4e47a6b",
       listeDeProximite: false,
