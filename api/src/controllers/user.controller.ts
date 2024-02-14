@@ -61,9 +61,9 @@ export const signUp = async (req: Request, res: Response) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newUser = await Utilisateur.createUser(pseudo, email, hashedPassword);
+    await Utilisateur.createUser(pseudo, email, hashedPassword);
 
-    return res.status(201).json({ data: newUser });
+    return res.status(201).json({ message: "Le compte a bien été crée" });
   } catch (error) {
     return res.status(500).json({ message: error });
   }

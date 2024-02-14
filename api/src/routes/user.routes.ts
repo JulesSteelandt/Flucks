@@ -8,6 +8,6 @@ const router = express.Router();
 // Route pour rechercher un utilisateur par e-mail
 router.post("/signin", signIn);
 router.get("/validate", validate);
-router.get("/signup", signUp);
+router.post("/signup", signUp);
 
 export default router; // Exportez le routeur par défaut
