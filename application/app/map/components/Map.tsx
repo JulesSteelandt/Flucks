@@ -1,12 +1,13 @@
-
 'use client';
 import {MapContainer, Marker, Popup, TileLayer, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import GetCoords from './GetCoords';
+
 
 
 export default function MyMap() {
   return (
-
+<div className={'w-screen full'}>
   <MapContainer className={'w-screen h-[40vw]'} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} >
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -18,5 +19,8 @@ export default function MyMap() {
       </Popup>
     </Marker>
   </MapContainer>
+  <GetCoords></GetCoords>
+
+</div>
   );  
 }
