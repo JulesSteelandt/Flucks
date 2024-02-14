@@ -1,3 +1,5 @@
+import { Utilisateur } from "@prisma/client";
+
 const jwt = require("jsonwebtoken");
 import config from "./config";
 
@@ -8,13 +10,13 @@ class JwtManager {
    * @param {Object} user un objet contenant le username et l'email de l'utilisateur
    * @returns {string} un token jwt sous forme de string
    */
-  static create(user) {
+  static create(user: Utilisateur) {
     const payload = {
       iss: "flucks.db",
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + parseInt(config.jwt.expiresIn),
       upr: {
-        username: user.username,
+        username: user.pseudo,
         email: user.email,
       },
     };
@@ -29,7 +31,7 @@ class JwtManager {
    * @returns {Object} le payload du jwt sous forme d'objet JavaScript
    * @throws {Error} si le token est expiré, invalide ou indéchiffrable
    */
-  static validate(token) {
+  static validate(token: string) {
     try {
       return jwt.verify(token, config.jwt.secret);
     } catch (err) {

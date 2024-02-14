@@ -84,7 +84,6 @@ export const createDiffusion = async (req: Request, res: Response) => {
       urgence,
       tags,
       geolocalisation,
-      createur: req.user.email,
     });
 
     return res.status(201).json({ data: newDiffusion });

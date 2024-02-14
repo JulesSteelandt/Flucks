@@ -1,28 +1,36 @@
 import { Request, Response } from "express";
 import Utilisateur from "../models/Utilisateur";
+const bcrypt = require("bcrypt");
+const JwtManager = require("../config/JwtManager");
 
-export const getUserByEmail = async (req: Request, res: Response) => {
-  const email = req.params.email;
+export const signIn = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "L'email et le mot de passe sont obligatoires." });
+  }
 
   try {
     const user = await Utilisateur.getUserByEmail(email);
-    if (user) {
-      // Si un utilisateur est trouvé, retournez-le
-      return res.status(200).json({ user });
+    if (!user) {
+      return res.status(404).json({ message: "L'utilisateur n'existe pas" });
+    }
+
+    const result = await bcrypt.compare(password, user.motDePasse);
+
+    if (result === true) {
+      const token = JwtManager.create({
+        username: user.username,
+        email: user.email,
+      });
+
+      return res.status(200).json({ token });
     } else {
-      // Si aucun utilisateur correspondant n'est trouvé, retournez une réponse avec un message approprié
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
+      return res.status(400).json({ message: "Mot de passe incorrect" });
     }
   } catch (error) {
-    // En cas d'erreur, retournez une réponse avec le code d'erreur approprié et un message d'erreur
-    console.error(
-      "Erreur lors de la recherche de l'utilisateur par e-mail:",
-      error,
-    );
-    return res
-      .status(500)
-      .json({
-        message: "Erreur serveur lors de la recherche de l'utilisateur",
-      });
+    return res.status(500).json({ message: error });
   }
 };

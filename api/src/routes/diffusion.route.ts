@@ -2,9 +2,10 @@
 
 import express from "express";
 import {
+  createDiffusion,
   getDiffusion,
   getDiffusionById,
-} from "../controllers/diffusion.controller";
+} from '../controllers/diffusion.controller';
 
 const router = express.Router();
 
