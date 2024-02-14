@@ -1,11 +1,11 @@
 import Stream from "@/app/components/Stream";
 import '../globals.css';
 
-export default function StreamList() {
+export default function StreamList({ nb }) {
     return (
         <div>
             <p class={'font-bold p-8 text-2xl'}>Liste des streams</p>
-            <div className={'flex flex-wrap justify-evenly p-8 bg-gray-100'}>
+            <div className={'flex flex-wrap justify-evenly p-8'}>
                 <Stream/>
                 <Stream/>
                 <Stream/>
@@ -15,7 +15,6 @@ export default function StreamList() {
                 <Stream/>
                 <Stream/>
             </div>
-
         </div>
     )
 }
