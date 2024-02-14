@@ -1,10 +1,11 @@
-export default function Home() {
-  return (
-      <div>
-        <h1 className={""}>Page d'accueil</h1>
-        <div>
+import Link from "next/link";
 
-        </div>
-      </div>
-  );
+export default function Page() {
+    return (
+        <main>
+            <div className={'p-2 m-4 bg-gray-200'}>
+                <Link href={"/flucks"}>Allez sur la page d'accueil</Link>
+            </div>
+        </main>
+    );
 }
