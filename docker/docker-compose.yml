@@ -46,3 +46,17 @@ services:
       - flucks.net
     environment:
       - NODE_ENV=development
+
+
+  api:
+    image: 'node:alpine'
+    ports:
+      - '35305:3000'
+    command: sh -c "npm i && npm run dev"
+    volumes:
+      - ../api:/app
+    working_dir: /app
+    networks:
+      - flucks.net
+    environment:
+      - NODE_ENV=development
