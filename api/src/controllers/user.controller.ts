@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Utilisateur from "../models/Utilisateur";
-const bcrypt = require("bcrypt");
+import bcrypt from "bcryptjs";
 const JwtManager = require("../config/JwtManager");
 
 export const signIn = async (req: Request, res: Response) => {
@@ -11,7 +11,6 @@ export const signIn = async (req: Request, res: Response) => {
       .status(400)
       .json({ message: "L'email et le mot de passe sont obligatoires." });
   }
-
   try {
     const user = await Utilisateur.getUserByEmail(email);
     if (!user) {
@@ -21,10 +20,7 @@ export const signIn = async (req: Request, res: Response) => {
     const result = await bcrypt.compare(password, user.motDePasse);
 
     if (result === true) {
-      const token = JwtManager.create({
-        username: user.username,
-        email: user.email,
-      });
+      const token = JwtManager.create(user);
 
       return res.status(200).json({ token });
     } else {
