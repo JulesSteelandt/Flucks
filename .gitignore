@@ -41,3 +41,5 @@ next-env.d.ts
 
 #Server
 **/node_modules
+server/public/video
+server/public/temp
