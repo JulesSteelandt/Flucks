@@ -1,9 +1,12 @@
-export default function Page({ params }: {
+export default function Page({params}: {
     params: {
         id: string
     }
 }) {
     return (
-        <p>Bienvenue sur le stream n° { params.id} !</p>
+        <div className={'p-4'}>
+            <p>Bienvenue sur le stream !</p>
+            <p className={'font-bold'}>{params.id}</p>
+        </div>
     )
 }
