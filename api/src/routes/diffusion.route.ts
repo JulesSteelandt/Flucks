@@ -10,5 +10,6 @@ const router = express.Router();
 
 router.get("/", getDiffusion);
 router.get("/:id", getDiffusionById);
+router.post("/create", createDiffusion);
 
 export default router; // Exportez le routeur par défaut
