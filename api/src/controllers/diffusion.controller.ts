@@ -71,3 +71,27 @@ export const getDiffusionById = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const createDiffusion = async (req: Request, res: Response) => {
+  try {
+    const { titre, description, direct, urgence, tags, geolocalisation } =
+      req.body;
+
+    const newDiffusion = await Diffusion.createDiffusion({
+      titre,
+      description,
+      direct,
+      urgence,
+      tags,
+      geolocalisation,
+      createur: req.user.email,
+    });
+
+    return res.status(201).json({ data: newDiffusion });
+  } catch (error) {
+    console.error("Erreur lors de la création de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la création de la diffusion.",
+    });
+  }
+};
