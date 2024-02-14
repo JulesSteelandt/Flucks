@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
+import * as L from 'leaflet';
+import 'leaflet-defaulticon-compatibility';
 import GeolocationComponent from './GeolocationComponent';
 
 export default function MyMap() {
@@ -12,6 +15,7 @@ export default function MyMap() {
     setMarkerPosition([coords.latitude, coords.longitude]);
   };
 
+
   return (
     <div className={'w-screen full'}>
       <MapContainer className={'w-screen h-[40vw]'} center={markerPosition || [48.866669, 2.33333]} zoom={13} scrollWheelZoom={true}>
@@ -20,11 +24,12 @@ export default function MyMap() {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
 
-        {markerPosition && <Marker position={markerPosition}>
+        {markerPosition && <Marker position={markerPosition} >
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Vous êtes ici
           </Popup>
         </Marker>}
+
       </MapContainer>
       <GeolocationComponent onCoordsReceived={handleCoordsReceived} />
     </div>
