@@ -14,7 +14,7 @@ export default function MyMap() {
 
   return (
     <div className={'w-screen full'}>
-      <MapContainer className={'w-screen h-[40vw]'} center={markerPosition || [48.866669, 2.33333]} zoom={13} scrollWheelZoom={false}>
+      <MapContainer className={'w-screen h-[40vw]'} center={markerPosition || [48.866669, 2.33333]} zoom={13} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
