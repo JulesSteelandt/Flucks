@@ -15,30 +15,12 @@ class Utilisateur {
   }
 
   static async getUserByEmail(email: string) {
-    try {
-      const user = await db("Utilisateur").where({ email }).first();
-      return user;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  static async getUserByUsername(username: string) {
-    try {
-      const user = await db("Utilisateur").where({ username }).first();
-      return user;
-    } catch (error) {
-      throw error;
-    }
+    return db("Utilisateur").where({ email }).first();
   }
 
   static async doesUserExist(email: string) {
-    try {
-      const user = await db("Utilisateur").where({ email }).first();
-      return user ? true : false;
-    } catch (error) {
-      throw error;
-    }
+    const user = await db("Utilisateur").where({ email }).first();
+    return !!user;
   }
 }
 

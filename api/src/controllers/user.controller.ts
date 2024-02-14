@@ -45,29 +45,23 @@ export const signIn = async (req: Request, res: Response) => {
 };
 
 export const signUp = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+  const { pseudo, email, password } = req.body;
 
-  if (!username || !email || !password) {
-    return res
-      .status(400)
-      .json({
-        message: "Le pseudo, l'email et le mot de passe sont obligatoires.",
-      });
+  if (!pseudo || !email || !password) {
+    return res.status(400).json({
+      message: "Le pseudo, l'email et le mot de passe sont obligatoires.",
+    });
   }
 
   try {
-    const user = await Utilisateur.getUserByEmail(email);
+    const user = await Utilisateur.doesUserExist(email);
     if (user) {
       return res.status(400).json({ message: "L'utilisateur existe déjà" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newUser = await Utilisateur.createUser(
-      username,
-      email,
-      hashedPassword,
-    );
+    const newUser = await Utilisateur.createUser(pseudo, email, hashedPassword);
 
     return res.status(201).json({ data: newUser });
   } catch (error) {
