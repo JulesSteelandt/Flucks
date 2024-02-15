@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import Diffusion from "../models/Diffusion";
+import Tag from "../models/Tag";
+import Geolocalisation from "../models/Geolocalisation";
+const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
   try {
@@ -68,6 +71,69 @@ export const getDiffusionById = async (req: Request, res: Response) => {
     );
     return res.status(500).json({
       message: "Erreur lors de la récupération de la diffusion par ID.",
+    });
+  }
+};
+
+export const createDiffusion = async (req: Request, res: Response) => {
+  try {
+    const { titre, description, direct, urgence, tags, geolocalisation } =
+      req.body;
+
+    if (!titre || direct === null || urgence === null) {
+      return res.status(400).json({
+        message: "Une des informations est manquante",
+      });
+    }
+
+    let user;
+
+    if (req.user !== undefined) {
+      user = req.user;
+    } else {
+      return res.status(403).json({ message: "Token invalide." });
+    }
+
+    const id = uuid4();
+
+    let isPublic: boolean = false;
+    if (direct) {
+      isPublic = !isPublic;
+    }
+
+    let geolocalisationId = null;
+    if (geolocalisation) {
+      geolocalisationId = await Geolocalisation.createGeolocalisation(
+        geolocalisation.latitude,
+        geolocalisation.longitude,
+      );
+    }
+
+    await Diffusion.createDiffusion({
+      id,
+      direct,
+      titre,
+      vue: 0,
+      description,
+      public: isPublic,
+      createur: user.email,
+      geolocalisationId: geolocalisationId.id,
+      urgence,
+    });
+
+    if (tags) {
+      for (const tag of tags) {
+        await Tag.createTags(id, tag);
+      }
+    }
+
+    return res
+      .status(201)
+      .json({ data: { diffusionId: id, message: "Diffusion créée." } });
+  } catch (error) {
+    console.error("Erreur lors de la création de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la création de la diffusion.",
     });
   }
 };
