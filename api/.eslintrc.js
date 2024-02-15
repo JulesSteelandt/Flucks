@@ -8,21 +8,13 @@ module.exports = {
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   overrides: [
     {
-      env: {
-        node: true,
-      },
+      env: { node: true },
       files: [".eslintrc.{js,cjs}"],
-      parserOptions: {
-        sourceType: "script",
-      },
+      parserOptions: { sourceType: "script" },
     },
   ],
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: "latest",
-  },
+  parserOptions: { ecmaVersion: "latest" },
   plugins: ["@typescript-eslint"],
-  rules: {
-    "@typescript-eslint/no-var-requires": 0,
-  },
+  rules: { "@typescript-eslint/no-var-requires": 0 },
 };
