@@ -1,18 +1,26 @@
-// checkToken.js
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import Diffusion from "../models/Diffusion";
 
-const JwtManager = require("../config/JwtManager");
-
-export const checkDiffusionIdExist = (
+export const checkDiffusionIdExist = async (
   req: Request,
   res: Response,
-  next: any,
+  next: NextFunction,
 ) => {
-  const { diffusionId } = req.body;
-  const diff = Diffusion.diffusionExists(diffusionId);
-  if (!diff) {
-    return res.status(400).json({ message: "Id de diffusion manquant." });
+  try {
+    const { diffusionId } = req.body;
+    const diff = await Diffusion.diffusionExists(diffusionId);
+    console.log(diff);
+    if (!diff) {
+      return res
+        .status(400)
+        .json({ message: "cette id de diffusion n'existe pas." });
+    }
+    req.idDiffusion = diffusionId;
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      message:
+        "Une erreur s'est produite lors de la vérification de l'existence de la diffusion.",
+    });
   }
-  next();
 };

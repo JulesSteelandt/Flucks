@@ -141,17 +141,11 @@ export const createDiffusion = async (req: Request, res: Response) => {
 
 export const likeDiffusion = async (req: Request, res: Response) => {
   try {
-    const { diffusionId, isLike } = req.body;
+    const { isLike } = req.body;
 
-    if (!diffusionId) {
+    if (isLike === null || isLike === undefined) {
       return res.status(400).json({
-        message: "Il manque l'id de la diffusion.",
-      });
-    }
-
-    if (isLike === null) {
-      return res.status(400).json({
-        message: "Information sur le like",
+        message: "il manque l'information sur le like",
       });
     }
 
@@ -165,16 +159,18 @@ export const likeDiffusion = async (req: Request, res: Response) => {
 
     let like;
     if (isLike) {
-      like = await Like.dislikeDiffusion(diffusionId, user.email);
+      like = false;
+      await Like.dislikeDiffusion(user.email, req.idDiffusion);
     } else {
-      like = await Like.likeDiffusion(diffusionId, user.email);
+      like = true;
+      await Like.likeDiffusion(user.email, req.idDiffusion);
     }
 
     if (like) {
       return res.status(200).json({ message: "Like ajouté." });
     }
 
-    return res.status(400).json({ message: "Like non ajouté." });
+    return res.status(400).json({ message: "Like supprimé." });
   } catch (error) {
     console.error("Erreur lors de l'ajout du like:", error);
     return res.status(500).json({

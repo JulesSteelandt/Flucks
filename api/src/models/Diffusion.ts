@@ -91,10 +91,7 @@ class Diffusion {
 
   static async diffusionExists(diffusionId: string) {
     const diffusion = await db("Diffusion").where({ id: diffusionId }).first();
-    if (diffusion) {
-      return true;
-    }
-    return false;
+    return !!diffusion;
   }
 }
 

@@ -1,7 +1,7 @@
 const db = require("../config/db");
 
 class Like {
-  static async likeDiffusion(diffusionId: string, email: string) {
+  static async likeDiffusion(email: string, diffusionId?: string) {
     try {
       const like = await db("Like").insert({
         diffusion: diffusionId,
@@ -14,7 +14,7 @@ class Like {
     }
   }
 
-  static async dislikeDiffusion(diffusionId: string, email: string) {
+  static async dislikeDiffusion(email: string, diffusionId?: string) {
     try {
       const dislike = await db("Like")
         .where({ diffusion: diffusionId, utilisateur: email })
