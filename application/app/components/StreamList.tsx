@@ -9,7 +9,7 @@ export default async function StreamList() {
             <div className={'flex flex-wrap pl-8'}>
                 {streamData.data.map((stream) => {
                     if (stream.direct) {
-                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence} />
+                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence} id={stream.id} />
                     }
                 })}
             </div>

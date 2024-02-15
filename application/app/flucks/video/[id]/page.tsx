@@ -5,7 +5,7 @@ export default function Page({params}: {
 }) {
     return (
         <div className={'p-4'}>
-            <p>Bienvenue sur le stream !</p>
+            <p>Bienvenue sur la vidéo !</p>
             <p className={'font-bold'}>{params.id}</p>
         </div>
     )
