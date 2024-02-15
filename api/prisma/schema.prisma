@@ -42,7 +42,7 @@ model Diffusion {
   direct            Boolean
   titre             String           @db.VarChar(255)
   vue               Int
-  description       String
+  description       String?
   public            Boolean
   urgence           Boolean
   GeoLocalisation   Geolocalisation? @relation(fields: [geolocalisationId], references: [id])

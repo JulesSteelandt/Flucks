@@ -26,6 +26,21 @@ class Geolocalisation {
       throw error;
     }
   }
+
+  static async createGeolocalisation(latitude: number, longitude: number) {
+    try {
+      const [id] = await db("Geolocalisation")
+        .insert({ latitude, longitude })
+        .returning("id");
+      return id;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la création de la géolocalisation :",
+        error,
+      );
+      throw error;
+    }
+  }
 }
 
 export default Geolocalisation;

@@ -2,6 +2,7 @@ import { Utilisateur } from "@prisma/client";
 
 const jwt = require("jsonwebtoken");
 import config from "./config";
+import { Payload } from "../types/types";
 
 class JwtManager {
   /**
@@ -12,7 +13,7 @@ class JwtManager {
    */
   static create(user: Utilisateur) {
     console.log(config.jwt);
-    const payload = {
+    const payload: Payload = {
       username: user.pseudo,
       email: user.email,
     };
