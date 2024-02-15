@@ -1,12 +1,13 @@
 // user.routes.ts
 
 import express from "express";
-import { signIn, signUp } from "../controllers/user.controller";
+import {follow, signIn, signUp} from '../controllers/user.controller';
+import { checkToken } from "../middlewares/checkToken";
 
 const router = express.Router();
 
-// Route pour rechercher un utilisateur par e-mail
 router.post("/signin", signIn);
 router.post("/signup", signUp);
+router.post("/follow", checkToken, follow);
 
-export default router; // Exportez le routeur par défaut
+export default router;
