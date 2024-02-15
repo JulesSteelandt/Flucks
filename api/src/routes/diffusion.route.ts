@@ -4,8 +4,8 @@ import express from "express";
 import {
   createDiffusion,
   getDiffusion,
-  getDiffusionById,
-} from "../controllers/diffusion.controller";
+  getDiffusionById, likeDiffusion,
+} from '../controllers/diffusion.controller';
 import { checkToken } from "../middlewares/checkToken";
 
 const router = express.Router();
