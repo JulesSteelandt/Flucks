@@ -5,6 +5,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import * as L from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 import GeolocationComponent from './GeolocationComponent';
+import EventsMarkers from './EventsMarkers';
 
 export default function MyMap() {
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
@@ -25,6 +26,7 @@ export default function MyMap() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
+          <EventsMarkers />
         </MapContainer>
       )}
 
@@ -40,6 +42,7 @@ export default function MyMap() {
               <Popup>Votre position</Popup>
             </Marker>
           )}
+          <EventsMarkers />
         </MapContainer>
       )}
 
