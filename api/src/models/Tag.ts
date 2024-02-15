@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-class Tags {
+class Tag {
   static async createTags(diffusion_id: string, tag: string) {
     return db("Tag").insert({
       tag,
@@ -9,4 +9,4 @@ class Tags {
   }
 }
 
-export default Tags;
+export default Tag;

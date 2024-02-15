@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Diffusion from "../models/Diffusion";
+import Tag from "../models/Tag";
 const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
@@ -112,6 +113,9 @@ export const createDiffusion = async (req: Request, res: Response) => {
     });
 
     if (tags) {
+      for (const tag of tags) {
+        await Tag.createTags(id, tag);
+      }
     }
 
     return res
