@@ -17,4 +17,4 @@ router.get("/:id", getDiffusionById);
 router.post("/create", checkToken, createDiffusion);
 router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
 
-export default router; // Exportez le routeur par défaut
+export default router;

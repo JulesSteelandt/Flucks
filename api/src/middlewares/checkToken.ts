@@ -15,8 +15,7 @@ export const checkToken = (req: Request, res: Response, next: any) => {
   if (token.startsWith(bearer)) {
     const tokenWithoutBearer = token.slice(bearer.length);
     try {
-      const user = JwtManager.validate(tokenWithoutBearer);
-      req.user = user;
+      req.user = JwtManager.validate(tokenWithoutBearer);
       next();
     } catch (error) {
       console.error(error);

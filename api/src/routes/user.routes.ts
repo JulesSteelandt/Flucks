@@ -1,7 +1,7 @@
 // user.routes.ts
 
 import express from "express";
-import { signIn, signUp } from "../controllers/user.controller";
+import {follow, signIn, signUp} from '../controllers/user.controller';
 import { checkToken } from "../middlewares/checkToken";
 
 const router = express.Router();

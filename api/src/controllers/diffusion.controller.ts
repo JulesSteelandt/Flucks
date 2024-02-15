@@ -157,20 +157,13 @@ export const likeDiffusion = async (req: Request, res: Response) => {
       return res.status(403).json({ message: "Token invalide." });
     }
 
-    let like;
     if (isLike) {
-      like = false;
       await Like.dislikeDiffusion(user.email, req.idDiffusion);
+      return res.status(400).json({ message: "Like supprimé." });
     } else {
-      like = true;
       await Like.likeDiffusion(user.email, req.idDiffusion);
-    }
-
-    if (like) {
       return res.status(200).json({ message: "Like ajouté." });
     }
-
-    return res.status(400).json({ message: "Like supprimé." });
   } catch (error) {
     console.error("Erreur lors de l'ajout du like:", error);
     return res.status(500).json({
