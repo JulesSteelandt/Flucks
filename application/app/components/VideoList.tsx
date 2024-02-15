@@ -3,6 +3,7 @@ import {fetchDiffusionData} from "@/app/data";
 
 export default async function VideoList() {
     const videoData = await fetchDiffusionData();
+
     return (
         <div>
             <p className={'font-bold p-8 text-2xl'}>Liste des vidéos</p>
