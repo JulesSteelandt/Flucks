@@ -38,9 +38,25 @@ services:
     image: 'node:alpine'
     ports:
       - '35303:3000'
-    command: sh -c "npm i && npm run watch"
+    env_file:
+      - express.env
+    command: sh -c "npm i && npm run dev:windows"
     volumes:
-      - ../server:/app
+      - ../server:/usr/src/app
+    working_dir: /usr/src/app
+    networks:
+      - flucks.net
+    environment:
+      - NODE_ENV=development
+
+
+  api:
+    image: 'node:alpine'
+    ports:
+      - '35305:3000'
+    command: sh -c "npm i && npm run dev"
+    volumes:
+      - ../api:/app
     working_dir: /app
     networks:
       - flucks.net

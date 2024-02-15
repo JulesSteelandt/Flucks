@@ -78,6 +78,16 @@ class Diffusion {
       throw error;
     }
   }
+
+  static async createDiffusion(diffusion: Diffusion) {
+    try {
+      const [id] = await db("Diffusion").insert(diffusion).returning("id");
+      return id;
+    } catch (error) {
+      console.error("Erreur lors de la création de la diffusion:", error);
+      throw error;
+    }
+  }
 }
 
 export default Diffusion;

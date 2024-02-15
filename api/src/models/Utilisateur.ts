@@ -1,44 +1,21 @@
 const db = require("../config/db");
 
 class Utilisateur {
-  static async createUser(username: string, email: string, password: string) {
-    try {
-      const newUser = await db("Utilisateur").insert({
-        username,
-        email,
-        password,
-      });
-      return newUser;
-    } catch (error) {
-      throw error;
-    }
+  static async createUser(pseudo: string, email: string, password: string) {
+    return db("Utilisateur").insert({
+      pseudo,
+      email,
+      motDePasse: password,
+      listeDeProximite: false,
+    });
   }
-
   static async getUserByEmail(email: string) {
-    try {
-      const user = await db("Utilisateur").where({ email }).first();
-      return user;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  static async getUserByUsername(username: string) {
-    try {
-      const user = await db("Utilisateur").where({ username }).first();
-      return user;
-    } catch (error) {
-      throw error;
-    }
+    return db("Utilisateur").where({ email }).first();
   }
 
   static async doesUserExist(email: string) {
-    try {
-      const user = await db("Utilisateur").where({ email }).first();
-      return user ? true : false;
-    } catch (error) {
-      throw error;
-    }
+    const user = await db("Utilisateur").where({ email }).first();
+    return !!user;
   }
 }
 
