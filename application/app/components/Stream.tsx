@@ -6,8 +6,8 @@ export default function Stream({title, creator, emergency, id}) {
     const router = useRouter();
     return (
         <div className={'border-2 rounded-xl bg-[#B0C0D4] w-1/3 m-2 relative'}>
-            <div className={'flex justify-center py-8'}>
-                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12'} onClick={() => router.push('/flucks/stream/' + id)}/>
+            <div className={'flex justify-center py-8'} onClick={() => router.push('/flucks/stream/' + id)}>
+                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12'}/>
             </div>
             {
                 emergency && (
