@@ -7,7 +7,7 @@ export default function Stream({title, creator, emergency, id}) {
     return (
         <div className={'border-2 rounded-xl bg-[#B0C0D4] w-1/3 m-2 relative'}>
             <div className={'flex justify-center py-8'} onClick={() => router.push('/flucks/stream/' + id)}>
-                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12'}/>
+                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12 hover:w-24 transition-transform duration-300'}/>
             </div>
             {
                 emergency && (
