@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Diffusion from "../models/Diffusion";
 import Tag from "../models/Tag";
+import Geolocalisation from "../models/Geolocalisation";
 const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
@@ -79,7 +80,7 @@ export const createDiffusion = async (req: Request, res: Response) => {
     const { titre, description, direct, urgence, tags, geolocalisation } =
       req.body;
 
-    if (!titre || !direct || !urgence) {
+    if (!titre || direct === null || urgence === null) {
       return res.status(400).json({
         message: "Une des informations est manquante",
       });
@@ -100,6 +101,14 @@ export const createDiffusion = async (req: Request, res: Response) => {
       isPublic = !isPublic;
     }
 
+    let geolocalisationId = null;
+    if (geolocalisation) {
+      geolocalisationId = await Geolocalisation.createGeolocalisation(
+        geolocalisation.latitude,
+        geolocalisation.longitude,
+      );
+    }
+
     await Diffusion.createDiffusion({
       id,
       direct,
@@ -108,7 +117,7 @@ export const createDiffusion = async (req: Request, res: Response) => {
       description,
       public: isPublic,
       createur: user.email,
-      geolocalisation,
+      geolocalisationId: geolocalisationId.id,
       urgence,
     });
 

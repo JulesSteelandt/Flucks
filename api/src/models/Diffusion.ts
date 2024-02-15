@@ -79,7 +79,7 @@ class Diffusion {
     }
   }
 
-  static async createDiffusion(diffusion: any) {
+  static async createDiffusion(diffusion: Diffusion) {
     try {
       const [id] = await db("Diffusion").insert(diffusion).returning("id");
       return id;
