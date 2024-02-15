@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Diffusion from "../models/Diffusion";
+const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
   try {
@@ -77,16 +78,45 @@ export const createDiffusion = async (req: Request, res: Response) => {
     const { titre, description, direct, urgence, tags, geolocalisation } =
       req.body;
 
-    const newDiffusion = await Diffusion.createDiffusion({
-      titre,
-      description,
+    if (!titre || !direct || !urgence) {
+      return res.status(400).json({
+        message: "Une des informations est manquante",
+      });
+    }
+
+    let user;
+
+    if (req.user !== undefined) {
+      user = req.user;
+    } else {
+      return res.status(403).json({ message: "Token invalide." });
+    }
+
+    const id = uuid4();
+
+    let isPublic: boolean = false;
+    if (direct) {
+      isPublic = !isPublic;
+    }
+
+    await Diffusion.createDiffusion({
+      id,
       direct,
-      urgence,
-      tags,
+      titre,
+      vue: 0,
+      description,
+      public: isPublic,
+      createur: user.email,
       geolocalisation,
+      urgence,
     });
 
-    return res.status(201).json({ data: newDiffusion });
+    if (tags) {
+    }
+
+    return res
+      .status(201)
+      .json({ data: { diffusionId: id, message: "Diffusion créée." } });
   } catch (error) {
     console.error("Erreur lors de la création de la diffusion:", error);
     return res.status(500).json({
