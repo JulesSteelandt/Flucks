@@ -3,38 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import {API_GEOLOCALISATION} from '@/app/utils/appGlobal';
-// la route retourne :
-/**
- * 
- * {
- *     "data": [
- *         {
- *             "id": 0,
- *             "geolocalisation": {
- *                 "latitude": 48.8566,
- *                 "longitude": 2.3522
- *             },
- *             "diffusionId": "8457d296-c8e6-4a75-b71b-ff2d775e6465"
- *         },
- *         {
- *             "id": 1,
- *             "geolocalisation": {
- *                 "latitude": 48.8566,
- *                 "longitude": 2.3523
- *             },
- *             "diffusionId": "8d926c39-ef68-4efc-97fe-b0c3f3f32edb"
- *         },
- *         {
- *             "id": 2,
- *             "geolocalisation": {
- *                 "latitude": 48.8566,
- *                 "longitude": 2.3521
- *             },
- *             "diffusionId": "871d3376-ec0b-464f-a137-5886cc16be71"
- *         }
- *     ]
- * }
- */
+
 
 export default function EventsMarkers() {
   
