@@ -1,5 +1,8 @@
+'use client'
+
 import {fetchDiffusionDataWithID} from "@/app/data";
 import Like from "@/app/components/Like";
+import VideoContent from '@/app/components/VideoContent';
 import {formatAbonnements} from '@/app/flucks/likes';
 
 export default async function Page({params}: {
@@ -10,13 +13,7 @@ export default async function Page({params}: {
     const videoData = await fetchDiffusionDataWithID(params.id);
     return (
         <div className={'p-4 w-5/6 m-8'}>
-            <div className={'bg-black w-[calc(100% - 32px)] h-2/3 flex justify-center items-center mb-4'}>
-                <video className={'h-full'} controls>
-                    <source src={"http://docketu.iutnc.univ-lorraine.fr:35303/video/" + params.id + ".mp4"}
-                            type={"video/mp4"}/>
-                    Impossible de lire la vidéo.
-                </video>
-            </div>
+            <VideoContent id={params.id}/>
             <div className={'flex flex-row'}>
                 <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{videoData.data.titre}</p>
                 <p className={'w-1/6 text-center p-4 italic underline'}>{videoData.data.createur.pseudo}</p>
