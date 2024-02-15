@@ -1,26 +1,37 @@
 const db = require("../config/db");
 
 class Geolocalisation {
-  static async getGeolocalisation() {
+  static async getGeolocalisationByDirect() {
     try {
-      const geolocalisations =
-        await db("Geolocalisation").select("Geolocalisation.*");
-
-      // Récupérer les ID des diffusions liées à chaque géolocalisation
-      for (const geolocalisation of geolocalisations) {
-        const diffusionIds = await db("Diffusion")
-          .where("geolocalisationId", geolocalisation.id)
-          .pluck("id");
-
-        const diffusionId = diffusionIds.length > 0 ? diffusionIds[0] : null;
-
-        geolocalisation.diffusionId = diffusionId;
-      }
+      const geolocalisations = await db("Geolocalisation")
+        .join("Diffusion", "Geolocalisation.id", "Diffusion.geolocalisationId")
+        .where("Diffusion.direct", true)
+        .select(
+          "Geolocalisation.*",
+          "Diffusion.id as diffusionId",
+          "Diffusion.titre",
+          "Diffusion.urgence",
+        );
 
       return geolocalisations;
     } catch (error) {
       console.error(
         "Erreur lors de la récupération des géolocalisations:",
+        error,
+      );
+      throw error;
+    }
+  }
+
+  static async createGeolocalisation(latitude: number, longitude: number) {
+    try {
+      const [id] = await db("Geolocalisation")
+        .insert({ latitude, longitude })
+        .returning("id");
+      return id;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la création de la géolocalisation :",
         error,
       );
       throw error;

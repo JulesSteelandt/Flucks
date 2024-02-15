@@ -79,7 +79,7 @@ class Diffusion {
     }
   }
 
-  static async createDiffusion(diffusion: any) {
+  static async createDiffusion(diffusion: Diffusion) {
     try {
       const [id] = await db("Diffusion").insert(diffusion).returning("id");
       return id;
@@ -87,6 +87,11 @@ class Diffusion {
       console.error("Erreur lors de la création de la diffusion:", error);
       throw error;
     }
+  }
+
+  static async diffusionExists(diffusionId: string) {
+    const diffusion = await db("Diffusion").where({ id: diffusionId }).first();
+    return !!diffusion;
   }
 }
 

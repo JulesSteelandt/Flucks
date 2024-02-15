@@ -68,26 +68,3 @@ export const signUp = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error });
   }
 };
-
-export const validate = async (req: Request, res: Response) => {
-  const token = req.headers.authorization;
-
-  if (!token) {
-    return res.status(400).json({ message: "Token manquant" });
-  }
-
-  const bearer = "Bearer ";
-  if (token.startsWith(bearer)) {
-    const tokenWithoutBearer = token.slice(bearer.length);
-
-    try {
-      const data = await JwtManager.validate(tokenWithoutBearer);
-
-      return res.status(200).json({ data });
-    } catch (error) {
-      return res.status(401).json({ message: error });
-    }
-  } else {
-    return res.status(401).json({ message: "Format de token non valide" });
-  }
-};

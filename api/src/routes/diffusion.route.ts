@@ -5,12 +5,16 @@ import {
   createDiffusion,
   getDiffusion,
   getDiffusionById,
-} from '../controllers/diffusion.controller';
+  likeDiffusion,
+} from "../controllers/diffusion.controller";
+import { checkToken } from "../middlewares/checkToken";
+import { checkDiffusionIdExist } from "../middlewares/checkDiffusionIdExist";
 
 const router = express.Router();
 
 router.get("/", getDiffusion);
 router.get("/:id", getDiffusionById);
-router.post("/create", createDiffusion);
+router.post("/create", checkToken, createDiffusion);
+router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
 
 export default router; // Exportez le routeur par défaut

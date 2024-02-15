@@ -4,6 +4,7 @@ import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import diffusionRoute from "./routes/diffusion.route";
 import geolocalisationRoute from "./routes/geolocalisation.route";
+import accueilRoutes from "./routes/accueil.routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,13 +14,10 @@ app.use(bodyParser.json());
 app.use(cors()); // Activez le middleware cors
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.use("/users", userRoutes);
 app.use("/diffusions", diffusionRoute);
 app.use("/geolocalisation", geolocalisationRoute);
+app.use("/", accueilRoutes);
 
 // Start server
 app.listen(PORT, () => {

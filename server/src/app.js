@@ -17,6 +17,9 @@ const wss = new Server(httpServer, {
 
 app.use(express.static('public'))
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => res.send("Hello depuis la racine"))
 app.use("/api", apiRouter)
 
