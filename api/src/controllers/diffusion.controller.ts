@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Diffusion from "../models/Diffusion";
 import Tag from "../models/Tag";
 import Geolocalisation from "../models/Geolocalisation";
+import Like from "../models/Like";
 const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
@@ -134,6 +135,46 @@ export const createDiffusion = async (req: Request, res: Response) => {
     console.error("Erreur lors de la création de la diffusion:", error);
     return res.status(500).json({
       message: "Erreur lors de la création de la diffusion.",
+    });
+  }
+};
+
+export const likeDiffusion = async (req: Request, res: Response) => {
+  try {
+    const { isLike } = req.body;
+
+    if (isLike === null || isLike === undefined) {
+      return res.status(400).json({
+        message: "il manque l'information sur le like",
+      });
+    }
+
+    let user;
+
+    if (req.user !== undefined) {
+      user = req.user;
+    } else {
+      return res.status(403).json({ message: "Token invalide." });
+    }
+
+    let like;
+    if (isLike) {
+      like = false;
+      await Like.dislikeDiffusion(user.email, req.idDiffusion);
+    } else {
+      like = true;
+      await Like.likeDiffusion(user.email, req.idDiffusion);
+    }
+
+    if (like) {
+      return res.status(200).json({ message: "Like ajouté." });
+    }
+
+    return res.status(400).json({ message: "Like supprimé." });
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du like:", error);
+    return res.status(500).json({
+      message: "Erreur lors de l'ajout du like.",
     });
   }
 };

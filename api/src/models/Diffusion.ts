@@ -88,6 +88,11 @@ class Diffusion {
       throw error;
     }
   }
+
+  static async diffusionExists(diffusionId: string) {
+    const diffusion = await db("Diffusion").where({ id: diffusionId }).first();
+    return !!diffusion;
+  }
 }
 
 export default Diffusion;
