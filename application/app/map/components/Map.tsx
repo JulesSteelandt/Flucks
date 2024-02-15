@@ -29,7 +29,7 @@ export default function MyMap() {
       )}
 
       {geolocationLoaded && (
-        <MapContainer className={'w-[85vw] h-[40vw]'} center={centerMap} zoom={18} scrollWheelZoom={true}>
+        <MapContainer className={'w-full h-[40vw]'} center={centerMap} zoom={18} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
