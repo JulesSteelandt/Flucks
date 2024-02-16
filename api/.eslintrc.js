@@ -16,5 +16,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: { ecmaVersion: "latest" },
   plugins: ["@typescript-eslint"],
-  rules: { "@typescript-eslint/no-var-requires": 0 },
+  rules: {
+    "@typescript-eslint/no-var-requires": 0,
+    "max-len": "off",
+  },
 };
