@@ -2,7 +2,7 @@
 import {useState} from 'react';
 import CheckboxLinear from './components/CheckboxLinear';
 import Image from 'next/image';
-
+import PreviewStream from './components/PreviewStream';
 export default function CreateStream() {
     // state
 
@@ -12,9 +12,7 @@ export default function CreateStream() {
     return (
         <section className={'bg-[#E0E2E8] w-full md:w-5/6'}>
             <div className={'flex flex-col '}>
-                <video className={'mb-4 h-auto w-auto min-h-[30vw] self-center'}>
-                    <source/>
-                </video>
+                <PreviewStream/>
                 <div className={'h-auto w-auto flex flex-col justify-center md:flex-row m-10'}>
 
 
