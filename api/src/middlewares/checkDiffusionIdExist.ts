@@ -9,7 +9,6 @@ export const checkDiffusionIdExist = async (
   try {
     const { diffusionId } = req.body;
     const diff = await Diffusion.diffusionExists(diffusionId);
-    console.log(diff);
     if (!diff) {
       return res
         .status(400)
