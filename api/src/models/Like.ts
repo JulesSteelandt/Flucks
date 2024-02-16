@@ -25,6 +25,16 @@ class Like {
       throw error;
     }
   }
+
+  static async deleteLike(diffusionId?: string) {
+    try {
+      const dislike = await db("Like").where("diffusion", diffusionId).del();
+      return dislike;
+    } catch (error) {
+      console.error("Erreur lors de la suppression des likes:", error);
+      throw error;
+    }
+  }
 }
 
 export default Like;

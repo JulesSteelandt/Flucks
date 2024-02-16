@@ -29,7 +29,7 @@ export const getDiffusion = async (req: Request, res: Response) => {
 
 export const getDiffusionById = async (req: Request, res: Response) => {
   try {
-    const diffusionId = req.params.id;
+    const diffusionId = req.idDiffusion;
 
     const diffusion = await Diffusion.getById(diffusionId);
 
@@ -108,6 +108,7 @@ export const createDiffusion = async (req: Request, res: Response) => {
         geolocalisation.latitude,
         geolocalisation.longitude,
       );
+      geolocalisationId = geolocalisationId.id;
     }
 
     await Diffusion.createDiffusion({
@@ -118,7 +119,7 @@ export const createDiffusion = async (req: Request, res: Response) => {
       description,
       public: isPublic,
       createur: user.email,
-      geolocalisationId: geolocalisationId.id,
+      geolocalisationId,
       urgence,
     });
 
@@ -168,6 +169,33 @@ export const likeDiffusion = async (req: Request, res: Response) => {
     console.error("Erreur lors de l'ajout du like:", error);
     return res.status(500).json({
       message: "Erreur lors de l'ajout du like.",
+    });
+  }
+};
+
+export const setPublic = async (req: Request, res: Response) => {
+  try {
+    await Diffusion.setPublic(req.idDiffusion);
+    return res.status(200).json({ message: "Diffusion modifiée." });
+  } catch (error) {
+    console.error("Erreur lors de la modification de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la modification de la diffusion.",
+    });
+  }
+};
+
+export const deleteDiffusion = async (req: Request, res: Response) => {
+  try {
+    await Like.deleteLike(req.idDiffusion);
+    await Tag.deleteTag(req.idDiffusion);
+    await Geolocalisation.deleteGeolocalisationByDiffusion(req.idDiffusion);
+    await Diffusion.deleteDiffusion(req.idDiffusion);
+    return res.status(200).json({ message: "Diffusion supprimée." });
+  } catch (error) {
+    console.error("Erreur lors de la suppression de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la suppression de la diffusion.",
     });
   }
 };
