@@ -48,28 +48,6 @@ class Diffusion {
         .where("Diffusion.id", diffusionId)
         .first();
 
-      // Sélectionner le nombre de likes
-      const likeCount = await db("Like")
-        .count("id as likeCount")
-        .where("diffusion", diffusionId)
-        .first();
-      diffusion.likeCount = likeCount ? likeCount.likeCount : 0;
-
-      const abonnementCount = await db("Abonnement")
-        .count("abonneur as abonnementCount")
-        .where("abonneur", diffusion.createurEmail)
-        .first();
-      diffusion.abonnementCount = abonnementCount
-        ? abonnementCount.abonnementCount
-        : 0;
-
-      // Sélectionner les commentaires
-      const commentaires = await db("Commentaire")
-        .select("Commentaire.*", "Utilisateur.pseudo as pseudo")
-        .leftJoin("Utilisateur", "Commentaire.utilisateur", "Utilisateur.email")
-        .where("diffusion", diffusionId);
-      diffusion.commentaires = commentaires || [];
-
       return diffusion;
     } catch (error) {
       console.error(

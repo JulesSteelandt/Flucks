@@ -3,6 +3,9 @@ import Diffusion from "../models/Diffusion";
 import Tag from "../models/Tag";
 import Geolocalisation from "../models/Geolocalisation";
 import Like from "../models/Like";
+import Abonnement from "../models/Abonnement";
+import Commentaire from "../models/Commentaire";
+const JwtManager = require("../config/JwtManager");
 const uuid4 = require("uuid4");
 
 export const getDiffusion = async (req: Request, res: Response) => {
@@ -29,12 +32,37 @@ export const getDiffusion = async (req: Request, res: Response) => {
 
 export const getDiffusionById = async (req: Request, res: Response) => {
   try {
-    const diffusionId = req.idDiffusion;
+    const diffusionId = req.params.id;
 
     const diffusion = await Diffusion.getById(diffusionId);
 
     if (!diffusion) {
       return res.status(404).json({ message: "Diffusion non trouvée." });
+    }
+
+    const like = await Like.getLikeCount(diffusionId);
+    const abonne = await Abonnement.getAbonnementCount(diffusion.createurEmail);
+    const commentaires =
+      await Commentaire.getCommentaireByDiffusion(diffusionId);
+
+    const token = req.headers.authorization;
+    let isLike = false;
+    let isAbonne = false;
+    if (token !== undefined) {
+      try {
+        const bearer = "Bearer ";
+        if (token.startsWith(bearer)) {
+          const tokenWithoutBearer = token.slice(bearer.length);
+          const user = JwtManager.validate(tokenWithoutBearer);
+          isLike = await Like.isLiked(user.email, diffusionId);
+          isAbonne = await Abonnement.isFollowing(
+            diffusion.createurEmail,
+            user.email,
+          );
+        }
+      } catch (error) {
+        console.error("Erreur lors de la validation du token:", error);
+      }
     }
 
     const elementsARetourner = {
@@ -45,18 +73,21 @@ export const getDiffusionById = async (req: Request, res: Response) => {
       createur: {
         pseudo: diffusion.createurPseudo,
         email: diffusion.createurEmail,
-        abonnees: diffusion.abonnementCount,
+        abonnees: abonne,
       },
       direct: diffusion.direct,
       urgence: diffusion.urgence,
-      like: diffusion.likeCount,
+      like: like,
       geolocalisation: {
         latitude: diffusion.latitude,
         longitude: diffusion.longitude,
       },
+      isLike: isLike,
+      isAbonne: isAbonne,
       commentaires:
-        diffusion.commentaires.length > 0
-          ? diffusion.commentaires.map((commentaire: any) => ({
+        commentaires.length > 0
+          ? commentaires.map((commentaire: any) => ({
+              id: commentaire.id,
               pseudo: commentaire.pseudo,
               commentaire: commentaire.commentaire,
             }))

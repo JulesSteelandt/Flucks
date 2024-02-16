@@ -16,7 +16,7 @@ import { checkDiffusionCreateur } from "../middlewares/checkDiffusionCreateur";
 const router = express.Router();
 
 router.get("/", getDiffusion);
-router.get("/:id", checkDiffusionIdExist, getDiffusionById);
+router.get("/:id", getDiffusionById);
 router.post("/create", checkToken, createDiffusion);
 router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
 router.patch(
