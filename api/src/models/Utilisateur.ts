@@ -2,6 +2,7 @@ const db = require("../config/db");
 
 class Utilisateur {
   static async createUser(pseudo: string, email: string, password: string) {
+    email = email.toLowerCase();
     return db("Utilisateur").insert({
       pseudo,
       email,
@@ -10,6 +11,7 @@ class Utilisateur {
     });
   }
   static async getUserByEmail(email: string) {
+    email = email.toLowerCase();
     return db("Utilisateur").where({ email }).first();
   }
 
