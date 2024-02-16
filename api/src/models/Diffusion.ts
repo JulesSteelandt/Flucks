@@ -97,6 +97,10 @@ class Diffusion {
       throw error;
     }
   }
+
+  static async getVideosByUser(email: string) {
+    return db("Diffusion").where({ createur: email });
+  }
 }
 
 export default Diffusion;

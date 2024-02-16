@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Utilisateur from "../models/Utilisateur";
 import bcrypt from "bcryptjs";
 import Abonnement from "../models/Abonnement";
+import Diffusion from "../models/Diffusion";
 const JwtManager = require("../config/JwtManager");
 
 export const signIn = async (req: Request, res: Response) => {
@@ -109,4 +110,11 @@ export const follow = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json({ message: error });
   }
+};
+
+export const video = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  const data = await Diffusion.getVideosByUser(user.email);
+
+  return res.status(200).json({ data });
 };
