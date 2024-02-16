@@ -39,7 +39,7 @@ export default function MyMap() {
 
           {markerPosition && (
             <Marker position={markerPosition}>
-              <Popup>Votre position</Popup>
+              <Popup>Vous êtes ici.</Popup>
             </Marker>
           )}
           <EventsMarkers />
