@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import React, {useState} from 'react';
+import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
 import * as L from 'leaflet';
@@ -12,16 +12,16 @@ export default function MyMap() {
   const [centerMap, setCenterMap] = useState<[number, number]>([48.866669, 2.33333]);
   const [geolocationLoaded, setGeolocationLoaded] = useState<boolean>(false);
 
-  const handleCoordsReceived = (coords: { latitude: number; longitude: number }) => {
+  const handleCoordsReceived = (coords: {latitude: number; longitude: number}) => {
     setMarkerPosition([coords.latitude, coords.longitude]);
     setCenterMap([coords.latitude, coords.longitude]);
     setGeolocationLoaded(true);
   };
 
   return (
-    <div className={'w-full full'}>
+    <div className={'full w-full'}>
       {!geolocationLoaded && (
-        <MapContainer className={'w-full h-[40vw]'} center={centerMap} zoom={5} scrollWheelZoom={true}>
+        <MapContainer className={'h-[40vw] w-full'} center={centerMap} zoom={5} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -31,7 +31,7 @@ export default function MyMap() {
       )}
 
       {geolocationLoaded && (
-        <MapContainer className={'w-full h-[40vw]'} center={centerMap} zoom={18} scrollWheelZoom={true}>
+        <MapContainer className={'h-[40vw] w-full'} center={centerMap} zoom={18} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

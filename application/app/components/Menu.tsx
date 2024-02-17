@@ -1,10 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-export default function Menu({ menuName }) {
-    return (
-        <button className={'flex flex-row justify-center items-center text-[#394054] bg-white rounded-xl mb-2 w-4/5'}>
-            <Image src={'/../img/img_icon.png'} width={30} height={30}/>
-            <p className={'font-bold'}>{ menuName }</p>
-        </button>
-    )
+// @ts-ignore
+export default function Menu({menuName}) {
+  return (
+    <button className={'mb-2 flex w-4/5 flex-row items-center justify-center rounded-xl bg-white text-[#394054]'}>
+      <Image src={'/../img/img_icon.png'} width={30} height={30} alt={'menu'} />
+      <p className={'font-bold'}>{menuName}</p>
+    </button>
+  );
 }
