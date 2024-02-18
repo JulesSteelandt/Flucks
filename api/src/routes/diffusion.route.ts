@@ -2,6 +2,7 @@
 
 import express from "express";
 import {
+  addCommentaire,
   createDiffusion,
   deleteDiffusion,
   getDiffusion,
@@ -20,6 +21,7 @@ router.get("/", getDiffusion);
 router.get("/:id", getDiffusionById);
 router.post("/create", checkToken, createDiffusion);
 router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
+router.post("/commentaire", checkToken, checkDiffusionIdExist, addCommentaire);
 router.patch(
   "/public",
   checkToken,
@@ -27,19 +29,19 @@ router.patch(
   checkDiffusionCreateur,
   setPublic,
 );
-router.delete(
-  "/delete",
-  checkToken,
-  checkDiffusionIdExist,
-  checkDiffusionCreateur,
-  deleteDiffusion,
-);
 router.patch(
   "/stop",
   checkToken,
   checkDiffusionIdExist,
   checkDiffusionCreateur,
   stopLive,
+);
+router.delete(
+  "/delete",
+  checkToken,
+  checkDiffusionIdExist,
+  checkDiffusionCreateur,
+  deleteDiffusion,
 );
 
 export default router;
