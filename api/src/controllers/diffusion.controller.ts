@@ -204,9 +204,54 @@ export const likeDiffusion = async (req: Request, res: Response) => {
   }
 };
 
+export const addCommentaire = async (req: Request, res: Response) => {
+  try {
+    const { commentaire } = req.body;
+
+    if (commentaire === null || commentaire === undefined) {
+      return res.status(400).json({
+        message: "il manque l'information sur le commentaire",
+      });
+    }
+
+    let user;
+
+    if (req.user !== undefined) {
+      user = req.user;
+    } else {
+      return res.status(403).json({ message: "Token invalide." });
+    }
+
+    await Commentaire.createCommentaire({
+      utilisateur: user.email,
+      diffusion: req.idDiffusion,
+      commentaire,
+    });
+
+    return res.status(200).json({ message: "Commentaire ajouté." });
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du commentaire:", error);
+    return res.status(500).json({
+      message: "Erreur lors de l'ajout du commentaire.",
+    });
+  }
+};
+
 export const setPublic = async (req: Request, res: Response) => {
   try {
     await Diffusion.setPublic(req.idDiffusion);
+    return res.status(200).json({ message: "Diffusion modifiée." });
+  } catch (error) {
+    console.error("Erreur lors de la modification de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la modification de la diffusion.",
+    });
+  }
+};
+
+export const stopLive = async (req: Request, res: Response) => {
+  try {
+    await Diffusion.stopLive(req.idDiffusion);
     return res.status(200).json({ message: "Diffusion modifiée." });
   } catch (error) {
     console.error("Erreur lors de la modification de la diffusion:", error);
