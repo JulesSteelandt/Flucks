@@ -8,6 +8,7 @@ import {
   getDiffusionById,
   likeDiffusion,
   setPublic,
+  stopLive,
 } from "../controllers/diffusion.controller";
 import { checkToken } from "../middlewares/checkToken";
 import { checkDiffusionIdExist } from "../middlewares/checkDiffusionIdExist";
@@ -32,6 +33,13 @@ router.delete(
   checkDiffusionIdExist,
   checkDiffusionCreateur,
   deleteDiffusion,
+);
+router.patch(
+  "/stop",
+  checkToken,
+  checkDiffusionIdExist,
+  checkDiffusionCreateur,
+  stopLive,
 );
 
 export default router;

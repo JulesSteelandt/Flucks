@@ -89,6 +89,17 @@ class Diffusion {
     }
   }
 
+  static async stopLive(diffusionId?: string) {
+    try {
+      await db("Diffusion")
+        .where({ id: diffusionId })
+        .update({ direct: false, public: false, urgence: false });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la diffusion:", error);
+      throw error;
+    }
+  }
+
   static async deleteDiffusion(diffusionId?: string) {
     try {
       await db("Diffusion").where({ id: diffusionId }).del();
