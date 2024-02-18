@@ -5,7 +5,8 @@ class Diffusion {
     try {
       const diffusions = await db("Diffusion")
         .select("Diffusion.*", "Utilisateur.pseudo as createurPseudo")
-        .leftJoin("Utilisateur", "Diffusion.createur", "Utilisateur.email");
+        .leftJoin("Utilisateur", "Diffusion.createur", "Utilisateur.email")
+        .where("public", true);
 
       const tags = await db("Tag").where(
         "diffusion_id",
@@ -28,7 +29,7 @@ class Diffusion {
     }
   }
 
-  static async getById(diffusionId: string) {
+  static async getById(diffusionId?: string) {
     try {
       const diffusion = await db("Diffusion")
         .select(
@@ -46,28 +47,6 @@ class Diffusion {
         )
         .where("Diffusion.id", diffusionId)
         .first();
-
-      // Sélectionner le nombre de likes
-      const likeCount = await db("Like")
-        .count("id as likeCount")
-        .where("diffusion", diffusionId)
-        .first();
-      diffusion.likeCount = likeCount ? likeCount.likeCount : 0;
-
-      const abonnementCount = await db("Abonnement")
-        .count("abonneur as abonnementCount")
-        .where("abonneur", diffusion.createurEmail)
-        .first();
-      diffusion.abonnementCount = abonnementCount
-        ? abonnementCount.abonnementCount
-        : 0;
-
-      // Sélectionner les commentaires
-      const commentaires = await db("Commentaire")
-        .select("Commentaire.*", "Utilisateur.pseudo as pseudo")
-        .leftJoin("Utilisateur", "Commentaire.utilisateur", "Utilisateur.email")
-        .where("diffusion", diffusionId);
-      diffusion.commentaires = commentaires || [];
 
       return diffusion;
     } catch (error) {
@@ -92,6 +71,46 @@ class Diffusion {
   static async diffusionExists(diffusionId: string) {
     const diffusion = await db("Diffusion").where({ id: diffusionId }).first();
     return !!diffusion;
+  }
+
+  static async getDiffusionByCreateur(diffusionId?: string, email?: string) {
+    const diffusion = await db("Diffusion")
+      .where({ id: diffusionId, createur: email })
+      .first();
+    return !!diffusion;
+  }
+
+  static async setPublic(diffusionId?: string) {
+    try {
+      await db("Diffusion").where({ id: diffusionId }).update({ public: true });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la diffusion:", error);
+      throw error;
+    }
+  }
+
+  static async stopLive(diffusionId?: string) {
+    try {
+      await db("Diffusion")
+        .where({ id: diffusionId })
+        .update({ direct: false, public: false, urgence: false });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la diffusion:", error);
+      throw error;
+    }
+  }
+
+  static async deleteDiffusion(diffusionId?: string) {
+    try {
+      await db("Diffusion").where({ id: diffusionId }).del();
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la diffusion:", error);
+      throw error;
+    }
+  }
+
+  static async getVideosByUser(email: string) {
+    return db("Diffusion").where({ createur: email });
   }
 }
 

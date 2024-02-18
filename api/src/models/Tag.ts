@@ -7,6 +7,10 @@ class Tag {
       diffusion_id,
     });
   }
+
+  static async deleteTag(diffusion_id?: string) {
+    return db("Tag").where("diffusion_id", diffusion_id).del();
+  }
 }
 
 export default Tag;
