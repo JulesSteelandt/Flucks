@@ -23,7 +23,7 @@ export default function CreateStream() {
                         </div>
 
 
-                        <form className={'flex flex-col'}>
+                        <form className={'flex flex-col gap-2'}>
 
 
                             <label className={'font-semibold'}>Email :</label>
