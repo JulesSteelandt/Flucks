@@ -5,9 +5,7 @@ import Like from '@/app/components/Like';
 import VideoContent from '@/app/components/VideoContent';
 import {formatAbonnements} from '@/app/flucks/likes';
 
-export default async function Page({
-  params,
-}: {
+export default async function Page({params}: {
   params: {
     id: string;
   };

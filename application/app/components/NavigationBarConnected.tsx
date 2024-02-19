@@ -25,7 +25,7 @@ export default function NavBarConnected() {
                     <img src={'/img/video_menu_logo.png'} alt={'img logo'} width={30}/>
                     <p className={'ml-1 max-sm:hidden'}>Vidéos</p>
                 </Link>
-                <Link href={'/map'}
+                <Link href={'/flucks/map'}
                       className={classNames('flex flex-row items-center max-sm:justify-center max-sm:w-64 rounded-xl bg-white text-[#394054] font-bold text-lg p-1 my-1 max-sm:mx-1 sm:w-full', {})}>
                     <img src={'/img/map_menu_logo.png'} alt={'img logo'} width={30}/>
                     <p className={'ml-1 max-sm:hidden'}>Carte</p>
@@ -51,7 +51,7 @@ export default function NavBarConnected() {
                     <img src={'/img/create_stream_menu_logo.png'} alt={'img logo'} width={30}/>
                     <p className={'ml-1 max-sm:hidden'}>Passer en direct</p>
                 </Link>
-                <Link href={'/flucks'}
+                <Link href={'/flucks/my_videos'}
                       className={'flex flex-row items-center max-sm:justify-center max-sm:w-64 rounded-xl bg-white text-[#394054] font-bold text-lg p-1 my-1 max-sm:mx-1 w-full'}>
                     <img src={'/img/my_videos_menu_logo.png'} alt={'img logo'} width={30}/>
                     <p className={'ml-1 max-sm:hidden'}>Mes vidéos</p>
