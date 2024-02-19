@@ -1,4 +1,5 @@
 import {useState} from "react";
+import classNames from "classnames";
 
 export default function Page(id) {
 
@@ -8,7 +9,7 @@ export default function Page(id) {
     }
 
     return (
-        <div className={'bg-black w-[calc(100% - 32px)] h-2/3 flex justify-center items-center mb-4'}>
+        <div className={classNames('bg-black w-[calc(100% - 32px)] h-2/3 flex justify-center items-center mb-4')}>
             {
                 videoNotFound ? (
                     <p className={'text-white'}>Erreur de chargement de la vidéo</p>
