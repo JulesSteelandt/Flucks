@@ -10,9 +10,9 @@ export default function VideoWaitingComponent({ title, creator, id }: { title: s
         <Video title={title} creator={creator} id={id}/>
       </div>
       <div className={'flex flex-col justify-between h-full w-full'}>
-        <button className={'bg-white font-semibold rounded-xl py-1 mt-2 w-full'}>Modifier</button>
-        <button className={'bg-white font-semibold rounded-xl py-1 w-full'}>Supprimer</button>
-        <button className={'text-white font-semibold bg-[#19AFFB] rounded-xl  py-1 mb-2 self-end w-full'}>Publier
+        <button className={'rounded-xl w-full bg-gray-100 px-6 py-1 font-bold mt-2 hover:bg-black hover:text-white drop-shadow-lg min-w-fit'}>Modifier</button>
+        <button className={'rounded-xl w-full bg-gray-100 px-6 py-1 font-bold hover:bg-black hover:text-white drop-shadow-lg min-w-fit'}>Supprimer</button>
+        <button className={'mb-2 w-full drop-shadow-lg mr-4 rounded-xl bg-[#19AFFB] px-6 py-1 font-bold text-white hover: hover:bg-white hover:text-[#19AFFB] min-w-fit'}>Publier
         </button>
       </div>
 
