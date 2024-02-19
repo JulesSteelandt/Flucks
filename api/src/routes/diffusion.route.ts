@@ -28,24 +28,29 @@ router.patch(
   changeDiffusionInformations,
 );
 router.post("/create", checkToken, createDiffusion);
-router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
-router.post("/commentaire", checkToken, checkDiffusionIdExist, addCommentaire);
+router.post("/like/:id", checkToken, checkDiffusionIdExist, likeDiffusion);
+router.post(
+  "/commentaire/:id",
+  checkToken,
+  checkDiffusionIdExist,
+  addCommentaire,
+);
 router.patch(
-  "/public",
+  "/public/:id",
   checkToken,
   checkDiffusionIdExist,
   checkDiffusionCreateur,
   setPublic,
 );
 router.patch(
-  "/stop",
+  "/stop/:id",
   checkToken,
   checkDiffusionIdExist,
   checkDiffusionCreateur,
   stopLive,
 );
 router.delete(
-  "/delete",
+  "/delete/:id",
   checkToken,
   checkDiffusionIdExist,
   checkDiffusionCreateur,
