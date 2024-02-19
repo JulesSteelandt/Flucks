@@ -1,9 +1,10 @@
 import type {Metadata} from 'next';
 import {Inter} from 'next/font/google';
-import './globals.css';
+import './styles/globals.css';
 import React from 'react';
 import Header from "@/app/components/Header";
 import NavBar from "@/app/components/NavigationBar";
+import NavBarConnected from "@/app/components/NavigationBarConnected";
 
 const inter = Inter({subsets: ['latin']});
 
@@ -17,8 +18,8 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <html lang='fr'>
             <body className={inter.className}>
                 <Header/>
-                <div className={'flex flex-row'}>
-                    <NavBar />
+                <div className={'flex md:flex-row max-sm:flex-col'}>
+                    <NavBarConnected />
                     {children}
                 </div>
             </body>
