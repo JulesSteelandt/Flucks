@@ -12,7 +12,6 @@ class JwtManager {
    * @returns {string} un token jwt sous forme de string
    */
   static create(user: Utilisateur) {
-    console.log(config.jwt);
     const payload: Payload = {
       username: user.pseudo,
       email: user.email,

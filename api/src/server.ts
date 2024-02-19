@@ -7,7 +7,7 @@ import geolocalisationRoute from "./routes/geolocalisation.route";
 import accueilRoutes from "./routes/accueil.routes";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Middleware
 app.use(bodyParser.json());

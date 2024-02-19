@@ -43,24 +43,24 @@ async function main() {
   const geo1 = await prisma.geolocalisation.create({
     data: {
       id: 0,
-      latitude: 48.8566,
-      longitude: 2.3522,
+      latitude: 48.6882389,
+      longitude: 6.1738789,
     },
   });
 
   const geo2 = await prisma.geolocalisation.create({
     data: {
       id: 1,
-      latitude: 48.8566,
-      longitude: 2.3523,
+      latitude: 48.68823,
+      longitude: 6.1738,
     },
   });
 
   const geo3 = await prisma.geolocalisation.create({
     data: {
       id: 2,
-      latitude: 48.8566,
-      longitude: 2.3521,
+      latitude: 48.68823,
+      longitude: 6.1732,
     },
   });
 

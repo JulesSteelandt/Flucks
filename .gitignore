@@ -49,3 +49,4 @@ next-env.d.ts
 **/node_modules
 server/public/video
 server/public/temp
+/application/.next/
