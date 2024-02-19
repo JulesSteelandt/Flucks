@@ -14,7 +14,7 @@ export default function Video({ title, creator, id }: { title: string; creator: 
             </div>
             {(pathNameTest === "/flucks/my_videos") && (
                 <Link href={'/flucks/edit/' + id} className={'m-2 absolute right-0 top-0'}>
-                    Modifier
+                    <img src={'/img/pencil_icon.png'} alt={'edit'} width={25}/>
                 </Link>
             )}
             <div className={'flex flex-row justify-between bg-white rounded-b-xl p-2'}>
