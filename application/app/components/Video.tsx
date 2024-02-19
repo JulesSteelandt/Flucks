@@ -3,12 +3,12 @@
 import {useRouter, usePathname} from "next/navigation";
 import Link from "next/link";
 
-export default function Video({ title, creator, id }) {
+export default function Video({ title, creator, id }: { title: string; creator: string; id: string }) {
     const router = useRouter();
     const pathNameTest = usePathname();
 
     return (
-        <div className={'border-2 rounded-xl bg-[#5DA5B3] xl:w-1/4 max-xl:w-1/3 max-md:w-1/2 relative'}>
+        <div className={'border-2 rounded-xl bg-[#5DA5B3] w-1/3 m-2'}>
             <div className={'flex justify-center py-8'} onClick={() => router.push('/flucks/video/' + id)}>
                 <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12'}/>
             </div>
