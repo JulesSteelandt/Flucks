@@ -17,13 +17,13 @@ export function patchVisibiliteAction(req, res, next) {
                     rename(PrivatePath, PublicPath, (err) => {
                         if (err) throw err
                         console.log(`${req.body.id} est devenu publique`)
-                      return res.status(200).json({ message : 'La vidéo est devenu publique' });
+                        return res.status(200).json({message: 'La vidéo est devenu publique'});
                     })
                 } else {
-                  return res.status(400).json({ message : 'La vidéo n\'existe pas dans le répertoire privé' });
+                    return res.status(400).json({message: 'La vidéo n\'existe pas dans le répertoire privé'});
                 }
             } else {
-              return res.status(400).json({ message : 'La vidéo est déjà publique' });
+                return res.status(400).json({message: 'La vidéo est déjà publique'});
             }
 
 
@@ -33,16 +33,14 @@ export function patchVisibiliteAction(req, res, next) {
                     rename(PublicPath, PrivatePath, (err) => {
                         if (err) throw err
                         console.log(`${req.body.id} est devenu privé`)
-                      return res.status(200).json({ message : 'La vidéo est devenu privée' });
+                        return res.status(200).json({message: 'La vidéo est devenu privée'});
 
                     })
                 } else {
-                  return res.status(400).json({ message : 'La vidéo est déjà privée' });
-
+                    return res.status(400).json({message: 'La vidéo n\'existe pas dans le répertoire publique'});
                 }
             } else {
-              return res.status(400).json({ message : 'La vidéo n\'existe pas dans le répertoire publique' });
-
+                return res.status(400).json({message: 'La vidéo est déjà privée'});
             }
 
         }

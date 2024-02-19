@@ -1,6 +1,7 @@
 import express from "express"
 import {helloWorldAction} from '../actions/helloWorldAction.js';
 import {uploadVideoAction} from '../actions/uploadVideoAction.js';
+import {patchVisibiliteAction} from "../actions/patchVisibiliteAction.js";
 
 const router = express.Router()
 
