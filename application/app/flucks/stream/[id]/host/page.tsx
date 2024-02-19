@@ -1,6 +1,4 @@
 import {fetchDiffusionDataWithID} from '@/app/data';
-import Like from '@/app/components/Like';
-import {formatAbonnements} from '@/app/flucks/likes';
 import React from 'react';
 
 export default async function Page({params}: {
@@ -18,14 +16,7 @@ export default async function Page({params}: {
                 <p className={'w-1/6 text-center p-4 italic underline'}>{streamData.data.createur.pseudo}</p>
             </div>
             <div className={'flex flex-row justify-between'}>
-                <div className={'flex flex-row items-center p-4'}>
-                    <p className={'font-extrabold text-xl text-[#394054] mx-2 font-mono'}>{formatAbonnements(streamData.data.createur.abonnees)}</p>
-                    <button className={'bg-[#394054] text-white px-4 py-2 rounded-full font-bold'}>S'abonner</button>
-                </div>
-                <div className={'flex flex-row items-center'}>
-                    <Like nbLikes={streamData.data.like}/>
-                    <p className={'text-sm'}>{streamData.data.vue} vues</p>
-                </div>
+
             </div>
         </div>
 
