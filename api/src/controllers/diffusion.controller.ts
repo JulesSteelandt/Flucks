@@ -174,9 +174,9 @@ export const createDiffusion = async (req: Request, res: Response) => {
 
 export const likeDiffusion = async (req: Request, res: Response) => {
   try {
-    const { isLike } = req.body;
+    const { like } = req.body;
 
-    if (isLike === null || isLike === undefined) {
+    if (like === null || like === undefined) {
       return res.status(400).json({
         message: "il manque l'information sur le like",
       });
@@ -190,7 +190,7 @@ export const likeDiffusion = async (req: Request, res: Response) => {
       return res.status(403).json({ message: "Token invalide." });
     }
 
-    if (isLike) {
+    if (!like) {
       await Like.dislikeDiffusion(user.email, req.idDiffusion);
       return res.status(400).json({ message: "Like supprimé." });
     } else {
