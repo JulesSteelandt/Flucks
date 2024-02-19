@@ -11,28 +11,33 @@ export default (socket, user, file) => {
     }
     if (user.role === "streamer") {
         console.log("Fin de stream");
-        file.tempFile.end();
-        if (!existsSync(DOSSIER_VIDEO)) {
-            mkdirSync(DOSSIER_VIDEO, {recursive: true});
+        try {
+            file.tempFile.end();
+            if (!existsSync(DOSSIER_VIDEO)) {
+                mkdirSync(DOSSIER_VIDEO, {recursive: true});
+            }
+
+            let pathFileTemp = `${DOSSIER_TEMPORAIRE}/${file.name}.tmp`;
+            let pathFileTranscode = `${DOSSIER_VIDEO}/${file.name}.mp4`;
+
+            console.log("Conversion...");
+
+            ffmpeg()
+                .input(pathFileTemp)
+                .withVideoCodec("libx264")
+                .addOption("-preset", "ultrafast")
+                .addOption("-crf", 22)
+                .output(pathFileTranscode)
+                .on("end", () => {
+
+                    console.log("Conversion fini");
+
+                    unlinkSync(pathFileTemp); // Delete file temp
+                })
+                .run();
+        } catch (error){
+            console.log(error)
         }
 
-        let pathFileTemp = `${DOSSIER_TEMPORAIRE}/${file.name}.tmp`;
-        let pathFileTranscode = `${DOSSIER_VIDEO}/${file.name}.mp4`;
-
-        console.log("Conversion...");
-
-        ffmpeg()
-            .input(pathFileTemp)
-            .withVideoCodec("libx264")
-            .addOption("-preset", "ultrafast")
-            .addOption("-crf", 22)
-            .output(pathFileTranscode)
-            .on("end", () => {
-
-                console.log("Conversion fini");
-
-                unlinkSync(pathFileTemp); // Delete file temp
-            })
-            .run();
     }
 };
