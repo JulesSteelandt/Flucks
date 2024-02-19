@@ -3,17 +3,15 @@ import Image from 'next/image';
 import VideoWaitingComponent from '@/app/flucks/video/create/components/VideoWaiting';
 
 
-export default function Page() {
+export default function Page()  {
   return (
     <div className={'flex  w-full flex-col items-center md:w-5/6 mx-8  '}>
       <p className={'p-6 text-3xl font-bold'}>Créer une vidéo</p>
 
-      <form className={'flex w-full'}>
-
-
-        <div className={'flex'}>
+      <form className={'flex w-full justify-center'}>
+        <div className={'flex flex-wrap'}>
           <div className={'flex gap-2 h-fit'}>
-            <div className={'bg-[#5DA5B3] rounded-xl min-w-[150px] min-h-[75px] '}>
+            <div className={'bg-[#5DA5B3] rounded-xl min-w-[150px] min-h-[75px] flex items-center justify-center'}>
               <Image src={'/img/video_play_img.png'} alt={'Play'} width={'50'} height={'50'} />
             </div>
 
@@ -27,7 +25,7 @@ export default function Page() {
           <div className={'flex flex-col'}>
             <div className={'mb-4 w-ull mx-auto'}>
               <div className={'flex'}>
-              <p className={'mb-1 text-sm font-bold'}>Titre</p>
+                <p className={'mb-1 text-sm font-bold'}>Titre</p>
                 <p className={'text-red-700'}>*</p>
               </div>
               <input type={'text'} className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px]'} />
@@ -55,16 +53,16 @@ export default function Page() {
       </form>
 
       <div className={'border-[1px] border-black w-[70vw] mt-8'} />
+      <p className={'font-bold text-2xl mt-4'}>Vidéos en attente de publication</p>
 
-      <div>
-        <p className={'font-bold text-2xl mt-4'}>Vidéos en attente de publication</p>
 
-        <div className={'flex '}>
-          <VideoWaitingComponent />
-          <VideoWaitingComponent />
-          <VideoWaitingComponent />
-        </div>
+      <div className={'flex flex-wrap justify-start gap-2'}>
+        <VideoWaitingComponent id={''} title={''} creator={''} />
+        <VideoWaitingComponent id={''} title={''} creator={''} />
+        <VideoWaitingComponent id={''} title={''} creator={''} />
+
       </div>
+
 
     </div>
   );
