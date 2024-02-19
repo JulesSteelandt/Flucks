@@ -3,10 +3,37 @@ import {useState} from 'react';
 import CheckboxLinear from '../../../components/CheckboxLinear';
 import Image from 'next/image';
 import PreviewStream from './components/PreviewStream';
+import {API_CREATE_STREAM} from '@/app/utils/appGlobal';
+import {router} from 'next/client';
+import {useRouter} from 'next/navigation';
+
 export default function CreateStream() {
     // state
+    const router = useRouter();
 
     // comportement
+      async function createIdStream () {
+        const response = await fetch(API_CREATE_STREAM, { cache: 'no-cache',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsaWNlT2ZmIiwiZW1haWwiOiJhbGljZUBtYWlsLmNvbSIsImlhdCI6MTcwODM1NDM3MH0.2uLEkqYJoEfVAEI3uHG3hqhHZEj8iWKtQp3fA1iCFYo'
+            },
+            body: JSON.stringify({
+                titre: 'JeTestAvecLeFront',
+                direct: 1,
+                urgence: 0,
+            })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            console.log('erreur pdt le fetch creation stream');
+        } else {
+            router.push(`/flucks/stream/${data.data.diffusionId}`);
+        }
+
+    };
+
 
     // affichage
     return (
@@ -36,7 +63,7 @@ export default function CreateStream() {
                             <label className={'font-semibold mr-2'}>Géolocalisation</label>
                         </div>
 
-                        <div className={'flex self-center'}>
+                        <div className={'flex self-center'} onClick={createIdStream} >
                             <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
                                    className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'}/>
                             <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en
