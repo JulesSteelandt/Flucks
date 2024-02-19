@@ -89,6 +89,11 @@ class Diffusion {
     }
   }
 
+  static async isPublic(diffusionId?: string) {
+    const diffusion = await db("Diffusion").where({ id: diffusionId }).first();
+    return diffusion.public;
+  }
+
   static async stopLive(diffusionId?: string) {
     try {
       await db("Diffusion")
