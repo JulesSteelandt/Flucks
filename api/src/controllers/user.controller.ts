@@ -98,7 +98,7 @@ export const follow = async (req: Request, res: Response) => {
         .json({ message: "Vous ne pouvez pas vous suivre vous-même" });
     }
 
-    if (abonne) {
+    if (!abonne) {
       await Abonnement.unfollow(email, follower.email);
       return res
         .status(200)
