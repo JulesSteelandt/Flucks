@@ -40,7 +40,7 @@ services:
       - '35303:3000'
     env_file:
       - express.env
-    command: sh -c "npm i && npm run dev:windows"
+    command: sh -c "npm i && npm run start"
     volumes:
       - ../server:/usr/src/app
     working_dir: /usr/src/app
