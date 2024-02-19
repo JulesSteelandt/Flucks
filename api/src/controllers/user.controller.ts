@@ -119,6 +119,11 @@ export const video = async (req: Request, res: Response) => {
   return res.status(200).json({ data });
 };
 
+export const videoById = async (req: Request, res: Response) => {
+  const data = await Diffusion.getById((req as any).idDiffusion);
+  return res.status(200).json({ data });
+};
+
 export const getAbonnements = async (req: Request, res: Response) => {
   const user = (req as any).user;
   const data = await Abonnement.getAbonnements(user.email);

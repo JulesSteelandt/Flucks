@@ -28,6 +28,12 @@
     - *Options*:
       - *Headers*: 
           - `Authorization`: Token de l'utilisateur
+
+
+- **GET** `/users/video/:id` : Video d'un utilisateur
+    - *Options*:
+        - *Headers*:
+            - `Authorization`: Token de l'utilisateur
       
 
 - **GET** `/users/abonnement` : liste des chaines suivies par l'utilisateur

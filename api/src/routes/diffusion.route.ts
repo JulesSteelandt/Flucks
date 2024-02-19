@@ -15,6 +15,7 @@ import {
 import { checkToken } from "../middlewares/checkToken";
 import { checkDiffusionIdExist } from "../middlewares/checkDiffusionIdExist";
 import { checkDiffusionCreateur } from "../middlewares/checkDiffusionCreateur";
+import { checkDiffusionPublic } from "../middlewares/checkDiffusionPublic";
 
 const router = express.Router();
 
@@ -28,11 +29,18 @@ router.patch(
   changeDiffusionInformations,
 );
 router.post("/create", checkToken, createDiffusion);
-router.post("/like/:id", checkToken, checkDiffusionIdExist, likeDiffusion);
+router.post(
+  "/like/:id",
+  checkToken,
+  checkDiffusionIdExist,
+  checkDiffusionPublic,
+  likeDiffusion,
+);
 router.post(
   "/commentaire/:id",
   checkToken,
   checkDiffusionIdExist,
+  checkDiffusionPublic,
   addCommentaire,
 );
 router.patch(
