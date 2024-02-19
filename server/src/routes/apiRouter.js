@@ -14,4 +14,8 @@ router
     .post((req, res, next) => uploadVideoAction(req, res, next))
     .all((req, res, next) => next(405))
 
+router
+    .route("/video/visibilite")
+    .patch((req, res, next) => patchVisibiliteAction(req, res, next))
+
 export default router
