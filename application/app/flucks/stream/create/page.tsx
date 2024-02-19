@@ -1,6 +1,6 @@
 'use client';
 import {useState} from 'react';
-import CheckboxLinear from './components/CheckboxLinear';
+import CheckboxLinear from '../../../components/CheckboxLinear';
 import Image from 'next/image';
 import PreviewStream from './components/PreviewStream';
 export default function CreateStream() {
