@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <form className={'flex w-5/6 flex-col items-center'}>
+    <form className={'flex w-full flex-col items-center md:w-5/6'}>
 
       <p className={'p-6 text-3xl font-bold'}>Inscription</p>
       <img src={'/img/desktop_logo.png'} className={'w-1/5 min-w-[150px]'} />
