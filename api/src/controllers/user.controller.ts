@@ -118,3 +118,13 @@ export const video = async (req: Request, res: Response) => {
 
   return res.status(200).json({ data });
 };
+
+export const getAbonnements = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+  const data = await Abonnement.getAbonnements(user.email);
+  console.log(data);
+  if (data.length === 0) {
+    return res.status(200).json({ data: { message: "aucun abonnement" } });
+  }
+  return res.status(200).json({ data });
+};
