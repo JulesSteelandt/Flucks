@@ -47,6 +47,10 @@ class Abonnement {
       .first();
     return !!abonnement;
   }
+
+  static async getAbonnements(emailAbonne: string) {
+    return db("Abonnement").where({ abonne: emailAbonne });
+  }
 }
 
 export default Abonnement;
