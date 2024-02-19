@@ -112,6 +112,13 @@ class Diffusion {
   static async getVideosByUser(email: string) {
     return db("Diffusion").where({ createur: email });
   }
+
+  static async changeDiffusionInformation(
+    diffusionId: string | undefined,
+    value: { [p: string]: string },
+  ) {
+    return db("Diffusion").where({ id: diffusionId }).update(value);
+  }
 }
 
 export default Diffusion;

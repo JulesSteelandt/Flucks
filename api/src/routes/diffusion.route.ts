@@ -3,6 +3,7 @@
 import express from "express";
 import {
   addCommentaire,
+  changeDiffusionInformations,
   createDiffusion,
   deleteDiffusion,
   getDiffusion,
@@ -18,7 +19,14 @@ import { checkDiffusionCreateur } from "../middlewares/checkDiffusionCreateur";
 const router = express.Router();
 
 router.get("/", getDiffusion);
-router.get("/:id", getDiffusionById);
+router.get("/:id", checkDiffusionIdExist, getDiffusionById);
+router.patch(
+  "/:id",
+  checkToken,
+  checkDiffusionIdExist,
+  checkDiffusionCreateur,
+  changeDiffusionInformations,
+);
 router.post("/create", checkToken, createDiffusion);
 router.post("/like", checkToken, checkDiffusionIdExist, likeDiffusion);
 router.post("/commentaire", checkToken, checkDiffusionIdExist, addCommentaire);

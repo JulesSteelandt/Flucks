@@ -5,6 +5,7 @@ import Geolocalisation from "../models/Geolocalisation";
 import Like from "../models/Like";
 import Abonnement from "../models/Abonnement";
 import Commentaire from "../models/Commentaire";
+
 const JwtManager = require("../config/JwtManager");
 const uuid4 = require("uuid4");
 
@@ -32,7 +33,7 @@ export const getDiffusion = async (req: Request, res: Response) => {
 
 export const getDiffusionById = async (req: Request, res: Response) => {
   try {
-    const diffusionId = req.params.id;
+    const diffusionId = req.idDiffusion;
 
     const diffusion = await Diffusion.getById(diffusionId);
 
@@ -272,6 +273,47 @@ export const deleteDiffusion = async (req: Request, res: Response) => {
     console.error("Erreur lors de la suppression de la diffusion:", error);
     return res.status(500).json({
       message: "Erreur lors de la suppression de la diffusion.",
+    });
+  }
+};
+
+export const changeDiffusionInformations = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const {
+      titre,
+      description,
+    }: {
+      titre: string;
+      description: string;
+    } = req.body;
+
+    const diffusionId = req.idDiffusion;
+
+    const value: { [key: string]: string } = {};
+
+    if (titre) {
+      value["titre"] = titre;
+    }
+
+    if (description) {
+      value["description"] = description;
+    }
+
+    if (Object.keys(value).length === 0) {
+      return res.status(400).json({
+        message: "Aucune information à modifier.",
+      });
+    }
+
+    await Diffusion.changeDiffusionInformation(diffusionId, value);
+    return res.status(200).json({ message: "Diffusion modifiée." });
+  } catch (error) {
+    console.error("Erreur lors de la modification de la diffusion:", error);
+    return res.status(500).json({
+      message: "Erreur lors de la modification de la diffusion.",
     });
   }
 };

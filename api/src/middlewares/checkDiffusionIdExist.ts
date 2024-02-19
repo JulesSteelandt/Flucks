@@ -7,7 +7,16 @@ export const checkDiffusionIdExist = async (
   next: NextFunction,
 ) => {
   try {
-    const { diffusionId } = req.body;
+    let { diffusionId } = req.body;
+    if (!diffusionId) {
+      diffusionId = req.params.id;
+      if (!diffusionId) {
+        return res
+          .status(400)
+          .json({ message: "il manque l'id de la diffusion." });
+      }
+    }
+
     const diff = await Diffusion.diffusionExists(diffusionId);
     if (!diff) {
       return res
