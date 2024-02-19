@@ -1,13 +1,21 @@
 'use client'
 
 import {useRouter} from "next/navigation";
+import {useState} from "react";
 
 export default function Stream({title, creator, emergency, id}) {
     const router = useRouter();
+    /**
+    const [mouseHover, setMousteHover] = useState(false);
+    const handleMouseHover = () => {
+        setMousteHover(!mouseHover);
+    }
+     **/
+
     return (
         <div className={'border-2 rounded-xl bg-[#B0C0D4] w-1/3 m-2 relative'}>
             <div className={'flex justify-center py-8'} onClick={() => router.push('/flucks/stream/' + id)}>
-                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12 hover:w-24 transition-transform duration-300'}/>
+                <img src={"/img/play_icon.png"} alt={"play logo"} className={'w-12'}/>
             </div>
             {
                 emergency && (
