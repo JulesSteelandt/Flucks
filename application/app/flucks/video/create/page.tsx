@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
+
+import VideoWaitingComponent from '@/app/flucks/video/create/components/VideoWaiting';
 
 
 export default function Page() {
@@ -58,6 +59,11 @@ export default function Page() {
       <div>
         <p className={'font-bold text-2xl mt-4'}>Vidéos en attente de publication</p>
 
+        <div className={'flex '}>
+          <VideoWaitingComponent />
+          <VideoWaitingComponent />
+          <VideoWaitingComponent />
+        </div>
       </div>
 
     </div>
