@@ -18,7 +18,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <html lang='fr'>
             <body className={inter.className}>
                 <Header/>
-                <div className={'flex flex-row'}>
+                <div className={'flex md:flex-row max-sm:flex-col'}>
                     <NavBarConnected />
                     {children}
                 </div>
