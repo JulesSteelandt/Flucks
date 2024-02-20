@@ -13,12 +13,9 @@ export default function CreateStream() {
             <div className={'flex flex-col '}>
                 <div className={'h-auto w-auto flex flex-col justify-center md:flex-row m-10'}>
                     <div className={'flex flex-col'}>
-
                         <div className={'flex flex-col items-center mb-8'}>
                             <div
                                 className={'bg-[#D9D9D9] rounded-full h-[50vw] w-[50vw] max-w-[200px] max-h-[200px] mb-2'}/>
-
-
                             <label>Photo de profil</label>
                         </div>
 
