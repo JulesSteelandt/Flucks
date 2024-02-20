@@ -3,14 +3,8 @@
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 
-export default function Stream({title, creator, emergency, id}) {
+export default function Stream({title, creator, emergency, id} : {title: string, creator: string, emergency: boolean, id: string}) {
     const router = useRouter();
-    /**
-    const [mouseHover, setMousteHover] = useState(false);
-    const handleMouseHover = () => {
-        setMousteHover(!mouseHover);
-    }
-     **/
 
     return (
         <div className={'border-2 rounded-xl bg-[#B0C0D4] xl:w-1/4 max-xl:w-1/3 max-md:w-1/2 relative'}>

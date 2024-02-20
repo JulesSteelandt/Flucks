@@ -1,18 +1,34 @@
 import Stream from '@/app/components/Stream';
-import {fetchDiffusionData} from '@/app/data';
+import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
 export default async function StreamList() {
-  const streamData = await fetchDiffusionData();
-  return (
-    <div>
-      <p className={'p-8 text-2xl font-bold'}>Liste des streams</p>
-      <div className={'flex flex-wrap px-8'}>
-        {streamData.data.map((stream: any) => {
-          if (stream.direct) {
-            return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence} id={stream.id} />;
-          }
-        })}
-      </div>
-    </div>
-  );
+
+    const fetchStreamData = async () => {
+        try {
+            const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
+            if (!res.ok) {
+                console.error('Erreur de récupération des marqueurs');
+                return;
+            }
+            return await res.json();
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    const streamData = await fetchStreamData();
+
+    return (
+        <div>
+            <p className={'p-8 text-2xl font-bold'}>Liste des streams</p>
+            <div className={'flex flex-wrap px-8'}>
+                {streamData.data.map((stream: any) => {
+                    if (stream.direct) {
+                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
+                                       id={stream.id}/>;
+                    }
+                })}
+            </div>
+        </div>
+    );
 }

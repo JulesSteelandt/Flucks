@@ -1,5 +1,3 @@
-import Menu from "./Menu.tsx";
-
 export default function NavBar() {
     return (
         <div className={'flex flex-col items-center bg-[#394054] mt-0 h-screen w-1/6'}>

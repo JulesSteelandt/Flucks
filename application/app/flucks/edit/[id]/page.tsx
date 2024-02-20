@@ -1,16 +1,28 @@
 'use client'
 
-import {fetchDiffusionDataWithID} from "@/app/data";
 import Video from "@/app/components/Video";
-import CommentsList from "@/app/components/CommentsList";
 import CheckboxLinear from "@/app/components/CheckboxLinear";
+import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
 export default async function Page({params}: {
     params: {
         id: string;
     };
 }) {
-    const editData = await fetchDiffusionDataWithID(params.id);
+    const fetchEditDataWithID = async () => {
+        try {
+            const res = await fetch(API_DIFFUSIONS + '/' + params.id, {cache: 'no-cache'});
+            if (!res.ok) {
+                console.error('Erreur de récupération des marqueurs');
+                return;
+            }
+            return await res.json();
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    const editData = await fetchEditDataWithID();
 
     return (
         <div className={'m-8 w-5/6 p-4'}>
