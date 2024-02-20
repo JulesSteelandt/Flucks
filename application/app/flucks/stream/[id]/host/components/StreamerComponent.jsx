@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
+import Image from 'next/image';
 
 function StreamerHost(id) {
-  const idValue = id;
-  const [startDisabled, setStartDisabled] = useState(true);
+  const idValue = id.id;
+  const [startDisabled, setStartDisabled] = useState(false);
   const [stopDisabled, setStopDisabled] = useState(true);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [localStream, setLocalStream] = useState(null);
@@ -66,6 +67,7 @@ function StreamerHost(id) {
   };
 
   const handleStartRecord = () => {
+    console.log(id);
     setStartDisabled(true);
     setStopDisabled(false);
 
@@ -79,13 +81,17 @@ function StreamerHost(id) {
   };
 
   return (
-    <div>
-      <h1>Record en temp rÃ©el</h1>
-      <h2>Local Video</h2>
-      <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
+    <div className={'flex flex-col justify-center'}>
+      <div className={'px-6 bg-[#D9D9D9] min-h-[40vw] mb-4 flex justify-center'}>
+        <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
+      </div>
       <div>
-        <button id='startRecord' onClick={handleStartRecord} >Record/Stream</button>
-        <button id='stopRecord' onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
+        <button className={'flex self-center'} onClick={handleStartRecord} disabled={startDisabled}>
+          <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
+                 className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'} />
+          <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en direct</p>
+        </button>
+        <button onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
       </div>
     </div>
   );
