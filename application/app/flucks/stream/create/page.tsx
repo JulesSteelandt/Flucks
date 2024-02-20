@@ -6,10 +6,17 @@ import PreviewStream from './components/PreviewStream';
 import {API_CREATE_STREAM} from '@/app/utils/appGlobal';
 import {router} from 'next/client';
 import {useRouter} from 'next/navigation';
-
+import {getCookieToken, getDecodedToken} from '@/app/utils/getToken';
 export default function CreateStream() {
     // state
     const router = useRouter();
+    const [titre, setTitre] = useState('');
+    const [description, setDescription] = useState('');
+    const [tags, setTags] = useState([]);
+    const [geolocalisation, setGeolocalisation] = useState(false);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
 
     // comportement
       async function createIdStream () {
@@ -17,10 +24,10 @@ export default function CreateStream() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsaWNlT2ZmIiwiZW1haWwiOiJhbGljZUBtYWlsLmNvbSIsImlhdCI6MTcwODM1NDM3MH0.2uLEkqYJoEfVAEI3uHG3hqhHZEj8iWKtQp3fA1iCFYo'
+                'Authorization': `Bearer ${await getCookieToken()}`,
             },
             body: JSON.stringify({
-                titre: 'JeTestAvecLeFront',
+                titre: titre,
                 direct: 1,
                 urgence: 0,
             })
