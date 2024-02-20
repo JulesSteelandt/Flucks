@@ -1,6 +1,6 @@
-import Like from "@/app/components/Like";
+import Like from '@/app/components/Like';
 import {formatAbonnements} from '@/app/flucks/likes';
-import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
+import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
 import React from 'react';
 import ViewerComponent from '@/app/flucks/stream/[id]/components/ViewerComponent';
 
@@ -11,7 +11,7 @@ export default async function Page({params}: {
 }) {
     const fetchStreamDataWithID = async () => {
         try {
-            const res = await fetch(API_DIFFUSIONS + '/' + params.id, {cache: 'no-cache'});
+            const res = await fetch(`${API_DIFFUSIONS  }/${  params.id}`, {cache: 'no-cache'});
             if (!res.ok) {
                 console.error('Erreur de récupération des marqueurs');
                 return;
@@ -20,7 +20,7 @@ export default async function Page({params}: {
         } catch (e) {
             throw new Error(e);
         }
-    }
+    };
 
     const streamData = await fetchStreamDataWithID();
 
