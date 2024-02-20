@@ -9,3 +9,5 @@ export const API_GEOLOCALISATION : string = `${API_BASE_URL}/geolocalisation`;
 export const API_CREATE_STREAM : string = `${API_BASE_URL}/diffusions/create`;
 
 export const API_WS_STREAM : string = `${API_WS_URL}/`;
+
+export const APi_SIGNIN: string = `${API_BASE_URL}/users/signin`;

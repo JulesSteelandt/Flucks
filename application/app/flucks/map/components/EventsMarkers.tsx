@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Marker, Popup } from 'react-leaflet';
-import { API_GEOLOCALISATION } from '@/app/utils/appGlobal';
+import React, {useState, useEffect} from 'react';
+import {Marker, Popup} from 'react-leaflet';
+import {API_GEOLOCALISATION} from '@/app/utils/appGlobal';
 import {useRouter} from 'next/navigation';
-
 
 
 interface MarkerData {
@@ -25,7 +24,7 @@ const EventsMarkers: React.FC = () => {
     useEffect(() => {
         const fetchMarkers = async () => {
             try {
-                const res = await fetch(API_GEOLOCALISATION, { cache: 'no-cache' });
+                const res = await fetch(API_GEOLOCALISATION, {cache: 'no-cache'});
 
                 if (!res.ok) {
                     console.error('Erreur de récupération des marqueurs');
@@ -35,19 +34,19 @@ const EventsMarkers: React.FC = () => {
                 const data = await res.json();
 
                 const markersApi: MarkerData[] = data.data.map((item: any) => {
-return {
-                    id: item.diffusion.id,
-                    geolocalisation: {
-                        latitude: item.geolocalisation.latitude,
-                        longitude: item.geolocalisation.longitude,
-                    },
-                    diffusion: {
+                    return {
                         id: item.diffusion.id,
-                        titre: item.diffusion.titre,
-                        urgence: item.diffusion.urgence,
-                    },
-                };
-});
+                        geolocalisation: {
+                            latitude: item.geolocalisation.latitude,
+                            longitude: item.geolocalisation.longitude,
+                        },
+                        diffusion: {
+                            id: item.diffusion.id,
+                            titre: item.diffusion.titre,
+                            urgence: item.diffusion.urgence,
+                        },
+                    };
+                });
 
                 setMarkers(markersApi);
             } catch (error) {
@@ -61,22 +60,22 @@ return {
     return (
         <div>
             {markers.map((marker, index) => {
-return (
-                <Marker
-                    key={index}
-                    position={[marker.geolocalisation.latitude, marker.geolocalisation.longitude]}
-                >
-                    <Popup>
-                        <div  onClick={() => {
-                            return router.push(`/flucks/stream/${marker.diffusion.id}`);
-                        }}>
-                            <h3 >{marker.diffusion.titre}</h3>
-                            <p>Urgence: {marker.diffusion.urgence ? 'Oui' : 'Non'}</p>
-                        </div>
-                    </Popup>
-                </Marker>
-            );
-})}
+                return (
+                    <Marker
+                        key={index}
+                        position={[marker.geolocalisation.latitude, marker.geolocalisation.longitude]}
+                    >
+                        <Popup>
+                            <div onClick={() => {
+                                return router.push(`/flucks/stream/${marker.diffusion.id}`);
+                            }}>
+                                <h3>{marker.diffusion.titre}</h3>
+                                <p>Urgence: {marker.diffusion.urgence ? 'Oui' : 'Non'}</p>
+                            </div>
+                        </Popup>
+                    </Marker>
+                );
+            })}
         </div>
     );
 };

@@ -1,8 +1,21 @@
 import Video from "@/app/components/Video";
-import {fetchDiffusionData} from "@/app/data";
+import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
 export default async function VideoList() {
-    const videoData = await fetchDiffusionData();
+    const fetchVideoData = async () => {
+        try {
+            const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
+            if (!res.ok) {
+                console.error('Erreur de récupération des marqueurs');
+                return;
+            }
+            return await res.json();
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    const videoData = await fetchVideoData();
 
     return (
         <div>

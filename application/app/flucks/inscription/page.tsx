@@ -5,21 +5,21 @@ export default function Page() {
         <div className={'flex w-5/6 flex-col items-center'}>
             <p className={'p-6 text-3xl font-bold'}>Inscription</p>
             <img src={'/img/desktop_logo.png'} className={'w-1/5'}/>
-            <div className={'mb-4 w-1/4'}>
+            <div className={'mb-4 w-fit mx-auto'}>
                 <p className={'mb-1 text-sm font-bold'}>Email :</p>
-                <input type={'text'} className={'w-full rounded-md border-2 p-1'} placeholder={'xxx@yyy.zz'}/>
+                <input type={'text'} className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px]'} placeholder={'xxx@yyy.zz'}/>
             </div>
-            <div className={'mb-4 w-1/4'}>
+            <div className={'mb-4 w-fit mx-auto'}>
                 <p className={'mb-1 text-sm font-bold'}>Pseudo :</p>
-                <input type={'text'} className={'w-full rounded-md border-2 p-1'} placeholder={'AlixPerrot68'}/>
+                <input type={'text'} className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px]'} placeholder={'AlixPerrot68'}/>
             </div>
-            <div className={'mb-4 w-1/4'}>
+            <div className={'mb-4 w-fit mx-auto'}>
                 <p className={'mb-1 text-sm font-bold'}>Mot de passe :</p>
-                <input type={'text'} className={'w-full rounded-md border-2 p-1'} placeholder={'1fHu8Eyp8s'}/>
+                <input type={'text'} className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px]'} placeholder={'1fHu8Eyp8s'}/>
             </div>
-            <div className={'mb-4 w-1/4'}>
+            <div className={'mb-4 w-fit mx-auto'}>
                 <p className={'mb-1 text-sm font-bold'}>Confirmer le mot de passe : </p>
-                <input type={'text'} className={'w-full rounded-md border-2 p-1'} placeholder={'1fHu8Eyp8s'}/>
+                <input type={'text'} className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px]'} placeholder={'1fHu8Eyp8s'}/>
             </div>
             <div className={'flex flex-row'}>
                 <button
