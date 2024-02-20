@@ -3,7 +3,10 @@ import {Inter} from 'next/font/google';
 import './styles/globals.css';
 import React from 'react';
 import Header from '@/app/components/Header';
-import NavBarChoice from '@/app/components/NavBarChoice';
+import isUserLog from '@/app/utils/isUserLog';
+import NavBarConnected from '@/app/components/NavigationBarConnected';
+import NavBar from '@/app/components/NavBar';
+import HeaderConnected from '@/app/components/HeaderConnected';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -13,12 +16,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
+  const isAuth = isUserLog();
+
   return (
     <html lang='fr'>
       <body className={inter.className}>
-        <Header />
+        {isAuth ? <HeaderConnected /> : <Header />}
         <div className={'flex max-sm:flex-col md:flex-row'}>
-          <NavBarChoice />
+          {isAuth ? <NavBarConnected /> : <NavBar />}
           {children}
         </div>
       </body>
