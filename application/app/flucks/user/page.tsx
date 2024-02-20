@@ -30,9 +30,13 @@ export default function CreateStream() {
 
 
                         <form className={'flex flex-col gap-2'}>
-                            <label><strong>Email : </strong>{userEmail}</label>
+                            <label className={'font-semibold'}>Email :</label>
+                            <p>{userEmail}</p>
+                            <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
 
-                            <label><strong>Pseudo : </strong>{userPseudo}</label>
+                            <label className={'font-semibold'}>Pseudo :</label>
+                            <p>{userPseudo}</p>
+                            <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
 
                             <input type={'submit'}
                                    className={'flex self-end bg-[#19AFFB] py-1 px-2 rounded-lg text-white drop-shadow-lg'}
