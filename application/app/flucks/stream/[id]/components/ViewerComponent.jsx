@@ -68,6 +68,9 @@ function Viewer(id) {
       }
     };
 
+    // Call handleSearch method automatically once component is loaded
+    handleSearch();
+
     return () => {
       // Clean up RTCMultiConnection instance if needed
     };
@@ -91,7 +94,6 @@ function Viewer(id) {
     <div>
       <div id='list-streamer'>
         <p id='alerte'>{alertMessage}</p>
-        <button id='search' onClick={handleSearch}>Watch</button>
       </div>
       <video id='remoteStream' autoPlay muted playsInline ref={videoRef}></video>
       <div id='videos-container'></div>
