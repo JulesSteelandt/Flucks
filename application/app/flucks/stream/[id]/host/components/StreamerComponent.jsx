@@ -3,6 +3,7 @@
 import React, {useState} from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
 import Image from 'next/image';
+import {useRouter} from 'next/navigation';
 
 function StreamerHost(id) {
   const idValue = id.id;
@@ -12,6 +13,7 @@ function StreamerHost(id) {
   const [localStream, setLocalStream] = useState(null);
   const [connection] = useState(new RTCMultiConnection());
 
+  const router = useRouter();
   const segmentLengthInMs = 500;
 
   const constraints = {
@@ -64,6 +66,8 @@ function StreamerHost(id) {
 
     mediaRecorder.stop();
     setLocalStream(null);
+
+    router.push('/flucks');
   };
 
   const handleStartRecord = () => {
