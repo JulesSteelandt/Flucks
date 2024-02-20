@@ -1,12 +1,12 @@
 'use server';
-
-import {cookies} from 'next/headers';
+import {cookies} from 'next/headers'; // Assurez-vous que cette importation est correcte
 import {jwtDecode} from 'jwt-decode';
 
 export const getCookieToken = () => {
-  const hasCookie = cookies().has('token');
+  const cookiesHeader = cookies();
+  const hasCookie = cookiesHeader.has('token');
   if (hasCookie) {
-    return cookies().get('token');
+    return cookiesHeader.get('token')?.value;
   }
   return null;
 };
