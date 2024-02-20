@@ -1,13 +1,22 @@
 'use client';
-import {useState} from 'react';
-import Image from 'next/image';
+
+import {getDecodedToken} from "@/app/utils/getToken";
+import {useEffect, useState} from "react";
 
 export default function CreateStream() {
-    // state
 
-    // comportement
+    const [userEmail, setUserEmail] = useState(null);
+    const [userPseudo, setUserPseudo] = useState(null);
 
-    // affichage
+    useEffect(() => {
+        getDecodedToken().then(token => {
+            setUserEmail(token.email);
+            setUserPseudo(token.username);
+        }).catch(error => {
+            console.log(error);
+        })
+    },[]);
+
     return (
         <section className={'bg-[#E0E2E8] w-full md:w-5/6'}>
             <div className={'flex flex-col '}>
@@ -21,18 +30,13 @@ export default function CreateStream() {
 
 
                         <form className={'flex flex-col gap-2'}>
+                            <label><strong>Email : </strong>{userEmail}</label>
 
-
-                            <label className={'font-semibold'}>Email :</label>
-                            <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
-
-                            <label className={'font-semibold'}>Pseudo :</label>
-                            <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
+                            <label><strong>Pseudo : </strong>{userPseudo}</label>
 
                             <input type={'submit'}
                                    className={'flex self-end bg-[#19AFFB] py-1 px-2 rounded-lg text-white drop-shadow-lg'}
                                    value={'Enregistrer'}/>
-
                         </form>
                     </div>
 
@@ -46,7 +50,7 @@ export default function CreateStream() {
                         <label>Nouveau mot de passe :</label>
                         <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
 
-                        <label >Confirmation du mot de passe :</label>
+                        <label>Confirmation du mot de passe :</label>
                         <input type={'text'} className={'rounded-lg drop-shadow-lg resize-none'}/>
 
                         <input type={'submit'}
