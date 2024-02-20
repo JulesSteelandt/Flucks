@@ -63,11 +63,11 @@ export default function CreateStream() {
                             <label className={'font-semibold mr-2'}>Géolocalisation</label>
                         </div>
 
-                        <div className={'flex self-center'} onClick={createIdStream} >
+                        <button className={'flex self-center'} onClick={createIdStream} >
                             <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
                                    className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'}/>
                             <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Créer une diffusion en direct</p>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>

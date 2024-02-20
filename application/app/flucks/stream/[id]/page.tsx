@@ -26,7 +26,6 @@ export default async function Page({params}: {
 
     return (
         <div className={'p-4 w-5/6 m-8'}>
-
               <ViewerComponent id={params.id} />
             <div className={'flex flex-row'}>
                 <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre}</p>

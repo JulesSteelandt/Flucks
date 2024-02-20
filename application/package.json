@@ -21,7 +21,8 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "rtcmulticonnection": "^3.7.1",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.8",
