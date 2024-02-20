@@ -8,5 +8,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/flucks/stream/create', '/flucks/my_videos'],
+  matcher: ['/flucks/stream/create', '/flucks/my_videos', '/flucks/user'],
 };
