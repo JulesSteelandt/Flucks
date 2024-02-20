@@ -3,10 +3,44 @@ import {useState} from 'react';
 import CheckboxLinear from '../../../components/CheckboxLinear';
 import Image from 'next/image';
 import PreviewStream from './components/PreviewStream';
+import {API_CREATE_STREAM} from '@/app/utils/appGlobal';
+import {router} from 'next/client';
+import {useRouter} from 'next/navigation';
+import {getCookieToken, getDecodedToken} from '@/app/utils/getToken';
 export default function CreateStream() {
     // state
+    const router = useRouter();
+    const [titre, setTitre] = useState('');
+    const [description, setDescription] = useState('');
+    const [tags, setTags] = useState([]);
+    const [geolocalisation, setGeolocalisation] = useState(false);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
 
     // comportement
+      async function createIdStream () {
+        const response = await fetch(API_CREATE_STREAM, { cache: 'no-cache',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${await getCookieToken()}`,
+            },
+            body: JSON.stringify({
+                titre: titre,
+                direct: 1,
+                urgence: 0,
+            })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            console.log('erreur pdt le fetch creation stream');
+        } else {
+            router.push(`/flucks/stream/${data.data.diffusionId}/host`);
+        }
+
+    };
+
 
     // affichage
     return (
@@ -36,12 +70,11 @@ export default function CreateStream() {
                             <label className={'font-semibold mr-2'}>Géolocalisation</label>
                         </div>
 
-                        <div className={'flex self-center'}>
+                        <button className={'flex self-center'} onClick={createIdStream} >
                             <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
                                    className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'}/>
-                            <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en
-                                direct</p>
-                        </div>
+                            <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Créer une diffusion en direct</p>
+                        </button>
                     </div>
                 </div>
             </div>

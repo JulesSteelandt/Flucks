@@ -67,7 +67,7 @@ export default function NavBarConnected() {
           <p className={'ml-1 max-sm:hidden'}>Créer</p>
         </button>
         <Link
-          href={'/flucks'}
+          href={'/flucks/video/create'}
           className={classNames(
             'my-1 ml-6 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center',
             {hidden: !subMenu},
@@ -77,7 +77,7 @@ export default function NavBarConnected() {
           <p className={'ml-1 max-sm:hidden'}>Publier une vidéo</p>
         </Link>
         <Link
-          href={'/flucks'}
+          href={'/flucks/stream/create'}
           className={classNames(
             'my-1 ml-6 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center',
             {hidden: !subMenu},

@@ -1,6 +1,8 @@
-import Like from "@/app/components/Like";
+import Like from '@/app/components/Like';
 import {formatAbonnements} from '@/app/flucks/likes';
-import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
+import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
+import React from 'react';
+import ViewerComponent from '@/app/flucks/stream/[id]/components/ViewerComponent';
 
 export default async function Page({params}: {
     params: {
@@ -9,7 +11,7 @@ export default async function Page({params}: {
 }) {
     const fetchStreamDataWithID = async () => {
         try {
-            const res = await fetch(API_DIFFUSIONS + '/' + params.id, {cache: 'no-cache'});
+            const res = await fetch(`${API_DIFFUSIONS  }/${  params.id}`, {cache: 'no-cache'});
             if (!res.ok) {
                 console.error('Erreur de récupération des marqueurs');
                 return;
@@ -18,14 +20,13 @@ export default async function Page({params}: {
         } catch (e) {
             throw new Error(e);
         }
-    }
+    };
 
     const streamData = await fetchStreamDataWithID();
 
     return (
         <div className={'p-4 w-5/6 m-8'}>
-            <div className={'bg-gray-200 w-[calc(100% - 32px)] h-2/3 flex justify-center items-center mb-4'}>ID du stream
-                : <strong>{params.id}</strong></div>
+              <ViewerComponent id={params.id} />
             <div className={'flex flex-row'}>
                 <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre}</p>
                 <p className={'w-1/6 text-center p-4 italic underline'}>{streamData.data.createur.pseudo}</p>
@@ -41,5 +42,6 @@ export default async function Page({params}: {
                 </div>
             </div>
         </div>
-    )
+
+    );
 }
