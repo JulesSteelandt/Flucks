@@ -2,10 +2,10 @@
 
 import {useRouter} from 'next/navigation';
 
-export default function Video({title, creator, id}) {
+export default function Video({key, title, creator, id}) {
   const router = useRouter();
   return (
-    <div id='carte' className={'m-2 w-1/3 rounded-xl border-2 bg-[#5DA5B3]'}>
+    <div id='carte' className={'m-2 w-1/3 rounded-xl border-2 bg-[#5DA5B3]'} key={key}>
       <div
         className={'flex justify-center py-8'}
         onClick={() => {
