@@ -27,6 +27,7 @@ export default function LoginPage() {
       if (response.ok) {
         const json = await response.json();
         await setCookieLogin(json.token);
+        router.refresh();
         router.push('/flucks/');
       } else {
         console.error('Identifiants incorrects', error);

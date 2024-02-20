@@ -1,5 +1,4 @@
-'use strict';
-
+'use server';
 import {cookies} from 'next/headers'; // Assurez-vous que cette importation est correcte
 import {jwtDecode} from 'jwt-decode';
 
