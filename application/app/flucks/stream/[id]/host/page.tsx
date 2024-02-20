@@ -1,5 +1,6 @@
 import {fetchDiffusionDataWithID} from '@/app/data';
 import React from 'react';
+import StreamerHost from '@/app/flucks/stream/[id]/host/components/StreamerComponent';
 
 export default async function Page({params}: {
     params: {
@@ -18,6 +19,9 @@ export default async function Page({params}: {
             <div className={'flex flex-row justify-between'}>
 
             </div>
+
+
+          <StreamerHost/>
         </div>
 
     );
