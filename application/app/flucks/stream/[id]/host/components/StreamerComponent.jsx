@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
 
-function App() {
-  const [idValue, setIdValue] = useState('');
+function StreamerHost(id) {
+  const idValue = id;
   const [startDisabled, setStartDisabled] = useState(true);
   const [stopDisabled, setStopDisabled] = useState(true);
   const [mediaRecorder, setMediaRecorder] = useState(null);
@@ -55,20 +55,9 @@ function App() {
     setMediaRecorder(recorder);
   };
 
-  const handleIdChange = (e) => {
-    const value = e.target.value;
-    setIdValue(value);
-    if (value === '') {
-      setStartDisabled(true);
-      setStopDisabled(true);
-    } else {
-      setStartDisabled(false);
-    }
-  };
 
   const handleStopRecord = () => {
     connection.closeSocket();
-    setIdValue('');
     setStartDisabled(false);
     setStopDisabled(true);
 
@@ -77,7 +66,6 @@ function App() {
   };
 
   const handleStartRecord = () => {
-    setIdValue('');
     setStartDisabled(true);
     setStopDisabled(false);
 
@@ -96,18 +84,11 @@ function App() {
       <h2>Local Video</h2>
       <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
       <div>
-        <input
-          type='text'
-          name='idstream'
-          placeholder='id'
-          value={idValue}
-          onChange={handleIdChange}
-        />
-        <button id='startRecord' onClick={handleStartRecord} disabled={startDisabled}>Record/Stream</button>
+        <button id='startRecord' onClick={handleStartRecord} >Record/Stream</button>
         <button id='stopRecord' onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
       </div>
     </div>
   );
 }
 
-export default App;
+export default StreamerHost;

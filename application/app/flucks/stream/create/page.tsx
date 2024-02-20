@@ -29,7 +29,7 @@ export default function CreateStream() {
         if (!response.ok) {
             console.log('erreur pdt le fetch creation stream');
         } else {
-            router.push(`/flucks/stream/${data.data.diffusionId}`);
+            router.push(`/flucks/stream/${data.data.diffusionId}/host`);
         }
 
     };

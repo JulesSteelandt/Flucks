@@ -24,7 +24,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         {children}
       </div>
       </body>
-      <Script src='https://muazkhan.com:9001/dist/RTCMultiConnection.min.js'></Script>
       <Script src='https://muazkhan.com:9001/socket.io/socket.io.js'></Script>
       </html>
     );
