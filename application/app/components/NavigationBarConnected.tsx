@@ -24,7 +24,7 @@ export default function NavBarConnected() {
             'my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center sm:w-full'
           }
         >
-          <img src={'/img/video_menu_logo.png'} alt={'img logo'} width={30} />
+          <img src={'/img/stream_menu_logo.png'} alt={'img logo'} width={30} />
           <p className={'ml-1 max-sm:hidden'}>Streams</p>
         </Link>
         <Link
@@ -33,7 +33,7 @@ export default function NavBarConnected() {
             'my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center sm:w-full'
           }
         >
-          <img src={'/img/stream_menu_logo.png'} alt={'img logo'} width={30} />
+          <img src={'/img/video_menu_logo.png'} alt={'img logo'} width={30} />
           <p className={'ml-1 max-sm:hidden'}>Vidéos</p>
         </Link>
         <Link
