@@ -24,7 +24,7 @@ export default function SignUpPage() {
           body: JSON.stringify({email, password, pseudo}),
         });
         if (response.ok) {
-          router.push('/flucks/login');
+          router.push('/flucks');
         } else {
           console.error('Email déjà utilisé', error);
           setError('Email déjà utilisé');
