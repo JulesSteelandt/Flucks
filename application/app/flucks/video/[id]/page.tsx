@@ -4,6 +4,7 @@ import Like from '@/app/components/Like';
 import VideoContent from '@/app/components/VideoContent';
 import {formatAbonnements} from '@/app/flucks/likes';
 import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
+import classNames from "classnames";
 
 export default async function Page({params}: {
     params: {
@@ -33,6 +34,7 @@ export default async function Page({params}: {
             <VideoContent id={params.id}/>
             <div className={'flex flex-row'}>
                 <p className={'w-5/6 bg-[#D9D9D9] p-4 text-center font-bold'}>{videoData.data.titre}</p>
+                <p>état du like : {videoData.data.isLike.toString()}</p>
                 <p className={'w-1/6 p-4 text-center italic underline'}>{videoData.data.createur.pseudo}</p>
             </div>
             <div className={'flex flex-row justify-between'}>
@@ -43,7 +45,7 @@ export default async function Page({params}: {
                     <button className={'rounded-full bg-[#394054] px-4 py-2 font-bold text-white'}>S'abonner</button>
                 </div>
                 <div className={'flex flex-row items-center'}>
-                    <Like nbLikes={videoData.data.like}/>
+                    <Like nbLikes={videoData.data.like} idVideo={videoData.data.id}/>
                     <p className={'text-sm'}>{videoData.data.vue} vues</p>
                 </div>
             </div>
