@@ -47,7 +47,7 @@ export default function NavBarConnected() {
           <p className={'ml-1 max-sm:hidden'}>Carte</p>
         </Link>
         <Link
-          href={'/map'}
+          href={'/flucks/abonnements'}
           className={classNames(
             'my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center sm:w-full',
             {},
