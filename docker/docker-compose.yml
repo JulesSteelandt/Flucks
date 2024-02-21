@@ -11,27 +11,25 @@ networks:
 # Définition des services
 services:
   app:
-    # Configuration de la construction de l'image
     build:
-      context: ../application/ # Chemin vers le répertoire contenant les fichiers Docker
+      context: ../application/
       target: dev
     volumes:
-      - ../application:/app # Montage du code source dans le conteneur
-    working_dir: /app # Définition du répertoire de travail dans le conteneur
+      - ../application:/app
+    working_dir: /app
     networks:
-      - flucks
+      - flucks.net
       - traefik_web
     environment:
       - NODE_ENV=development
     ports:
-      - '35300:3000' # Mapping des ports du conteneur vers l'hôte
-    # Étiquettes Traefik pour la configuration du routage et de la résolution TLS
+      - '35300:3000'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr`)"
+      - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr:35300`)"
       - "traefik.http.routers.flucks.entrypoints=websecure"
       - "traefik.http.routers.flucks.tls.certresolver=myresolver"
-      - "traefik.http.services.flucks.loadbalancer.server.port=35300"
+      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
 
 
   adminer:
