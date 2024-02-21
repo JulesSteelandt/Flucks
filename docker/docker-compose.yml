@@ -1,27 +1,31 @@
 version: '3.5'
 name: 'flucks'
 
+# Définition des réseaux
 networks:
   traefik_web:
     external: true
-  flucks.net:
+  flucks:
     driver: bridge
 
+# Définition des services
 services:
   app:
+    # Configuration de la construction de l'image
     build:
-      context: ../application/
+      context: ../application/ # Chemin vers le répertoire contenant les fichiers Docker
       target: dev
     volumes:
-      - ../application:/app
-    working_dir: /app
+      - ../application:/app # Montage du code source dans le conteneur
+    working_dir: /app # Définition du répertoire de travail dans le conteneur
     networks:
       - flucks.net
       - traefik_web
     environment:
-        - NODE_ENV=development
+      - NODE_ENV=development
     ports:
-      - '35300:3000'
+      - '35300:3000' # Mapping des ports du conteneur vers l'hôte
+    # Étiquettes Traefik pour la configuration du routage et de la résolution TLS
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr`)"
@@ -35,7 +39,7 @@ services:
     ports:
       - '35301:8080'
     networks:
-      - flucks.net
+      - flucks
 
   flucks.db:
     image: 'postgres:latest'
@@ -43,7 +47,7 @@ services:
     ports:
       - '35302:5432'
     networks:
-      - flucks.net
+      - flucks
 
   webrtc:
     image: 'node:alpine'
@@ -56,7 +60,7 @@ services:
       - ../server:/usr/src/app
     working_dir: /usr/src/app
     networks:
-      - flucks.net
+      - flucks
     environment:
       - NODE_ENV=development
 
@@ -69,6 +73,6 @@ services:
       - ../api:/app
     working_dir: /app
     networks:
-      - flucks.net
+      - flucks
     environment:
       - NODE_ENV=development
