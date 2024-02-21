@@ -18,6 +18,12 @@ services:
         - NODE_ENV=development
     ports:
       - '35300:3000'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr`)"
+      - "traefik.http.routers.flucks.entrypoints=websecure"
+      - "traefik.http.routers.flucks.tls.certresolver=myresolver"
+      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
 
   adminer:
     image: adminer
