@@ -16,3 +16,5 @@ export const API_STOP_STREAM: string = `${API_BASE_URL}/diffusions/stop`;
 export const API_VIDEO_USER : string = `${API_BASE_URL}/users/video`;
 
 export const API_ABONNEMENTS : string = `${API_BASE_URL}/users/abonnement`;
+
+export const API_UPLOAD_VIDEO : string = `${API_WS_URL}/upload`;
