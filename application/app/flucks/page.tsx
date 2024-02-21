@@ -12,7 +12,7 @@ export default function Page() {
                         <p>Voir plus de streams</p>
                     </Link>
                 </div>
-                <StreamList/>
+                <StreamList limit={"8"}/>
             </div>
             <div className={'flex flex-row justify-between items-center w-full'}>
                 <p className={'font-bold p-8 text-2xl'}>Les dernières vidéos</p>
@@ -20,7 +20,7 @@ export default function Page() {
                     <p>Voir plus de vidéos</p>
                 </Link>
             </div>
-            <VideoList/>
+            <VideoList limit={"8"}/>
         </div>
     );
 }

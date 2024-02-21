@@ -1,7 +1,7 @@
 import Video from "@/app/components/Video";
 import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
-export default async function VideoList() {
+export default async function VideoList({limit} : {limit: string}) {
     const fetchVideoData = async () => {
         try {
             const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
@@ -15,15 +15,14 @@ export default async function VideoList() {
         }
     }
 
-    const videoData = await fetchVideoData();
+    const diffusionsData = await fetchVideoData();
+    const videoData = diffusionsData.data.filter(diffusion => diffusion.direct === false).slice(0, limit);
 
     return (
         <div>
             <div className={'flex flex-wrap px-8'}>
-                {videoData.data.slice(0, 8).map((video) => {
-                    if (!video.direct) {
-                        return <Video title={video.titre} creator={video.createur} id={video.id}/>
-                    }
+                {videoData.map((video: any) => {
+                    return <Video title={video.titre} creator={video.createur} id={video.id}/>
                 })}
             </div>
         </div>

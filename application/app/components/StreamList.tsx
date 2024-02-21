@@ -1,7 +1,7 @@
 import Stream from '@/app/components/Stream';
 import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
-export default async function StreamList() {
+export default async function StreamList({limit} : {limit: string}) {
 
     const fetchStreamData = async () => {
         try {
@@ -12,20 +12,19 @@ export default async function StreamList() {
             }
             return await res.json();
         } catch (e) {
-           console.log('Données non chargées')
+            console.log('Données non chargées')
         }
     }
 
-    const streamData = await fetchStreamData();
+    const diffusionsData = await fetchStreamData();
+    const streamData = diffusionsData.data.filter(diffusion => diffusion.direct === true).slice(0, limit);
 
     return (
         <div>
             <div className={'flex flex-wrap px-8'}>
-                {streamData.data.slice(0, 8).map((stream: any) => {
-                    if (stream.direct) {
-                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
-                                       id={stream.id}/>;
-                    }
+                {streamData.map((stream: any) => {
+                    return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
+                                   id={stream.id}/>;
                 })}
             </div>
         </div>
