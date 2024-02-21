@@ -32,11 +32,13 @@ export default function CreateStream() {
                         <form className={'flex flex-col gap-2'}>
                             <label className={''}><strong>Email :</strong> {userEmail}</label>
                             <input type={'text'}
-                                   className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px] resize-none'}/>
+                                   className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px] resize-none'}
+                                   placeholder={'Changer de mail ...'}/>
 
                             <label className={''}><strong>Pseudo :</strong> {userPseudo}</label>
                             <input type={'text'}
-                                   className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px] resize-none'}/>
+                                   className={'w-full rounded-lg border-2 p-1 drop-shadow-lg min-w-[250px] resize-none'}
+                                   placeholder={'Changer de pseudo ...'}/>
 
                             <input type={'submit'}
                                    className={'flex self-end bg-[#19AFFB] py-2 px-6 rounded-xl font-bold text-sm text-white drop-shadow-lg hover:border-2 hover:bg-white hover:text-[#19AFFB]'}
@@ -58,7 +60,6 @@ export default function CreateStream() {
                         <input type={'submit'}
                                className={'flex self-end bg-[#19AFFB] py-2 px-6 rounded-xl font-bold text-sm text-white drop-shadow-lg hover:border-2 hover:bg-white hover:text-[#19AFFB]'}
                                value={'Enregistrer'}/>
-
                     </form>
                 </div>
             </div>

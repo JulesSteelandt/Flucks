@@ -3,8 +3,6 @@ import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
 export default async function StreamList() {
 
-    const fetchFailed = false;
-
     const fetchStreamData = async () => {
         try {
             const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
