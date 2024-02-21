@@ -18,8 +18,8 @@ services:
       - ../application:/app
     working_dir: /app
     networks:
-      - flucks
       - traefik_web
+      - flucks
     environment:
       - NODE_ENV=development
     ports:
