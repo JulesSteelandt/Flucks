@@ -19,7 +19,7 @@ services:
       - ../application:/app # Montage du code source dans le conteneur
     working_dir: /app # Définition du répertoire de travail dans le conteneur
     networks:
-      - flucks.net
+      - flucks
       - traefik_web
     environment:
       - NODE_ENV=development
