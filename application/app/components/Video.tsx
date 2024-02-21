@@ -20,7 +20,7 @@ export default function Video({key, title, creator, id}) {
                     return router.push(`/flucks/video/${id}`);
                 }}
             >
-                <img src={'/img/play_icon.png'} alt={'play logo'} className={'w-12'}/>
+                <img src={'/img/video_menu_logo.png'} alt={'play logo'} className={'w-12'}/>
             </div>
             {isPathnameMyVideos() &&
                 <Link href={'/flucks/edit/' + id}>
