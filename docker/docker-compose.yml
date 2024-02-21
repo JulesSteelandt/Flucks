@@ -1,5 +1,5 @@
 version: '3.5'
-name: 'flucks'
+name: 'flucks-2'
 
 networks:
   traefik_web:
@@ -9,8 +9,9 @@ networks:
 
 services:
   app:
-    image: 'node:alpine'
-    command: sh -c "npm i && npm run dev"
+    build:
+      context: ../application/
+      target: dev
     volumes:
       - ../application:/app
     working_dir: /app
