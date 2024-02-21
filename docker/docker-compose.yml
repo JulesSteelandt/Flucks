@@ -61,6 +61,12 @@ services:
       - traefik_web
     environment:
       - NODE_ENV=development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flucks.rule=Host(`flucks-live.timeuh.fr`)"
+      - "traefik.http.routers.flucks.entrypoints=websecure"
+      - "traefik.http.routers.flucks.tls.certresolver=myresolver"
+      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
 
   api:
     image: 'node:alpine'
@@ -74,3 +80,9 @@ services:
       - traefik_web
     environment:
       - NODE_ENV=development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flucks.rule=Host(`flucks-api.timeuh.fr`)"
+      - "traefik.http.routers.flucks.entrypoints=websecure"
+      - "traefik.http.routers.flucks.tls.certresolver=myresolver"
+      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
