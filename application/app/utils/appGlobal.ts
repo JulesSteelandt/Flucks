@@ -15,4 +15,8 @@ export const API_SIGNIN: string = `${API_BASE_URL}/users/signin`;
 export const API_SIGNUP: string = `${API_BASE_URL}/users/signup`;
 
 export const API_STOP_STREAM: string = `${API_BASE_URL}/diffusions/stop`;
-export const API_VIDEO_USER: string = `${API_BASE_URL}/users/video`;
+
+export const API_VIDEO_USER : string = `${API_BASE_URL}/users/video`;
+
+export const API_ABONNEMENTS : string = `${API_BASE_URL}/users/abonnement`;
+

@@ -1,6 +1,5 @@
 import Video from "@/app/components/Video";
 import {API_VIDEO_USER} from "@/app/utils/appGlobal";
-import {cache} from "browserslist";
 import {getCookieToken} from "@/app/utils/getToken";
 
 export default async function Page() {
