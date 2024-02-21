@@ -1,6 +1,6 @@
 export const API_BASE_URL: string = 'https://flucks-api.timeuh.fr';
 
-export const API_WS_URL: string = 'https://flucks-live.timeuh.fr';
+export const API_WS_URL: string = 'https://flucks-live.timeuh.fr/';
 
 export const API_DIFFUSIONS: string = `${API_BASE_URL}/diffusions`;
 
