@@ -1,19 +1,33 @@
-import Video from '@/app/components/Video';
-import {fetchDiffusionData} from '@/app/data';
+import Video from "@/app/components/Video";
+import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
 
 export default async function VideoList() {
-  const videoData = await fetchDiffusionData();
+    const fetchVideoData = async () => {
+        try {
+            const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
+            if (!res.ok) {
+                console.error('Erreur de récupération des données');
+                return;
+            }
+            return await res.json();
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
 
-  return (
-    <div>
-      <p className={'p-8 text-2xl font-bold'}>Liste des vidéos</p>
-      <div className={'flex flex-wrap pl-8'}>
-        {videoData.data.map((video: {direct: any; titre: any; createur: any; id: any}) => {
-          if (!video.direct) {
-            return <Video title={video.titre} creator={video.createur} id={video.id} />;
-          }
-        })}
-      </div>
-    </div>
-  );
+    const videoData = await fetchVideoData();
+
+    return (
+        <div>
+            <p className={'font-bold p-8 text-2xl'}>Liste des vidéos</p>
+            <div className={'flex flex-wrap px-8'}>
+                {videoData.data.map((video) => {
+                    if (!video.direct) {
+                        return <Video title={video.titre} creator={video.createur} id={video.id}/>
+                    }
+                })}
+            </div>
+        </div>
+    )
 }
+
