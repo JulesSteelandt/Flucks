@@ -26,7 +26,7 @@ services:
       - '35300:3000'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr:35300`)"
+      - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr`)"
       - "traefik.http.routers.flucks.entrypoints=websecure"
       - "traefik.http.routers.flucks.tls.certresolver=myresolver"
       - "traefik.http.services.flucks.loadbalancer.server.port=3000"
