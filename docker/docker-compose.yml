@@ -63,10 +63,10 @@ services:
       - NODE_ENV=development
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flucks.rule=Host(`flucks-live.timeuh.fr`)"
-      - "traefik.http.routers.flucks.entrypoints=websecure"
-      - "traefik.http.routers.flucks.tls.certresolver=myresolver"
-      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
+      - "traefik.http.routers.flucks-live.rule=Host(`flucks-live.timeuh.fr`)"
+      - "traefik.http.routers.flucks-live.entrypoints=websecure"
+      - "traefik.http.routers.flucks-live.tls.certresolver=myresolver"
+      - "traefik.http.services.flucks-live.loadbalancer.server.port=3000"
 
   api:
     image: 'node:alpine'
@@ -82,7 +82,7 @@ services:
       - NODE_ENV=development
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flucks.rule=Host(`flucks-api.timeuh.fr`)"
-      - "traefik.http.routers.flucks.entrypoints=websecure"
-      - "traefik.http.routers.flucks.tls.certresolver=myresolver"
-      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
+      - "traefik.http.routers.flucks-api.rule=Host(`flucks-api.timeuh.fr`)"
+      - "traefik.http.routers.flucks-api.entrypoints=websecure"
+      - "traefik.http.routers.flucks-api.tls.certresolver=myresolver"
+      - "traefik.http.services.flucks-api.loadbalancer.server.port=3000"
