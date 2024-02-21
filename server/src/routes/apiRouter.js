@@ -11,7 +11,7 @@ router
   .all((req, res, next) => next(405))
 
 router
-.route("/upload")
+.route("/upload/:id")
     .post((req, res, next) => uploadVideoAction(req, res, next))
     .all((req, res, next) => next(405))
 
