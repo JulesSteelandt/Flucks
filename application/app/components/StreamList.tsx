@@ -12,7 +12,7 @@ export default async function StreamList() {
             }
             return await res.json();
         } catch (e) {
-           return "test";
+           console.log('Données non chargées')
         }
     }
 
