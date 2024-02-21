@@ -1,6 +1,6 @@
-import {existsSync, mkdirSync, rename} from "fs"
-import {DOSSIER_PRIVE, DOSSIER_VIDEO} from "../conf/constant.js";
-import { default as axios } from 'axios';
+import {existsSync, mkdirSync, rename} from 'fs';
+import {DOSSIER_PRIVE, DOSSIER_VIDEO} from '../conf/constant.js';
+import {default as axios} from 'axios';
 
 export async function patchVisibiliteAction(req, res, next) {
         if (!existsSync(DOSSIER_PRIVE)) {
@@ -15,7 +15,7 @@ export async function patchVisibiliteAction(req, res, next) {
         } else {
             const token = req.headers.authorization.split(' ')[1];
             try {
-                const response = await axios.get(`http://docketu.iutnc.univ-lorraine.fr:35305/users/video/${req.body.id}`, {
+                const response = await axios.get(`https://flucks.timeuh.fr/users/video/${req.body.id}`, {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }

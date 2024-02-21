@@ -1,9 +1,10 @@
 'use client';
 import RTCMultiConnection from 'rtcmulticonnection';
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import {API_WS_URL} from '@/app/utils/appGlobal';
 
 function Viewer(id) {
-  const idStream = (id.id);
+  const idStream = id.id;
   const [alertMessage, setAlertMessage] = useState('');
   const videoRef = useRef(null);
   const connectionRef = useRef(null);
@@ -12,7 +13,7 @@ function Viewer(id) {
     const connection = new RTCMultiConnection();
     connectionRef.current = connection;
 
-    connection.socketURL = 'http://docketu.iutnc.univ-lorraine.fr:35303/';
+    connection.socketURL = API_WS_URL;
 
     connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: false,
@@ -53,9 +54,7 @@ function Viewer(id) {
     connection.onMediaError = function (e) {
       if (e.message === 'Concurrent mic process limit.') {
         if (DetectRTC.audioInputDevices.length <= 1) {
-          setAlertMessage(
-            'Please select external microphone. Check github issue number 483.'
-          );
+          setAlertMessage('Please select external microphone. Check github issue number 483.');
           return;
         }
 

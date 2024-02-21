@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import {API_STOP_STREAM} from '@/app/utils/appGlobal';
+import {API_STOP_STREAM, API_WS_URL} from '@/app/utils/appGlobal';
 import {getCookieToken} from '@/app/utils/getToken';
 
 function StreamerHost(id) {
@@ -23,7 +23,7 @@ function StreamerHost(id) {
     video: true,
   };
 
-  connection.socketURL = 'http://docketu.iutnc.univ-lorraine.fr:35303/';
+  connection.socketURL = API_WS_URL;
 
   connection.session = {
     audio: true,
@@ -36,7 +36,7 @@ function StreamerHost(id) {
     OfferToReceiveVideo: false,
   };
 
-  connection.onstream = function(event) {
+  connection.onstream = function (event) {
     // Vérification que l'élément video est bien initialisé
     const videoElement = document.getElementById('localVideo');
     if (videoElement) {
@@ -60,13 +60,13 @@ function StreamerHost(id) {
     setMediaRecorder(recorder);
   };
 
-
   async function stopStream() {
-    const response = await fetch(`${API_STOP_STREAM  }/${  id.id}`, { cache: 'no-cache',
+    const response = await fetch(`${API_STOP_STREAM}/${id.id}`, {
+      cache: 'no-cache',
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${await getCookieToken()}`,
+        Authorization: `Bearer ${await getCookieToken()}`,
       },
     });
     const data = await response.json();
@@ -75,8 +75,7 @@ function StreamerHost(id) {
     } else {
       router.push('/flucks');
     }
-  };
-
+  }
 
   const handleStopRecord = async () => {
     connection.closeSocket();
@@ -106,16 +105,23 @@ function StreamerHost(id) {
 
   return (
     <div className={'flex flex-col justify-center'}>
-      <div className={'px-6 bg-[#D9D9D9] min-h-[40vw] mb-4 flex justify-center'}>
+      <div className={'mb-4 flex min-h-[40vw] justify-center bg-[#D9D9D9] px-6'}>
         <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
       </div>
       <div>
         <button className={'flex self-center'} onClick={handleStartRecord} disabled={startDisabled}>
-          <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
-                 className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'} />
-          <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en direct</p>
+          <Image
+            src={'/../img/FlecheDouble.png'}
+            width={30}
+            height={30}
+            className={'max-h-[30px] max-w-[30px] self-center'}
+            alt={'fleche'}
+          />
+          <p className={'rounded-lg bg-[#19AFFB] px-2 py-1 text-white'}>Lancer la diffusion en direct</p>
         </button>
-        <button onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
+        <button onClick={handleStopRecord} disabled={stopDisabled}>
+          Stop record/stream
+        </button>
       </div>
     </div>
   );
