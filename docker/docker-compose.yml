@@ -2,6 +2,8 @@ version: '3.5'
 name: 'flucks'
 
 networks:
+  traefik_web:
+    external: true
   flucks.net:
     driver: bridge
 
@@ -14,6 +16,7 @@ services:
     working_dir: /app
     networks:
       - flucks.net
+      - traefik_web
     environment:
         - NODE_ENV=development
     ports:
