@@ -1,5 +1,5 @@
 version: '3.5'
-name: 'flucks-2'
+name: 'flucks'
 
 networks:
   traefik_web:

@@ -1,4 +1,4 @@
-export const API_BASE_URL: string = 'http://localhost:35300';
+export const API_BASE_URL: string = 'http://localhost:35305';
 
 export const API_WS_URL: string = 'http://localhost:35303';
 
