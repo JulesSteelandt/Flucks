@@ -19,7 +19,7 @@ export default function NavBarConnected() {
       <input className={'mx-1 my-4 w-11/12 p-1.5 max-sm:hidden'} type={'text'} placeholder={'Rechercher'} />
       <div className={'max-w-11/12 flex w-11/12 flex-col items-center max-sm:flex-row'}>
         <Link
-          href={'/flucks'}
+          href={'/flucks/streams'}
           className={
             'my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center sm:w-full'
           }
@@ -28,7 +28,7 @@ export default function NavBarConnected() {
           <p className={'ml-1 max-sm:hidden'}>Streams</p>
         </Link>
         <Link
-          href={'/flucks'}
+          href={'/flucks/videos'}
           className={
             'my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center sm:w-full'
           }
