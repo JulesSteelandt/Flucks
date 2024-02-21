@@ -5,7 +5,7 @@ name: 'flucks'
 networks:
   traefik_web:
     external: true
-  flucks:
+  default:
     driver: bridge
 
 # Définition des services
@@ -19,7 +19,6 @@ services:
     working_dir: /app
     networks:
       - traefik_web
-      - flucks
     environment:
       - NODE_ENV=development
     ports:
@@ -38,7 +37,6 @@ services:
     ports:
       - '35301:8080'
     networks:
-      - flucks
       - traefik_web
 
   flucks.db:
@@ -47,7 +45,6 @@ services:
     ports:
       - '35302:5432'
     networks:
-      - flucks
       - traefik_web
 
   webrtc:
@@ -61,7 +58,6 @@ services:
       - ../server:/usr/src/app
     working_dir: /usr/src/app
     networks:
-      - flucks
       - traefik_web
     environment:
       - NODE_ENV=development
@@ -75,7 +71,6 @@ services:
       - ../api:/app
     working_dir: /app
     networks:
-      - flucks
       - traefik_web
     environment:
       - NODE_ENV=development
