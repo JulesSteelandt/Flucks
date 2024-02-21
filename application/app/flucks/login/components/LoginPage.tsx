@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {APi_SIGNIN} from '@/app/utils/appGlobal';
+import {API_SIGNIN} from '@/app/utils/appGlobal';
 import {useState} from 'react';
 import setCookieLogin from '@/app/flucks/login/actions/setCookieLogin';
 import {useRouter} from 'next/navigation';
@@ -17,7 +17,7 @@ export default function LoginPage() {
     const credentials = `${email}:${password}`;
     const encodedCredentials = Buffer.from(credentials).toString('base64');
     try {
-      const response = await fetch(APi_SIGNIN, {
+      const response = await fetch(API_SIGNIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
