@@ -16,7 +16,7 @@ export default function Header() {
                     <Link href={'/flucks/inscription'} className={'bg-white font-bold rounded-2xl p-1 my-1 flex justify-center'}>S'inscrire</Link>
                     <Link href={'/flucks/login'} className={'bg-white font-bold rounded-2xl p-1 my-1 flex justify-center'}>Se connecter</Link>
                 </div>
-                <img src={'/img/flucks_profile.png'} alt={'flucks profile'} className={'rounded-t-full rounded-br-full w-28'}/>
+                <img src={'/img/flucks_profile.png'} alt={'flucks profile'} className={'rounded-t-full rounded-br-full w-28'} onClick={() => router.push('/flucks/user')}/>
             </div>
         </header>
     )

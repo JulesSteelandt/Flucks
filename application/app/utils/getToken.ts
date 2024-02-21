@@ -12,9 +12,13 @@ export const getCookieToken = () => {
 };
 
 export const getDecodedToken = () => {
-  const token = getCookieToken();
-  if (token !== null) {
-    return jwtDecode(token);
-  }
-  return null;
+  return new Promise((resolve, reject) => {
+    const token = getCookieToken();
+    if (token !== null) {
+      resolve(jwtDecode(token));
+    } else {
+      reject(null);
+    }
+  })
+
 };
