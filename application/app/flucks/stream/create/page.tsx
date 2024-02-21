@@ -10,7 +10,7 @@ import {getCookieToken, getDecodedToken} from '@/app/utils/getToken';
 export default function CreateStream() {
     // state
     const router = useRouter();
-    const [titre, setTitre] = useState('');
+    const [titre, setTitre] = useState('ftyqud');
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState([]);
     const [geolocalisation, setGeolocalisation] = useState(false);

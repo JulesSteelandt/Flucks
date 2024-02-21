@@ -4,6 +4,8 @@ import React, {useState} from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
+import {API_STOP_STREAM} from '@/app/utils/appGlobal';
+import {getCookieToken} from '@/app/utils/getToken';
 
 function StreamerHost(id) {
   const idValue = id.id;
@@ -59,13 +61,31 @@ function StreamerHost(id) {
   };
 
 
-  const handleStopRecord = () => {
+  async function stopStream() {
+    const response = await fetch(`${API_STOP_STREAM  }/${  id.id}`, { cache: 'no-cache',
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${await getCookieToken()}`,
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      console.log('erreur pdt le patch fin de stream');
+    } else {
+      router.push('/flucks');
+    }
+  };
+
+
+  const handleStopRecord = async () => {
     connection.closeSocket();
     setStartDisabled(false);
     setStopDisabled(true);
 
     mediaRecorder.stop();
     setLocalStream(null);
+    await stopStream();
 
     router.push('/flucks');
   };
