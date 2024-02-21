@@ -7,12 +7,12 @@ export default async function StreamList() {
         try {
             const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
             if (!res.ok) {
-                console.error('Erreur de récupération des marqueurs');
+                console.error('Erreur de récupération des données');
                 return;
             }
             return await res.json();
         } catch (e) {
-            throw new Error(e);
+           console.log('Données non chargées')
         }
     }
 

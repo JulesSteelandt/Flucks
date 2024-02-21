@@ -24,6 +24,9 @@ export default async function Page({params}: {
     }
 
     const videoData = await fetchVideoDataWithID();
+    const areCommentsEmpty = () => {
+        return videoData.data.commentaires === null;
+    }
 
     return (
         <div className={'m-8 w-5/6 p-4'}>
@@ -50,14 +53,19 @@ export default async function Page({params}: {
                     <img src={'/img/chat_icon.png'} alt={'chat'} width={40}/>
                 </div>
                 <input type={'text'} placeholder={'Écrire un commentaire ...'} className={'p-1 w-full my-4'}/>
-                {videoData.data.commentaires.map((comment) => {
-                    return (
-                        <div className={'flex flex-row justify-between'}>
-                            <p>{comment.commentaire}</p>
-                            <p>{comment.pseudo}</p>
-                        </div>
-                    )
-                })}
+                {areCommentsEmpty() ? (
+                    <p>Pas de commentaires</p>
+                ) : (
+                    videoData.data.commentaires.map((comment) => {
+                            return (
+                                <div className={'flex flex-row justify-between'}>
+                                    <p>{comment.commentaire}</p>
+                                    <p>{comment.pseudo}</p>
+                                </div>
+                            )
+                        }
+                    ))
+                }
             </div>
         </div>
     );

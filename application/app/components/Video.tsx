@@ -13,14 +13,14 @@ export default function Video({key, title, creator, id}) {
     }
 
     return (
-        <div className={'relative m-2 w-1/3 rounded-xl border-2 bg-[#5DA5B3]'} key={key}>
+        <div className={'relative w-1/3 rounded-xl border-2 bg-[#5DA5B3] max-xl:w-1/3 max-md:w-1/2 xl:w-1/4'} key={key}>
             <div
                 className={'flex justify-center py-8'}
                 onClick={() => {
                     return router.push(`/flucks/video/${id}`);
                 }}
             >
-                <img src={'/img/play_icon.png'} alt={'play logo'} className={'w-12'}/>
+                <img src={'/img/video_menu_logo.png'} alt={'play logo'} className={'w-12'}/>
             </div>
             {isPathnameMyVideos() &&
                 <Link href={'/flucks/edit/' + id}>
