@@ -12,4 +12,5 @@ export const API_WS_STREAM : string = `${API_WS_URL}/`;
 
 export const APi_SIGNIN: string = `${API_BASE_URL}/users/signin`;
 
+export const API_STOP_STREAM: string = `${API_BASE_URL}/diffusions/stop`;
 export const API_VIDEO_USER : string = `${API_BASE_URL}/users/video`;
