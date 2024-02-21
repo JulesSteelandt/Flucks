@@ -31,7 +31,9 @@ services:
       - "traefik.http.routers.flucks.rule=Host(`flucks.timeuh.fr`)"
       - "traefik.http.routers.flucks.entrypoints=websecure"
       - "traefik.http.routers.flucks.tls.certresolver=myresolver"
-      - "traefik.http.services.flucks.loadbalancer.server.port=3000"
+      - "traefik.http.routers.flucks.service=flucks"
+      - "traefik.http.services.flucks.loadbalancer.server.port=35300"
+
 
   adminer:
     image: adminer
