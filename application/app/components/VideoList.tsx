@@ -6,7 +6,7 @@ export default async function VideoList() {
         try {
             const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
             if (!res.ok) {
-                console.error('Erreur de récupération des marqueurs');
+                console.error('Erreur de récupération des données');
                 return;
             }
             return await res.json();
