@@ -48,6 +48,7 @@ services:
       - '35302:5432'
     networks:
       - flucks
+      - traefik_web
 
   webrtc:
     image: 'node:alpine'
@@ -61,6 +62,7 @@ services:
     working_dir: /usr/src/app
     networks:
       - flucks
+      - traefik_web
     environment:
       - NODE_ENV=development
 
@@ -74,5 +76,6 @@ services:
     working_dir: /app
     networks:
       - flucks
+      - traefik_web
     environment:
       - NODE_ENV=development
