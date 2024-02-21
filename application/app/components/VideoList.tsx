@@ -19,7 +19,6 @@ export default async function VideoList() {
 
     return (
         <div>
-            <p className={'font-bold p-8 text-2xl'}>Liste des vidéos</p>
             <div className={'flex flex-wrap px-8'}>
                 {videoData.data.slice(0, 8).map((video) => {
                     if (!video.direct) {

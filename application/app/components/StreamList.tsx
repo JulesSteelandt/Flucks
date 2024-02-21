@@ -20,7 +20,6 @@ export default async function StreamList() {
 
     return (
         <div>
-            <p className={'p-8 text-2xl font-bold'}>Liste des streams</p>
             <div className={'flex flex-wrap px-8'}>
                 {streamData.data.slice(0, 8).map((stream: any) => {
                     if (stream.direct) {
