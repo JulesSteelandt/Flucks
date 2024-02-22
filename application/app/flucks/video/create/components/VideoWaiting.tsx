@@ -20,7 +20,6 @@ export default function VideoWaitingComponent({id, title, creator}: {title: stri
         throw new Error('Failed to publish video');
       }
       router.refresh();
-      router.push('/flucks/video');
     } catch (error) {
       console.error('Error publishing video:', error);
     }
@@ -40,7 +39,6 @@ export default function VideoWaitingComponent({id, title, creator}: {title: stri
         throw new Error('Failed to delete video');
       }
       router.refresh();
-      router.push('/flucks/video');
     } catch (error) {
       console.error('Error deleting video:', error);
     }
