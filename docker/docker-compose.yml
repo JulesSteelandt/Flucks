@@ -7,20 +7,21 @@ networks:
 
 services:
   app:
-    build:
-      context: .
-      target: dev
-    command: yarn dev
-    env_file: .env.local
+    image: 'node:alpine'
+    command: sh -c "npm i && npm run dev"
     volumes:
       - ../application:/app
-      - ../application/node_modules:/app/node_modules
-      - ../application/.next:/app/.next
+    working_dir: /app
+    networks:
+      - flucks.net
+    environment:
+        - NODE_ENV=development
     ports:
       - '35300:3000'
 
   adminer:
     image: adminer
+    command: php -S 0.0.0.0:8080 -t /var/www/html
     ports:
       - '35301:8080'
     networks:
@@ -38,15 +39,16 @@ services:
     image: 'node:alpine'
     ports:
       - '35303:3000'
-    command: sh -c "npm i && npm run watch"
+    env_file:
+      - express.env
+    command: sh -c "npm i && npm run start"
     volumes:
-      - ../server:/app
-    working_dir: /app
+      - ../server:/usr/src/app
+    working_dir: /usr/src/app
     networks:
       - flucks.net
     environment:
       - NODE_ENV=development
-
 
   api:
     image: 'node:alpine'
