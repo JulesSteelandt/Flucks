@@ -1,24 +1,33 @@
+import React from 'react';
+import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
+import StreamerHost from '@/app/flucks/emergency/[id]/components/StreamerComponent';
 
-export default function emergencyWarning() {
+export default async function Page({params}: {
+    params: {
+        id: string
+    }
+}) {
+  const fetchStreamDataWithID = async () => {
+    try {
+      const res = await fetch(`${API_DIFFUSIONS  }/${  params.id}`, {cache: 'no-cache'});
+      if (!res.ok) {
+        console.error('Erreur de récupération des marqueurs');
+        return;
+      }
+      return await res.json();
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
 
-
-
+  const streamData = await fetchStreamDataWithID();
     return (
-        <div className={'flex w-full flex-col items-center md:w-5/6 h-full justify-center'}>
-            <button className={'flex w-fit flex-col items-center justify-center mt-[25vh] max-w-[400px]'}>
-                <div className={'flex rounded-t-lg bg-[#5DA5B3] py-6 w-full'}>
-                    <div className={'flex bg-[#A91208] rounded-full h-12 w-12 items-center justify-center ml-4 min-h-12 min-w-12'}>
-                        <p className={'text-white text-center text-3xl'}>!</p>
-                    </div>
+        <div className={'p-4 w-5/6 m-8'}>
+          <StreamerHost id={params.id} />
+                <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre}</p>
+            <div className={'flex flex-row justify-between'}>
 
-                    <p className={'text-white max-w-[30vw] mx-4 font-semibold text-left'}>
-                       ça fonctionne bien
-                    </p>
-                </div>
-                <p className={'bg-[#A91208] rounded-b-lg text-white w-full font-bold py-4'}>
-                    c'est lancé
-                </p>
-            </button>
+            </div>
         </div>
 
     );
