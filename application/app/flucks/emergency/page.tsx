@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import {API_CREATE_STREAM} from '@/app/utils/appGlobal';
 import {getCookieToken, getDecodedToken} from '@/app/utils/getToken';
 import {useRouter} from 'next/navigation';
@@ -24,6 +23,15 @@ export default function emergencyWarning() {
         }
     };
 
+    const getPosition = () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            } else {
+                reject('La géolocalisation n\'est pas prise en charge par ce navigateur.');
+            }
+        });
+    };
 
     const createBody = async () => {
         const titre = await getTitre();
@@ -36,12 +44,14 @@ export default function emergencyWarning() {
         body.description = 'Urgence en direct';
         body.tags = ['Urgence'];
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const geo = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-                body.geolocalisation = geo;
-            });
+        try {
+            const position = await getPosition();
+            // @ts-ignore
+            body.geolocalisation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+        } catch (error) {
+            body.geolocalisation = {latitude: null, longitude: null};
         }
+
         return JSON.stringify(body);
     };
 
