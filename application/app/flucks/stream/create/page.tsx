@@ -15,8 +15,8 @@ export default function CreateStream() {
   const [description, setDescription] = useState<string>('');
   const [tags, setTags] = useState<string>('');
   const [geolo, setGeolocalisation] = useState<boolean>(false);
-  const [latitude, setLatitude] = useState<number>(0);
-  const [longitude, setLongitude] = useState<number>(0);
+  const [latitude, setLatitude] = useState<number>(200);
+  const [longitude, setLongitude] = useState<number>(200);
 
 
   // comportement
@@ -34,33 +34,24 @@ export default function CreateStream() {
   
 
   const handleGeolocation = () => {
-    const geoOnOff = geolo;
-    console.log(geoOnOff);
-    setGeolocalisation(!geoOnOff);
+    setGeolocalisation(!geolo);
     if (geolo) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           setLatitude(position.coords.latitude);
           setLongitude(position.coords.longitude);
-          console.log('Latitude :', position.coords.latitude);
-          console.log('Longitude :', position.coords.longitude);
         });
       } else {
         console.log('Geolocalisation non supportée');
       }
     } else {
-      setLatitude(0);
-      setLongitude(0);
+      setLatitude(200);
+      setLongitude(200);
     }
   };
 
 
   const createBody = () => {
-    console.log('geolo :', geolo);
-    console.log('latitude :', latitude);
-    console.log('longitude :', longitude);
-
-
 
     const body: {[key: string]: any} = {
       titre: titre,
@@ -76,8 +67,7 @@ export default function CreateStream() {
       body.tags = createTag();
     }
 
-    console.log('geolo :', geolo);
-    if (geolo) {
+    if (latitude !== 200 && longitude !== 200) {
       const geo = {latitude: latitude, longitude: longitude};
       body.geolocalisation = geo;
     }
