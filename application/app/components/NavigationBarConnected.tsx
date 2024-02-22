@@ -96,7 +96,7 @@ export default function NavBarConnected() {
           <p className={'ml-1 max-sm:hidden'}>Mes vidéos</p>
         </Link>
         <Link
-          href={'/flucks'}
+          href={'/flucks/emergency'}
           className={
             'my-1 flex w-full flex-row items-center rounded-xl bg-red-100 p-1 text-lg font-bold text-[#394054] max-sm:mx-1 max-sm:w-64 max-sm:justify-center'
           }

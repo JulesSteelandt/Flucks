@@ -9,7 +9,8 @@ export default function emergencyWarning() {
 
     const getDateTime = () => {
         const date = new Date();
-        return date.toISOString();
+        // date format  j-m-a-h-m
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}-${date.getHours()}h${date.getMinutes()}`;
     };
     const getTitre = async () => {
         let title = getDateTime();
