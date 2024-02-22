@@ -13,13 +13,25 @@ export default function CreateStream() {
   const router = useRouter();
   const [titre, setTitre] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string>('');
   const [geolo, setGeolocalisation] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
 
 
   // comportement
+  
+  const createTag = () => {
+    if (tags === '') {
+      return;
+    }
+    
+      const tagArray = tags.split(' ');
+      console.log('tagArray :', tagArray);
+      return tagArray;
+    
+  };
+  
 
   const handleGeolocation = () => {
     const geoOnOff = geolo;
@@ -60,9 +72,10 @@ export default function CreateStream() {
     if (description !== '') {
       body.description = description;
     }
-    if (tags.length > 0) {
-      body.tags = tags;
+    if (tags !== '') {
+      body.tags = createTag();
     }
+
     console.log('geolo :', geolo);
     if (geolo) {
       const geo = {latitude: latitude, longitude: longitude};
@@ -129,7 +142,7 @@ export default function CreateStream() {
               className={'rounded-lg drop-shadow-lg resize-none'}
               value={tags}
               onChange={(e) => {
-                setTags(e.target.value.split(','));
+                return setTags(e.target.value);
               }}
             ></textarea>
 
