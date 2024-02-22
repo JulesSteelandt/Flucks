@@ -1,42 +1,59 @@
-import {API_ABONNEMENTS} from "@/app/utils/appGlobal";
-import {getCookieToken} from "@/app/utils/getToken";
+'use client';
 
-export default async function Page() {
+import {useEffect, useState} from 'react';
+import {API_ABONNEMENTS} from '@/app/utils/appGlobal';
+import {getCookieToken} from '@/app/utils/getToken';
 
+interface Abonnement {
+  id: string;
+  abonneur: string;
+}
+
+export default function Page() {
+  const [abonnementsData, setAbonnementsData] = useState<Abonnement[]>([]);
+
+  useEffect(() => {
     const fetchAbonnements = async () => {
-        try {
-            const res = await fetch(API_ABONNEMENTS, {
-                cache: 'no-cache',
-                methode: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${await getCookieToken()}`,
-                },
-            });
-            if (!res.ok) {
-                console.error('Erreur de récupération des données');
-                return;
-            }
-            return await res.json();
-        } catch (e) {
-            console.log('Données non chargées');
+      try {
+        const res = await fetch(API_ABONNEMENTS, {
+          cache: 'no-cache',
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${await getCookieToken()}`,
+          },
+        });
+        if (!res.ok) {
+          console.error('Erreur de récupération des données');
+          return;
         }
-    }
+        const data = await res.json();
+        setAbonnementsData(data.data);
+      } catch (e) {
+        console.log('Données non chargées');
+      }
+    };
 
-    const abonnementsData = await fetchAbonnements();
+    fetchAbonnements();
+  }, []);
 
-    return (
-        <div className={'w-5/6'}>
-            <p className={'p-8 text-2xl font-bold'}>Mes abonnements</p>
-            {abonnementsData.data.map((abonnement) => {
-                return (
-                    <div className={'flex flex-row items-center pl-8 bg-[#5DA5B3] mx-8 py-4 rounded-lg'}>
-                        <img src={'/img/flucks_profile.png'} alt={''} width={80} className={'rounded-xl'}/>
-                        <p className={'text-white ml-8'}>Vous êtes abonné à <strong>{abonnement.abonneur}</strong></p>
-                    </div>
-                )
-            })}
-
-        </div>
-    )
+  return (
+    <div className={'w-5/6'}>
+      <p className={'p-8 text-2xl font-bold'}>Mes abonnements</p>
+      {Array.isArray(abonnementsData) && abonnementsData.length > 0 ? (
+        abonnementsData.map((abonnement: Abonnement) => {
+          return (
+            <div key={abonnement.id} className={'mx-8 flex flex-row items-center rounded-lg bg-[#5DA5B3] py-4 pl-8'}>
+              <img src={'/img/flucks_profile.png'} alt={''} width={80} className={'rounded-xl'} />
+              <p className={'ml-8 text-white'}>
+                Vous êtes abonné à <strong>{abonnement.abonneur}</strong>
+              </p>
+            </div>
+          );
+        })
+      ) : (
+        <p className='p-4 text-gray-500'>Aucun abonnement</p>
+      )}
+    </div>
+  );
 }
