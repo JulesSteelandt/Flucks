@@ -4,7 +4,6 @@ import CheckboxLinear from './components/CheckboxLinear';
 import Image from 'next/image';
 import PreviewStream from './components/PreviewStream';
 import {API_CREATE_STREAM} from '@/app/utils/appGlobal';
-import {router} from 'next/client';
 import {useRouter} from 'next/navigation';
 import {getCookieToken, getDecodedToken} from '@/app/utils/getToken';
 
@@ -71,8 +70,6 @@ export default function CreateStream() {
       const geo = {latitude: latitude, longitude: longitude};
       body.geolocalisation = geo;
     }
-
-    console.log('body :', body);
     return JSON.stringify(body);
   };
 
