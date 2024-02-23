@@ -49,36 +49,32 @@ export default function VideoWaitingComponent({id, title, creator}: {title: stri
   };
 
   return (
-    <div className='flex w-[20vw] min-w-[400px] gap-2 rounded-xl bg-[#394054] pr-2'>
-      <div className={'min-w-[200px]'}>
-        <Video key={id} title={title} creator={creator} id={id} />
+      <div className='flex w-[20vw] min-w-[400px] gap-2 rounded-xl bg-[#394054] pr-2'>
+        <div className={'min-w-[200px] my-2 ml-2'}>
+          <Video key={id} title={title} creator={creator} id={id}/>
+        </div>
+        <div className={'flex flex-col justify-between w-full'}>
+          <div className={'flex flex-col gap-2'}>
+            <button
+                onClick={handleEdit}
+                className={'w-full min-w-fit rounded-xl bg-gray-100 px-6 py-1 font-bold drop-shadow-lg hover:bg-black hover:text-white mt-2'}
+            >
+              Modifier
+            </button>
+            <button
+                onClick={handleDelete}
+                className={'w-full min-w-fit rounded-xl bg-gray-100 px-6 py-1 font-bold drop-shadow-lg hover:bg-black hover:text-white'}
+            >
+              Supprimer
+            </button>
+          </div>
+          <button
+              onClick={handlePublish}
+              className={'w-full min-w-fit rounded-xl bg-[#19AFFB] px-6 py-1 font-bold text-white drop-shadow-lg hover:bg-white hover:text-[#19AFFB] mb-2'}
+          >
+            Publier
+          </button>
+        </div>
       </div>
-      <div className={'flex h-full w-full flex-col justify-between'}>
-        <button
-          onClick={handleEdit}
-          className={
-            'mt-2 w-full min-w-fit rounded-xl bg-gray-100 px-6 py-1 font-bold drop-shadow-lg hover:bg-black hover:text-white'
-          }
-        >
-          Modifier
-        </button>
-        <button
-          onClick={handleDelete}
-          className={
-            'w-full min-w-fit rounded-xl bg-gray-100 px-6 py-1 font-bold drop-shadow-lg hover:bg-black hover:text-white'
-          }
-        >
-          Supprimer
-        </button>
-        <button
-          onClick={handlePublish}
-          className={
-            'hover: mb-2 mr-4 w-full min-w-fit rounded-xl bg-[#19AFFB] px-6 py-1 font-bold text-white drop-shadow-lg hover:bg-white hover:text-[#19AFFB]'
-          }
-        >
-          Publier
-        </button>
-      </div>
-    </div>
   );
 }
