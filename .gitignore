@@ -44,3 +44,9 @@ next-env.d.ts
 
 #config
 /api/src/config/config.ts
+
+#Server
+**/node_modules
+server/public/video
+server/public/temp
+/application/.next/
