@@ -1,4 +1,3 @@
-import {fetchDiffusionDataWithID} from '@/app/data';
 import React from 'react';
 import StreamerHost from '@/app/flucks/stream/[id]/host/components/StreamerComponent';
 import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
@@ -12,12 +11,12 @@ export default async function Page({params}: {
     try {
       const res = await fetch(`${API_DIFFUSIONS  }/${  params.id}`, {cache: 'no-cache'});
       if (!res.ok) {
-        console.error('Erreur de récupération des marqueurs');
+        console.error('Erreur lors de la récupération des données de la diffusion.');
         return;
       }
       return await res.json();
     } catch (e) {
-      throw new Error(e);
+      console.error('Erreur lors de la récupération des données de la diffusion.', e);
     }
   };
 
