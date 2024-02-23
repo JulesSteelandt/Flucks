@@ -113,8 +113,8 @@ function StreamerHost(id) {
       <div className={'px-6 bg-[#D9D9D9] min-h-[40vw] mb-4 flex justify-center'}>
         <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
       </div>
-      <div>
-        <button onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
+      <div className={'flex justify-between items-center mb-4'}>
+        <button className={'bg-[#A91208] py-1 px-2 rounded-lg text-white ml-auto'} onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
       </div>
     </div>
   );

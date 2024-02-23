@@ -109,13 +109,20 @@ function StreamerHost(id) {
       <div className={'px-6 bg-[#D9D9D9] min-h-[40vw] mb-4 flex justify-center'}>
         <video id='localVideo' autoPlay muted playsInline src={localStream}></video>
       </div>
-      <div>
-        <button className={'flex self-center'} onClick={handleStartRecord} disabled={startDisabled}>
-          <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
-                 className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'} />
-          <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en direct</p>
+      <div
+        className={'flex justify-between items-center mb-4'}>
+        {stopDisabled && (
+          <button className={'flex self-center'} onClick={handleStartRecord} disabled={startDisabled}>
+            <Image src={'/../img/FlecheDouble.png'} width={30} height={30}
+                   className={'max-w-[30px] max-h-[30px] self-center'} alt={'fleche'}/>
+            <p className={'bg-[#19AFFB] py-1 px-2 rounded-lg text-white'}>Lancer la diffusion en direct</p>
+          </button>
+        )}
+        {!stopDisabled && (
+        <button className={'bg-[#A91208] py-1 px-2 rounded-lg text-white ml-auto'} onClick={handleStopRecord}
+                disabled={stopDisabled}>Stop record/stream
         </button>
-        <button onClick={handleStopRecord} disabled={stopDisabled}>Stop record/stream</button>
+        )}
       </div>
     </div>
   );
