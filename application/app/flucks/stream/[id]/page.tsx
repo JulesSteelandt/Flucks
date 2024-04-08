@@ -18,7 +18,8 @@ export default async function Page({params}: {
             }
             return await res.json();
         } catch (e) {
-            throw new Error(e);
+            console.log('erreur lors de la recupération du stream');
+
         }
     };
 

@@ -17,15 +17,24 @@ export default async function Page({params}: {
       }
       return await res.json();
     } catch (e) {
-      throw new Error(e);
+        console.log('erreur lors de la création du stream');
     }
   };
 
-  const streamData = await fetchStreamDataWithID();
+  let streamData = {};
+  try {
+     streamData = await fetchStreamDataWithID();
+    console.log(streamData);
+    if (streamData === undefined)    streamData = {data: {titre: 'inconnu' }};
+
+  } catch (e) {
+    console.log('erreur');
+  }
+
     return (
         <div className={'p-4 w-5/6 m-8'}>
           <StreamerHost id={params.id} />
-                <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre}</p>
+                <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre} </p>
             <div className={'flex flex-row justify-between'}>
 
             </div>
