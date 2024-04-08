@@ -13,6 +13,7 @@ export default function Page() {
   const [tags, setTags] = useState('');
   const [video, setVideo] = useState<File | null>(null);
   const [videosData, setVideosData] = useState<VideoData[]>([]);
+  const [infoMissing, setInfoMissing] = useState(false);
 
   useEffect(() => {
     const getVideosPrivate = async () => {
@@ -41,6 +42,21 @@ export default function Page() {
 
   // comportement
   async function handleCreate(event: any) {
+    // verif que la video est bien upload avant de continuer
+    if (video === null) {
+      console.log('Pas de vidéo à uploader');
+      console.log('video', video);
+      setInfoMissing(true);
+      return;
+    }
+    // verif titre non vide
+    if (title === '') {
+      console.log('Pas de titre');
+      setInfoMissing(true);
+      return;
+    }
+
+
     console.log('coucou jai cliqué sur le bouton submit : créer');
     const data = await createVideo();
     const responseUpload = await uploadVideo(data);
@@ -49,6 +65,7 @@ export default function Page() {
 
   async function uploadVideo(data: any) {
     console.log(data.data.diffusionId);
+
     const formData = new FormData();
     formData.append('file', video as File);
 
@@ -117,6 +134,7 @@ export default function Page() {
 
       <div className={'flex w-full justify-center'}>
         <div className={'flex flex-wrap'}>
+          <div className={'flex flex-col'}>
           <div className={'flex h-fit gap-2'}>
             <div className={'flex min-h-[75px] min-w-[150px] items-center justify-center rounded-xl bg-[#5DA5B3]'}>
               <img src={'/img/video_play_img.png'} alt={'Play'} width={'50'} height={'50'} />
@@ -129,6 +147,14 @@ export default function Page() {
                 className={'w-full max-w-[15vw] rounded-lg border-2 p-1 drop-shadow-lg'}
               />
             </div>
+          </div>
+          {
+            infoMissing && (
+              <div className={'mt-4'}>
+              <label className={'text-red-700 font-semibold'}>Il faut au minimum un titre et une vidéo.</label>
+              </div>
+            )
+          }
           </div>
 
           <div className={'flex flex-col'}>
