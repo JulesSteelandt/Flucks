@@ -59,7 +59,7 @@ export default function Page() {
     });
     const dataresponse = await response.json();
     if (!response.ok) {
-      console.log("erreur pdt l'upload de la vidéo");
+      console.log('erreur pdt l\'upload de la vidéo');
     } else {
       return dataresponse;
     }
@@ -128,8 +128,6 @@ export default function Page() {
                 onChange={handleFileChange}
                 className={'w-full max-w-[15vw] rounded-lg border-2 p-1 drop-shadow-lg'}
               />
-
-              <input type={'file'} className={'w-full max-w-[15vw] rounded-lg border-2 p-1 drop-shadow-lg'} />
             </div>
           </div>
 
