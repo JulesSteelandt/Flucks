@@ -20,7 +20,7 @@ export default async function Page({
         return;
       }
       return await res.json();
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(e);
     }
   };
@@ -58,7 +58,7 @@ export default async function Page({
         {areCommentsEmpty() ? (
           <p>Pas de commentaires</p>
         ) : (
-          videoData.data.commentaires.map((comment) => {
+          videoData.data.commentaires.map((comment: any) => {
             return (
               <div className={'flex flex-row justify-between'}>
                 <p>{comment.commentaire}</p>

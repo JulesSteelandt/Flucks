@@ -13,12 +13,11 @@ export const getCookieToken = () => {
 
 export const getDecodedToken = () => {
   return new Promise((resolve, reject) => {
-    const token = getCookieToken();
+    const token: any = getCookieToken();
     if (token !== null) {
       resolve(jwtDecode(token));
     } else {
       reject(null);
     }
-  })
-
+  });
 };

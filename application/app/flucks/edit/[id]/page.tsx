@@ -42,7 +42,7 @@ export default function Page({
     <div className={'m-8 w-5/6 p-4'}>
       <p className={'mb-4 text-center text-xl font-bold'}>Modification de la vidéo</p>
       <div className={'flex justify-center'}>
-        {editData && <Video title={editData.titre} creator={editData.createur.pseudo} id={params.id} />}
+        {editData && <Video key={params.id} title={editData.titre} creator={editData.createur.pseudo} id={params.id} />}
       </div>
       <div className={'mt-8 flex w-full flex-row'}>
         <div className={'w-1/2 border-r-2 border-black p-4'}>

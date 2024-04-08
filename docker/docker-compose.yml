@@ -6,59 +6,70 @@ networks:
     driver: bridge
 
 services:
+  nginx:
+    image: nginx:alpine
+    networks:
+      - flucks.net
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./cert:/etc/nginx/certificat
+    ports:
+      - '35305:3005'
+      - "35503:3003"
+      - "35502:3002"
+      - "35301:3001"
+      - "35300:3000"
+    depends_on:
+      - app
+      - flucks.db
+      - webrtc
+      - api
+
+
   app:
     image: 'node:alpine'
-    command: sh -c "npm i && npm run dev"
+    command: sh -c "npm i && npm run build && npm run start"
+    env_file: .env.local
     volumes:
       - ../application:/app
-    working_dir: /app
+    ports:
+      - "3000"
     networks:
       - flucks.net
-    environment:
-        - NODE_ENV=development
-    ports:
-      - '35300:3000'
+    working_dir: /app
 
   adminer:
-    image: adminer
-    command: php -S 0.0.0.0:8080 -t /var/www/html
-    ports:
-      - '35301:8080'
-    networks:
-      - flucks.net
+      image: adminer
+      command: php -S 0.0.0.0:8080 -t /var/www/html
+      networks:
+        - flucks.net
 
   flucks.db:
-    image: 'postgres:latest'
-    env_file: ./db.env
-    ports:
-      - '35302:5432'
-    networks:
-      - flucks.net
+      image: 'postgres:latest'
+      env_file: ./db.env
+      networks:
+        - flucks.net
 
   webrtc:
-    image: 'node:alpine'
-    ports:
-      - '35303:3000'
-    env_file:
-      - express.env
-    command: sh -c "npm i && npm run start"
-    volumes:
-      - ../server:/usr/src/app
-    working_dir: /usr/src/app
-    networks:
-      - flucks.net
-    environment:
-      - NODE_ENV=development
+      image: 'node:alpine'
+      env_file:
+        - express.env
+      command: sh -c "npm i && npm run start"
+      volumes:
+        - ../server:/usr/src/app
+      working_dir: /usr/src/app
+      networks:
+        - flucks.net
+      environment:
+        - NODE_ENV=development
 
   api:
-    image: 'node:alpine'
-    ports:
-      - '35305:3000'
-    command: sh -c "npm i && npm run dev"
-    volumes:
-      - ../api:/app
-    working_dir: /app
-    networks:
-      - flucks.net
-    environment:
-      - NODE_ENV=development
+      image: 'node:alpine'
+      command: sh -c "npm i && npm run dev"
+      volumes:
+        - ../api:/app
+      working_dir: /app
+      networks:
+        - flucks.net
+      environment:
+        - NODE_ENV=development

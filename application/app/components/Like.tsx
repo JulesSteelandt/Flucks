@@ -3,7 +3,7 @@
 import React from 'react';
 
 // @ts-ignore
-export default function Like({nbLikes}: number) {
+export default function Like({nbLikes}: any) {
   const [liked, setLiked] = React.useState(false);
 
   function likeVideo() {
