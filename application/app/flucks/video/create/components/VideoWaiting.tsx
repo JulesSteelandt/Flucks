@@ -1,8 +1,8 @@
-import Video from '@/app/components/Video';
 import React from 'react';
 import {API_DELETE_VIDEO, API_PUBLISH_VIDEO} from '@/app/utils/appGlobal';
 import {getCookieToken} from '@/app/utils/getToken';
 import {useRouter} from 'next/navigation';
+import Video from '@/app/flucks/video/create/components/Video';
 
 export default function VideoWaitingComponent({id, title, creator}: {title: string; creator: string; id: string}) {
   const router = useRouter();
