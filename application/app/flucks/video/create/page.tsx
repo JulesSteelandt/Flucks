@@ -160,7 +160,7 @@ export default function Page() {
 
 
       <div className={'flex flex-wrap justify-start gap-2'}>
-        <VideoWaitingComponent id={''} title={''} creator={''} />
+        <VideoWaitingComponent id={'test'} title={'testtesttesttesttesttesttesttesttesttest'} creator={'testesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttestt'} />
         <VideoWaitingComponent id={''} title={''} creator={''} />
         <VideoWaitingComponent id={''} title={''} creator={''} />
 

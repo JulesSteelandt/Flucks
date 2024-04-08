@@ -1,5 +1,5 @@
-import Video from '@/app/components/Video';
 import React from 'react';
+import Video from '@/app/flucks/video/create/components/Video';
 
 
 export default function VideoWaitingComponent({ title, creator, id }: { title: string; creator: string; id: string }) {
