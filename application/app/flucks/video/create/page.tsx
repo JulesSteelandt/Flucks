@@ -44,28 +44,19 @@ export default function Page() {
   async function handleCreate(event: any) {
     // verif que la video est bien upload avant de continuer
     if (video === null) {
-      console.log('Pas de vidéo à uploader');
-      console.log('video', video);
       setInfoMissing(true);
       return;
     }
     // verif titre non vide
     if (title === '') {
-      console.log('Pas de titre');
       setInfoMissing(true);
       return;
     }
-
-
-    console.log('coucou jai cliqué sur le bouton submit : créer');
     const data = await createVideo();
     const responseUpload = await uploadVideo(data);
-    console.log(responseUpload);
   }
 
   async function uploadVideo(data: any) {
-    console.log(data.data.diffusionId);
-
     const formData = new FormData();
     formData.append('file', video as File);
 
@@ -103,8 +94,6 @@ export default function Page() {
     if (tags.length > 0) {
       body.tags = tags;
     }
-
-    console.log('body :', body);
     return JSON.stringify(body);
   };
 
@@ -119,7 +108,6 @@ export default function Page() {
       body: createBody(),
     });
     const data = await response.json();
-    console.log(data);
     if (!response.ok) {
       console.log('erreur pdt le fetch creation stream');
     } else {
@@ -135,26 +123,26 @@ export default function Page() {
       <div className={'flex w-full justify-center'}>
         <div className={'flex flex-wrap'}>
           <div className={'flex flex-col'}>
-          <div className={'flex h-fit gap-2'}>
-            <div className={'flex min-h-[75px] min-w-[150px] items-center justify-center rounded-xl bg-[#5DA5B3]'}>
-              <img src={'/img/video_play_img.png'} alt={'Play'} width={'50'} height={'50'} />
-            </div>
-
-            <div className={'flex flex-col gap-4'}>
-              <input
-                type={'file'}
-                onChange={handleFileChange}
-                className={'w-full max-w-[15vw] rounded-lg border-2 p-1 drop-shadow-lg'}
-              />
-            </div>
-          </div>
-          {
-            infoMissing && (
-              <div className={'mt-4'}>
-              <label className={'text-red-700 font-semibold'}>Il faut au minimum un titre et une vidéo.</label>
+            <div className={'flex h-fit gap-2'}>
+              <div className={'flex min-h-[75px] min-w-[150px] items-center justify-center rounded-xl bg-[#5DA5B3]'}>
+                <img src={'/img/video_play_img.png'} alt={'Play'} width={'50'} height={'50'} />
               </div>
-            )
-          }
+
+              <div className={'flex flex-col gap-4'}>
+                <input
+                  type={'file'}
+                  onChange={handleFileChange}
+                  className={'w-full max-w-[15vw] rounded-lg border-2 p-1 drop-shadow-lg'}
+                />
+              </div>
+            </div>
+            {
+              infoMissing && (
+                <div className={'mt-4'}>
+                  <label className={'text-red-700 font-semibold'}>Il faut au minimum un titre et une vidéo.</label>
+                </div>
+              )
+            }
           </div>
 
           <div className={'flex flex-col'}>
