@@ -1,5 +1,5 @@
-import Video from "@/app/components/Video";
-import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
+import Video from '@/app/components/Video';
+import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
 
 export default async function VideoList({limit} : {limit: string}) {
     const fetchVideoData = async () => {
@@ -11,21 +11,29 @@ export default async function VideoList({limit} : {limit: string}) {
             }
             return await res.json();
         } catch (e) {
-            throw new Error(e);
+           console.log(e);
         }
-    }
-
-    const diffusionsData = await fetchVideoData();
-    const videoData = diffusionsData.data.filter(diffusion => diffusion.direct === false).slice(0, limit);
-
+    };
+    
+    
+    let videoData = [];
+try {
+   const diffusionsData = await fetchVideoData();
+    // @ts-ignore
+    videoData = diffusionsData.data.filter(diffusion => {
+        return diffusion.direct === false;
+    }).slice(0, limit);
+} catch (e) {
+    console.log(videoData);
+}
     return (
         <div>
             <div className={'flex flex-wrap px-8'}>
                 {videoData.map((video: any) => {
-                    return <Video title={video.titre} creator={video.createur} id={video.id}/>
+                    return <Video title={video.titre} creator={video.createur} id={video.id}/>;
                 })}
             </div>
         </div>
-    )
+    );
 }
 

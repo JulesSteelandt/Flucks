@@ -1,23 +1,34 @@
 import Stream from '@/app/components/Stream';
-import {API_DIFFUSIONS} from "@/app/utils/appGlobal";
+import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
 
 export default async function StreamList({limit} : {limit: string}) {
 
     const fetchStreamData = async () => {
         try {
-            const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
+            const res = await fetch('https://docketu.iutnc.univ-lorraine.fr:35305/diffusions', {cache: 'no-cache'});
             if (!res.ok) {
                 console.error('Erreur de récupération des données');
                 return;
             }
             return await res.json();
         } catch (e) {
-            console.log('Données non chargées')
+            console.log('Données non chargées');
         }
-    }
+    };
 
+    let streamData = [];
+try {
     const diffusionsData = await fetchStreamData();
-    const streamData = diffusionsData.data.filter(diffusion => diffusion.direct === true).slice(0, limit);
+    console.log(diffusionsData);
+    // @ts-ignore
+    streamData = diffusionsData.data.filter(diffusion => {
+        return diffusion.direct === true;
+    }).slice(0, limit);
+} catch (e){
+    console.log(e);
+
+}
+
 
     return (
         <div>
