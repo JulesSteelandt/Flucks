@@ -16,7 +16,7 @@ export default function NavBarConnected() {
         'mt-0 flex w-1/6 min-w-48 flex-col items-center bg-[#394054] py-2 max-sm:w-screen max-sm:flex-row max-sm:justify-center md:h-screen'
       }
     >
-      <input className={'mx-1 my-4 w-11/12 p-1.5 max-sm:hidden'} type={'text'} placeholder={'Rechercher'} />
+      <input className={'mx-1 my-4 w-11/12 p-1.5 max-md:hidden'} type={'text'} placeholder={'Rechercher'} />
       <div className={'max-w-11/12 flex w-11/12 flex-col items-center max-sm:flex-row'}>
         <Link
           href={'/flucks/streams'}

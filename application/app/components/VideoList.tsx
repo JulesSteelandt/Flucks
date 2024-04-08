@@ -20,7 +20,7 @@ export default async function VideoList({limit} : {limit: string}) {
 
     return (
         <div>
-            <div className={'flex flex-wrap px-8'}>
+            <div className={'grid grid-cols-4 px-8'}>
                 {videoData.map((video: any) => {
                     return <Video title={video.titre} creator={video.createur} id={video.id}/>
                 })}

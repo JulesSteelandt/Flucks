@@ -12,7 +12,7 @@ export default function Video({key, title, creator, id}: {key: string; title: st
   };
 
   return (
-    <div className={'relative rounded-xl border-2 bg-[#5DA5B3] '} key={key}>
+    <div className={'relative rounded-xl border-2 bg-[#5DA5B3] hover:scale-105 duration-300'} key={key}>
       <div
         className={'flex justify-center py-8'}
         onClick={() => {
