@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-bleu flucks :
-bg-[#5DA5B3]
-
-gris flucks
-bg-[#394054]
-
-background steam
-bg-[#B0C0D4]
-*/
+.navBarButtonNoConnected {
+    @apply my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-md:mx-1 max-md:w-64 max-md:justify-center md:w-full
+}
