@@ -15,7 +15,7 @@ export default function Page(id) {
                     <p className={'text-white'}>Erreur de chargement de la vidéo</p>
                 ) : (
                     <video className={'h-full'} controls onError={handleVideoError}>
-                        <source src={"http://docketu.iutnc.univ-lorraine.fr:35303/video/" + id.id + ".mp4"}
+                        <source src={"https://docketu.iutnc.univ-lorraine.fr:35303/video/" + id.id + ".mp4"}
                                 type={"video/mp4"}/>
                     </video>
                 )

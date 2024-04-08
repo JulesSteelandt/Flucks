@@ -23,7 +23,7 @@ function StreamerHost(id) {
     video: true,
   };
 
-  connection.socketURL = 'http://docketu.iutnc.univ-lorraine.fr:35303/';
+  connection.socketURL = 'https://docketu.iutnc.univ-lorraine.fr:35303/';
 
   connection.session = {
     audio: true,

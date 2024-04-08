@@ -12,7 +12,7 @@ function Viewer(id) {
     const connection = new RTCMultiConnection();
     connectionRef.current = connection;
 
-    connection.socketURL = 'http://docketu.iutnc.univ-lorraine.fr:35303/';
+    connection.socketURL = 'https://docketu.iutnc.univ-lorraine.fr:35303/';
 
     connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: false,
