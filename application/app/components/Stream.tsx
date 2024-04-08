@@ -7,7 +7,7 @@ export default function Stream({key, title, creator, emergency, id}) {
     const router = useRouter();
 
     return (
-        <div className={'relative rounded-xl border-2 bg-[#B0C0D4] max-xl:w-1/3 max-md:w-1/2 xl:w-1/4'} key={key}>
+        <div className={'relative rounded-xl border-2 bg-[#B0C0D4] max-xl:w-1/3 max-md:w-1/2 xl:w-1/4 hover:scale-105 duration-300'} key={key}>
             <div
                 className={'flex justify-center py-8'}
                 onClick={() => {

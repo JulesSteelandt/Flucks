@@ -27,7 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     </head>
       <body className={inter.className}>
         {isAuth ? <HeaderConnected /> : <Header />}
-        <div className={'flex max-sm:flex-col md:flex-row'}>
+        <div className={'flex max-md:flex-col-reverse max-md:justify-center max-md:items-center md:flex-row'}>
           {isAuth ? <NavBarConnected /> : <NavBar />}
           {children}
         </div>

@@ -1,7 +1,7 @@
 import Stream from '@/app/components/Stream';
 import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
 
-export default async function StreamList({limit} : {limit: string}) {
+export default async function StreamList({limit}: { limit: string }) {
 
     const fetchStreamData = async () => {
         try {
@@ -31,13 +31,11 @@ try {
 
 
     return (
-        <div>
-            <div className={'flex flex-wrap px-8'}>
-                {streamData.map((stream: any) => {
-                    return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
-                                   id={stream.id}/>;
-                })}
-            </div>
+        <div className={'grid grid-cols-4 px-8'}>
+            {streamData.map((stream: any) => {
+                return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
+                               id={stream.id}/>;
+            })}
         </div>
     );
 }
