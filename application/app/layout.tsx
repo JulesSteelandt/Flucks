@@ -13,25 +13,27 @@ import Script from 'next/script';
 const inter = Inter({subsets: ['latin']});
 
 export const metadata: Metadata = {
-  title: 'Flucks',
-  description: 'Flucks application',
+    title: 'Flucks',
+    description: 'Flucks application',
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
-  const isAuth = isUserLog();
+export default function RootLayout({children}: { children: React.ReactNode }) {
+    const isAuth = isUserLog();
 
-  return (
-    <html lang='fr'>
-    <head>
-      <Script src='https://muazkhan.com:9001/socket.io/socket.io.js'></Script>
-    </head>
-      <body className={inter.className}>
-        {isAuth ? <HeaderConnected /> : <Header />}
+    return (
+        <html lang='fr'>
+        <head>
+            <Script src='https://muazkhan.com:9001/socket.io/socket.io.js'></Script>
+        </head>
+        <body className={inter.className}>
+        {isAuth ? <HeaderConnected/> : <Header/>}
         <div className={'flex max-md:flex-col-reverse max-md:justify-center max-md:items-center md:flex-row'}>
-          {isAuth ? <NavBarConnected /> : <NavBar />}
-          {children}
+            {isAuth ? <NavBarConnected/> : <NavBar/>}
+            <div className={'md:mb-32 md:margin_content flex justify-center w-full'}>
+                {children}
+            </div>
         </div>
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }

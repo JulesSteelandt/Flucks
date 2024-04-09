@@ -53,7 +53,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <form className={'flex w-full flex-col items-center md:w-5/6'} onSubmit={handleSubmit}>
+    <form className={'flex w-full flex-col items-center md:w-5/6 pb-2'} onSubmit={handleSubmit}>
       <div className={'mx-auto mb-4 w-fit'}>
         <p className={'mb-1 text-sm font-bold'}>Email :</p>
         <input

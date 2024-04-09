@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <div className={'w-5/6'}>
       <p className={'p-8 text-2xl font-bold'}>Mes vidéos</p>
-      <div className={'flex flex-wrap px-8'}>
+      <div className={'grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-2'}>
         {myVideosData.map((video: VideoData) => {
           if (!video.direct) {
             return <Video key={video.id} title={video.titre} creator={video.createur} id={video.id} />;
