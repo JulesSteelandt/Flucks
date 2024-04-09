@@ -1,7 +1,7 @@
 import Video from '@/app/components/Video';
 import {API_DIFFUSIONS} from '@/app/utils/appGlobal';
 
-export default async function VideoList({limit} : {limit: string}) {
+export default async function VideoList({limit}: { limit: string }) {
     const fetchVideoData = async () => {
         try {
             const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
@@ -11,27 +11,30 @@ export default async function VideoList({limit} : {limit: string}) {
             }
             return await res.json();
         } catch (e) {
-           console.log(e);
+            console.log(e);
         }
     };
-    
-    
+
+
     let videoData = [];
-try {
-   const diffusionsData = await fetchVideoData();
-    // @ts-ignore
-    videoData = diffusionsData.data.filter(diffusion => {
-        return diffusion.direct === false;
-    }).slice(0, limit);
-} catch (e) {
-    console.log(videoData);
-}
+    try {
+        const diffusionsData = await fetchVideoData();
+        // @ts-ignore
+        videoData = diffusionsData.data.filter(diffusion => {
+            return diffusion.direct === false;
+        }).slice(0, limit);
+    } catch (e) {
+        console.log(videoData);
+    }
     return (
         <div>
+            {videoData.length === 0 ? <p className={'px-8'}>Pas de vidéos disponibles</p> : ''}
             <div className={'grid grid-cols-4 px-8'}>
-                {videoData.map((video: any) => {
-                    return <Video title={video.titre} creator={video.createur} id={video.id}/>;
-                })}
+                {
+                    videoData.map((video: any) => {
+                        return <Video title={video.titre} creator={video.createur} id={video.id}/>;
+                    })
+                }
             </div>
         </div>
     );

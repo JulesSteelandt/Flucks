@@ -19,9 +19,9 @@ export default function MyMap() {
   };
 
   return (
-    <div className={'w-full full'}>
+    <div className={'w-full full z-0'}>
       {!geolocationLoaded && (
-        <MapContainer className={'w-full md:h-[40vw] max-md:[60vw]'} center={centerMap} zoom={5} scrollWheelZoom={true}>
+        <MapContainer className={'w-full sm:h-[40vw] max-sm:h-full'} center={centerMap} zoom={5} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -31,7 +31,7 @@ export default function MyMap() {
       )}
 
       {geolocationLoaded && (
-        <MapContainer className={'w-full h-[40vw]'} center={centerMap} zoom={18} scrollWheelZoom={true}>
+        <MapContainer className={'w-full md:h-[40vw] max-md:h-[50vh]'} center={centerMap} zoom={18} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

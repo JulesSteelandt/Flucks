@@ -1,11 +1,10 @@
 'use client';
 import Link from 'next/link';
-import classNames from 'classnames';
 
 export default function NavBar() {
     return (
         <div
-            className={'max-md:w-full max-md:h-24 max-md:z-0 mt-0 flex h-screen w-1/6 flex-col items-center bg-[#394054] max-md:fixed max-md:bottom-0'}>
+            className={'fixed left-0 max-md:w-full max-md:h-24 max-md:z-0 mt-0 flex h-screen w-1/6 flex-col items-center bg-[#394054] max-md:fixed max-md:bottom-0'}>
             <input className={'mx-1 my-4 w-11/12 p-1.5 max-md:hidden'} type={'text'} placeholder={'Rechercher'}/>
             <div
                 className={'max-w-11/12 flex md:w-11/12 max-md:w-full md:flex-col max-md:flex-row items-center md:justify-center'}>
