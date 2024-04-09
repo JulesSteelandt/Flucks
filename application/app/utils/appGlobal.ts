@@ -1,6 +1,6 @@
 export const API_BASE_URL: string = 'https://docketu.iutnc.univ-lorraine.fr:35305';
 
-export const API_WS_URL: string = 'https://docketu.iutnc.univ-lorraine.fr:35303';
+export const API_WS_URL: string = 'https://docketu.iutnc.univ-lorraine.fr:35303/api';
 
 export const API_DIFFUSIONS: string = `${API_BASE_URL}/diffusions`;
 
