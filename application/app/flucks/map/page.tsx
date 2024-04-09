@@ -16,7 +16,6 @@ export default function MapEvent() {
   return (
     <div className={'bg-[#E0E2E8] md:w-5/6 max-md:w-full'}>
       <div className={'h-full flex flex-col md:m-10'}>
-
         <Map/>
         <div className={'bg-[#D9D9D9] flex flex-col md:flex-row justify-between md:mt-10 p-6'}>
           <h1 className={'text-xl font-bold mb-2 sm:mb-0'}>Les évènements proches de vous.</h1>

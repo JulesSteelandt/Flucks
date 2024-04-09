@@ -12,7 +12,7 @@ export default function Video({key, title, creator, id}: {key: string; title: st
   };
 
   return (
-    <div className={'relative rounded-xl border-2 bg-[#5DA5B3] hover:scale-105 duration-300'} key={key}>
+    <div className={'relative flex flex-col rounded-xl border-2 bg-[#5DA5B3] hover:scale-105 duration-300'} key={key}>
       <div
         className={'flex justify-center py-8'}
         onClick={() => {
@@ -26,7 +26,7 @@ export default function Video({key, title, creator, id}: {key: string; title: st
           <img src={'/img/pencil_icon.png'} alt={'Modifier'} width={25} className={'absolute right-0 top-0 m-2 w-6'} />
         </Link>
       )}
-      <div className={'flex flex-row justify-between rounded-b-xl bg-white p-2'}>
+      <div className={'flex flex-row justify-between rounded-b-xl bg-white p-2 mt-auto'}>
         <p className={'text-sm font-bold'}>{title}</p>
         <p className={'text-sm italic'}>{creator}</p>
       </div>
