@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {API_DELETE_VIDEO, API_PUBLISH_VIDEO} from '@/app/utils/appGlobal';
 import {getCookieToken} from '@/app/utils/getToken';
 import {useRouter} from 'next/navigation';
@@ -6,8 +6,11 @@ import Video from '@/app/flucks/video/create/components/Video';
 
 export default function VideoWaitingComponent({id, title, creator}: {title: string; creator: string; id: string}) {
   const router = useRouter();
+  const [isDisplay, setIsDisplay] = useState(true);
+
   const handlePublish = async () => {
     try {
+      setIsDisplay(false);
       const token = await getCookieToken();
       const response = await fetch(`${API_PUBLISH_VIDEO}/${id}`, {
         method: 'PATCH',
@@ -27,6 +30,7 @@ export default function VideoWaitingComponent({id, title, creator}: {title: stri
 
   const handleDelete = async () => {
     try {
+      setIsDisplay(false);
       const token = await getCookieToken();
       const response = await fetch(`${API_DELETE_VIDEO}/${id}`, {
         method: 'DELETE',
@@ -49,6 +53,7 @@ export default function VideoWaitingComponent({id, title, creator}: {title: stri
   };
 
   return (
+    isDisplay &&
       <div className='flex w-[20vw] min-w-[400px] gap-2 rounded-xl bg-[#394054] pr-2'>
         <div className={'min-w-[200px] my-2 ml-2'}>
           <Video key={id} title={title} creator={creator} id={id}/>
