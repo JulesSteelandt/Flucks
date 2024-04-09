@@ -24,7 +24,7 @@ export default async function StreamList({limit}: {limit: string}) {
     console.log(diffusionsData);
     // @ts-ignore
     streamData = diffusionsData.data
-      .filter((diffusion) => {
+      .filter((diffusion: any) => {
         return diffusion.direct === true;
       })
       .slice(0, limit);
