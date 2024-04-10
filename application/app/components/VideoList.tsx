@@ -29,7 +29,7 @@ export default async function VideoList({limit}: { limit: string }) {
     return (
         <div>
             {videoData.length === 0 ? <p className={'px-8'}>Pas de vidéos disponibles</p> : ''}
-            <div className={'grid grid-cols-4 px-8'}>
+            <div className={'grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-2 px-8'}>
                 {
                     videoData.map((video: any) => {
                         return <Video title={video.titre} creator={video.createur} id={video.id}/>;
@@ -39,4 +39,3 @@ export default async function VideoList({limit}: { limit: string }) {
         </div>
     );
 }
-

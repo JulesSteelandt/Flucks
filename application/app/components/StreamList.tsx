@@ -32,14 +32,16 @@ export default async function StreamList({limit}: {limit: string}) {
     console.log(e);
   }
 
-  return (
-    <div>
-      {streamData.length === 0 ? <p className={'px-8'}>Pas de streams disponibles</p> : ''}
-      <div className={'grid grid-cols-4 px-8'}>
-        {streamData.map((stream: any) => {
-          return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence} id={stream.id} />;
-        })}
-      </div>
-    </div>
-  );
-}
+    return (
+        <div>
+            {streamData.length === 0 ? <p className={'px-8'}>Pas de streams disponibles</p> : ''}
+            <div className={'grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-2 px-8'}>
+                {
+                    streamData.map((stream: any) => {
+                        return <Stream title={stream.titre} creator={stream.createur} emergency={stream.urgence}
+                                       id={stream.id}/>;
+                    })
+                }
+            </div>
+        </div>
+    );
