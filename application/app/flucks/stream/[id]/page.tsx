@@ -26,8 +26,8 @@ export default async function Page({params}: {
     const streamData = await fetchStreamDataWithID();
 
     return (
-        <div className={'p-4 w-5/6 m-8'}>
-              <ViewerComponent id={params.id} />
+        <div className={'p-4 w-5/6 m-8 max-lg:mb-48'}>
+            <ViewerComponent id={params.id} />
             <div className={'flex flex-row'}>
                 <p className={'bg-[#D9D9D9] w-5/6 text-center p-4 font-bold'}>{streamData.data.titre}</p>
                 <p className={'w-1/6 text-center p-4 italic underline'}>{streamData.data.createur.pseudo}</p>
