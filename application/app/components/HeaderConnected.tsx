@@ -22,12 +22,12 @@ export default function HeaderConnected() {
             <div className={'flex flex-row items-center justify-center'}>
                 <div className={'flex sm:flex-col max-sm:flew-row mr-4 max-sm:gap-2'}>
                     <Link href={'/flucks/user'}
-                          className={'my-1 flex justify-center rounded-2xl bg-white p-1 font-bold'}>
+                          className={'my-1 flex justify-center rounded-2xl bg-white p-1 font-bold max-sm:px-4'}>
                         Mon compte
                     </Link>
                     <Link href={'/flucks/deconnexion'}
-                          className={'my-1 flex justify-center rounded-2xl bg-white py-1 px-2 font-bold'}>
-                        Se deconnecter
+                          className={'my-1 flex justify-center rounded-2xl bg-white py-1 px-2 font-bold max-sm:px-4'}>
+                        Se déconnecter
                     </Link>
                 </div>
                 <img src={'/img/flucks_profile.png'} alt={'flucks profile'}
