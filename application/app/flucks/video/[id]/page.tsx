@@ -3,7 +3,7 @@
 import {useEffect, useState} from 'react';
 import Like from '@/app/components/Like';
 import VideoContent from '@/app/components/VideoContent';
-import {API_DIFFUSIONS, API_POST_COMMENT, API_SABONNER} from '@/app/utils/appGlobal';
+import {API_DIFFUSIONS, API_LIKE, API_POST_COMMENT, API_SABONNER} from '@/app/utils/appGlobal';
 import {formatAbonnements} from '@/app/flucks/likes';
 import {getCookieToken} from '@/app/utils/getToken';
 
@@ -13,10 +13,40 @@ export default function Page({params}: {params: {id: string}}) {
   const [emptyComment, setEmptyComment] = useState<boolean>(false);
   const [nmbAbonnements, setNmbAbonnements] = useState<number>(0);
   const [abonne, setAbonne] = useState<boolean>(false);
+  const [nmbLikes, setNmbLikes] = useState<number>(0);
+  const [isLike, setIsLike] = useState<boolean>(false);
 
   useEffect(() => {
     fetchVideoDataWithID();
   }, [params.id]);
+
+  const userLike = async () => {
+    try {
+      const token = await getCookieToken();
+      const response = await fetch(`${API_LIKE}/${params.id}`, {
+        cache: 'no-cache',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({like: !isLike}),
+      });
+      if (response.ok) {
+        setIsLike(!isLike);
+        if (isLike) {
+          setNmbLikes(nmbLikes - 1);
+        } else {
+          setNmbLikes(nmbLikes + 1);
+        }
+      } else {
+        const errorData = await response.json();
+        console.error('Erreur lors de la requête:', errorData);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête:', error);
+    }
+  };
 
   const fetchVideoDataWithID = async () => {
     try {
@@ -35,6 +65,8 @@ export default function Page({params}: {params: {id: string}}) {
       const data = await res.json();
       setVideoData(data);
       setAbonne(data.data.isAbonne);
+      setNmbLikes(data.data.like);
+      setIsLike(data.data.isLike);
       setNmbAbonnements(data.data.createur.abonnees);
     } catch (e) {
       console.error('Erreur lors de la récupération des données de la vidéo:', e);
@@ -122,7 +154,7 @@ export default function Page({params}: {params: {id: string}}) {
               </button>
             </div>
             <div className={'flex flex-row items-center'}>
-              <Like nbLikes={videoData.data.like} isLike={videoData.data.isLike} />
+              <Like nmbLikes={nmbLikes} isLike={isLike} like={userLike} />
               <p className={'text-sm'}>{videoData.data.vue} vues</p>
             </div>
           </div>

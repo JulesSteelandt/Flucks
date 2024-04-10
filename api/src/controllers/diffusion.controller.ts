@@ -192,7 +192,7 @@ export const likeDiffusion = async (req: Request, res: Response) => {
 
     if (!like) {
       await Like.dislikeDiffusion(user.email, req.idDiffusion);
-      return res.status(400).json({ message: "Like supprimé." });
+      return res.status(200).json({ message: "Like supprimé." });
     } else {
       await Like.likeDiffusion(user.email, req.idDiffusion);
       return res.status(200).json({ message: "Like ajouté." });
