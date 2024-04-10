@@ -90,8 +90,6 @@ export default function Page({params}: {params: {id: string}}) {
         if (!response.ok) {
           console.log("Le commentaire n'a pas pu être envoyé");
         } else {
-          // Réinitialiser le champ d'entrée et le state une fois le commentaire publié avec succès
-          setCommentInput('');
           fetchVideoDataWithID();
         }
       } else {
@@ -142,12 +140,12 @@ export default function Page({params}: {params: {id: string}}) {
       {videoData && (
         <>
           <VideoContent id={params.id} />
-          <div className={'flex flex-row'}>
-            <p className={'w-5/6 bg-[#D9D9D9] p-4 text-center font-bold'}>{videoData.data.titre}</p>
-            <p className={'w-1/6 p-4 text-center italic underline'}>{videoData.data.createur.pseudo}</p>
+          <div className={'flex md:flex-row max-md:flex-col'}>
+            <p className={'md:w-5/6 max-md:w-full bg-[#D9D9D9] p-4 text-center font-bold'}>{videoData.data.titre}</p>
+            <p className={'md:w-1/6 p-4 text-center italic underline'}>{videoData.data.createur.pseudo}</p>
           </div>
-          <div className={'flex flex-row justify-between'}>
-            <div className={'flex flex-row items-center p-4'}>
+          <div className={'flex sm:flex-row max-sm:flex-col sm:justify-between'}>
+            <div className={'flex flex-row items-center p-4 max-sm:justify-center'}>
               <p className={'mx-2 font-mono text-xl font-extrabold text-[#394054]'}>
                 {formatAbonnements(nmbAbonnements)}
               </p>
@@ -155,12 +153,12 @@ export default function Page({params}: {params: {id: string}}) {
                 {abonne ? 'Se désabonner' : "S'abonner"}
               </button>
             </div>
-            <div className={'flex flex-row items-center'}>
+            <div className={'flex flex-row items-center max-sm:justify-around max-sm:mb-4'}>
               <Like nmbLikes={nmbLikes} isLike={isLike} like={userLike} />
               <p className={'text-sm'}>{videoData.data.vue} vues</p>
             </div>
           </div>
-          <div className={'flex flex-col bg-gray-300 p-4'}>
+          <div className={'flex flex-col bg-gray-300 p-4 max-md:mb-28'}>
             <div className={'flex flex-row items-center'}>
               <p className={'pr-3 font-bold'}>Commentaires</p>
               <img src={'/img/chat_icon.png'} alt={'chat'} width={40} />
@@ -193,8 +191,8 @@ export default function Page({params}: {params: {id: string}}) {
                 .map((comment: any, index: number) => {
                   return (
                     <div key={index} className={'flex flex-col border-b-2 border-gray-200 py-4 last:border-none'}>
-                      <p className={'text-sm italic'}>@{comment.pseudo} a écrit :</p>
-                      <p className={'pt-2'}>{comment.commentaire}</p>
+                      <p className={'text-sm italic font-bold'}>@{comment.pseudo} a écrit :</p>
+                      <p className={'pt-2 max-sm:text-sm'}>{comment.commentaire}</p>
                     </div>
                   );
                 })
