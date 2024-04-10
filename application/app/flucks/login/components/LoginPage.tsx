@@ -58,7 +58,7 @@ export default function LoginPage() {
         <input
           type={'password'}
           className={'w-full min-w-[250px] rounded-lg border-2 p-1 drop-shadow-lg'}
-          placeholder={'ACAB'}
+          placeholder={'*****'}
           value={password}
           onChange={(e) => {
             return setPassword(e.target.value);

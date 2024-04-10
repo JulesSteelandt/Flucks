@@ -5,7 +5,7 @@ export default function NavBar() {
   return (
     <div
       className={
-        'mt-4 z-10 fixed left-0 mt-0 md:pt-1  flex h-screen w-1/6 flex-col items-center bg-[#394054] max-md:fixed max-md:bottom-0 max-md:h-24 max-md:w-full'
+        'fixed left-0 z-10 mt-0 flex  h-screen w-1/6 flex-col items-center bg-[#394054] max-md:fixed max-md:bottom-0 max-md:h-24 max-md:w-full md:pt-1'
       }
     >
       <div
