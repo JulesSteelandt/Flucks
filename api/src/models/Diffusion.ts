@@ -48,6 +48,8 @@ class Diffusion {
         .where("Diffusion.id", diffusionId)
         .first();
 
+      await db("Diffusion").where("id", diffusionId).increment("vue", 1);
+
       return diffusion;
     } catch (error) {
       console.error(
