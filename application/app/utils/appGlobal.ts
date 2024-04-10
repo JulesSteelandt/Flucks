@@ -25,3 +25,5 @@ export const API_UPLOAD_VIDEO: string = `${API_WS_URL}/upload`;
 export const API_PUBLISH_VIDEO: string = `${API_BASE_URL}/diffusions/public`;
 
 export const API_DELETE_VIDEO: string = `${API_BASE_URL}/diffusions/delete`;
+
+export const API_POST_COMMENT: string = `${API_BASE_URL}/diffusions/commentaire`;
