@@ -1,6 +1,6 @@
 import StreamList from '@/app/components/StreamList';
 import VideoList from '@/app/components/VideoList';
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Page() {
     return (
@@ -12,7 +12,7 @@ export default function Page() {
                         <p>Voir plus de streams</p>
                     </Link>
                 </div>
-                <StreamList limit={"8"}/>
+                <StreamList limit={'8'}/>
             </div>
             <div className={'flex flex-row justify-between items-center w-full'}>
                 <p className={'font-bold p-8 text-2xl'}>Les dernières vidéos</p>
@@ -20,7 +20,7 @@ export default function Page() {
                     <p>Voir plus de vidéos</p>
                 </Link>
             </div>
-            <VideoList limit={"8"}/>
+            <VideoList limit={'8'}/>
         </div>
     );
 }
