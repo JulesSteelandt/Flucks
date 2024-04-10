@@ -11,7 +11,7 @@ export default function Like({nbLikes}: any) {
   }
 
   return (
-    <div className={'items mx-16 flex flex-row'}>
+    <div className={'items sm:mx-16 flex flex-row'}>
       <img
         src={liked ? '/img/like_full.png' : '/img/like_empty.png'}
         alt={'like empty'}
