@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import RTCMultiConnection from 'rtcmulticonnection';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import {API_STOP_STREAM} from '@/app/utils/appGlobal';
+import {API_STOP_STREAM, API_WS_URL} from '@/app/utils/appGlobal';
 import {getCookieToken} from '@/app/utils/getToken';
 
 function StreamerHost(id) {
@@ -23,7 +23,7 @@ function StreamerHost(id) {
     video: true,
   };
 
-  connection.socketURL = 'http://docketu.iutnc.univ-lorraine.fr:35303/';
+  connection.socketURL = 'https://docketu.iutnc.univ-lorraine.fr:35303/';
 
   connection.session = {
     audio: true,
