@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 import Like from '@/app/components/Like';
 import VideoContent from '@/app/components/VideoContent';
 import {API_DIFFUSIONS, API_LIKE, API_POST_COMMENT, API_SABONNER} from '@/app/utils/appGlobal';
@@ -73,36 +73,38 @@ export default function Page({params}: {params: {id: string}}) {
     }
   };
 
-  const sendComment = async () => {
-    try {
-      if (commentInput.trim().length > 0) {
-        setEmptyComment(false);
-        const token = await getCookieToken();
-        const response = await fetch(`${API_POST_COMMENT}/${params.id}`, {
-          cache: 'no-cache',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({commentaire: commentInput}),
-        });
-        if (!response.ok) {
-          console.log("Le commentaire n'a pas pu être envoyé");
-        } else {
-          fetchVideoDataWithID();
+    const sendComment = async () => {
+        try {
+            if (commentInput.trim().length > 0) {
+                setEmptyComment(false);
+                const token = await getCookieToken();
+                const response = await fetch(`${API_POST_COMMENT}/${params.id}`, {
+                    cache: 'no-cache',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ commentaire: commentInput }),
+                });
+                if (!response.ok) {
+                    console.log('Le commentaire n\'a pas pu être envoyé');
+                } else {
+                    // Réinitialiser le champ d'entrée et le state une fois le commentaire publié avec succès
+                    setCommentInput('');
+                    fetchVideoDataWithID();
+                }
+            } else {
+                setEmptyComment(true);
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi du commentaire:', error);
         }
-      } else {
-        setEmptyComment(true);
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du commentaire:", error);
-    }
-  };
+    };
 
-  const areCommentsEmpty = () => {
-    return videoData?.data.commentaires === null;
-  };
+    const areCommentsEmpty = () => {
+        return videoData?.data.commentaires === null;
+    };
 
   const abonnement = async () => {
     try {

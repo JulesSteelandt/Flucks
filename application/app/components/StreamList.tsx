@@ -33,7 +33,7 @@ export default async function StreamList({limit}: {limit: string}) {
   }
 
   return (
-    <div>
+    <div >
       {streamData.length === 0 ? <p className={'px-8'}>Pas de streams disponibles</p> : ''}
       <div className={'grid gap-2 px-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'}>
         {streamData.map((stream: any) => {
