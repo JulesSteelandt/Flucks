@@ -6,7 +6,7 @@ export default async function StreamList({limit}: {limit: string}) {
     // @ts-ignore
     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
     try {
-      const res = await fetch(API_DIFFUSIONS);
+      const res = await fetch(API_DIFFUSIONS, {cache: 'no-cache'});
       if (!res.ok) {
         console.error('Erreur de récupération des données');
         return;
