@@ -26,7 +26,7 @@ export default function Video({key, title, creator, id}: {key: string; title: st
           <img src={'/img/pencil_icon.png'} alt={'Modifier'} width={25} className={'absolute right-0 top-0 m-2 w-6'} />
         </Link>
       )}
-      <div className={'flex flex-row justify-between rounded-b-xl bg-white p-2 mt-auto'}>
+      <div className={'flex flex-row justify-between rounded-b-xl bg-white p-2 mt-auto overflow-x-auto gap-4'}>
         <p className={'text-sm font-bold'}>{title}</p>
         <p className={'text-sm italic'}>{creator}</p>
       </div>

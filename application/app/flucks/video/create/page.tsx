@@ -54,6 +54,9 @@ export default function Page() {
     }
     const data = await createVideo();
     const responseUpload = await uploadVideo(data);
+    if (responseUpload) {
+      window.location.reload();
+    }
   }
 
   async function uploadVideo(data: any) {

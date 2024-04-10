@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .navBarButtonNoConnected {
-    @apply hover:bg-gray-100 my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-md:mx-1 max-md:w-64 max-md:justify-center md:w-full
+    @apply hover:bg-gray-300 my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-md:mx-1 max-md:w-64 max-md:justify-center md:w-full
 }
 
 .navBarButtonConnected {
-    @apply my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-md:mx-1 max-md:w-64 max-md:justify-center md:w-full
+    @apply hover:bg-gray-300 my-1 flex flex-row items-center rounded-xl bg-white p-1 text-lg font-bold text-[#394054] max-md:mx-1 max-md:w-64 max-md:justify-center md:w-full
 }
 
 @layer utilities {
