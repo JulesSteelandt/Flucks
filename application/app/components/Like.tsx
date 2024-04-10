@@ -3,8 +3,8 @@
 import React from 'react';
 
 // @ts-ignore
-export default function Like({nbLikes}: any) {
-  const [liked, setLiked] = React.useState(false);
+export default function Like({nbLikes, isLike}: any) {
+  const [liked, setLiked] = React.useState(isLike);
 
   function likeVideo() {
     setLiked(!liked);
@@ -13,7 +13,7 @@ export default function Like({nbLikes}: any) {
   return (
     <div className={'items mx-16 flex flex-row'}>
       <img
-        src={liked ? '/img/like_full.png' : '/img/like_empty.png'}
+        src={liked ? '/img/like_empty.png' : '/img/like_full.png'}
         alt={'like empty'}
         className={'w-8'}
         onClick={likeVideo}
