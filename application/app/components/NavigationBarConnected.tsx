@@ -13,7 +13,7 @@ export default function NavBarConnected() {
   return (
     <div
       className={
-        'fixed z-50 mt-0 flex h-screen w-1/6 flex-col items-center overflow-hidden bg-[#394054] max-md:fixed max-md:bottom-0 max-md:z-0 max-md:h-24 max-md:w-full'
+        'z-10 fixed mt-0 flex h-screen w-1/6 flex-col items-center overflow-hidden bg-[#394054] max-md:fixed max-md:bottom-0 max-md:h-24 max-md:w-full'
       }
     >
       <div
