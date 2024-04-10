@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import {API_SIGNUP} from '@/app/utils/appGlobal';
 import {useState} from 'react';
-import {useRouter} from 'next/navigation';
 
 export default function SignUpPage() {
   const [email, setEmail] = useState('');
@@ -11,9 +10,11 @@ export default function SignUpPage() {
   const [pseudo, setPseudo] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
-  const router = useRouter();
+  const [signup, setSignup] = useState('');
 
   const handleSubmit = async (e: any) => {
+    setError('');
+    setSignup('');
     if (checkPassword() && checkPseudo()) {
       try {
         const response = await fetch(API_SIGNUP, {
@@ -24,28 +25,25 @@ export default function SignUpPage() {
           body: JSON.stringify({email, password, pseudo}),
         });
         if (response.ok) {
-          router.push('/flucks/login');
-          router.refresh();
+          setSignup('Inscription réussie');
         } else {
-          console.error('Email déjà utilisé', error);
           setError('Email déjà utilisé');
         }
       } catch (error) {
-        console.error('Erreur serveur', error);
         setError('Erreur serveur');
       }
     }
   };
 
   const checkPassword = () => {
-    if (password !== password2) {
+    if (password === '' || password2 === '' || password !== password2) {
       setError('Les mots de passe ne correspondent pas');
       return false;
     }
     return true;
   };
   const checkPseudo = () => {
-    if (pseudo.length < 4) {
+    if (pseudo === '' || pseudo.length < 4) {
       setError('Le pseudo doit contenir au moins 4 caractères');
       return false;
     }
@@ -53,7 +51,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <form className={'flex w-full flex-col items-center md:w-5/6 pb-2'} onSubmit={handleSubmit}>
+    <div className={'flex w-full flex-col items-center pb-2 md:w-5/6'}>
       <div className={'mx-auto mb-4 w-fit'}>
         <p className={'mb-1 text-sm font-bold'}>Email :</p>
         <input
@@ -108,25 +106,26 @@ export default function SignUpPage() {
       </div>
 
       {error && <p className='text-red-500'>{error}</p>}
+      {signup && <p className='text-green-700'>{signup}</p>}
 
       <div className={'flex flex-col gap-2 md:flex-row'}>
-        <input
-          type={'submit'}
-          value={'S’inscrire'}
+        <button
+          onClick={handleSubmit}
           className={
             'mr-4 min-w-fit rounded-xl bg-[#19AFFB] px-6 py-2 text-sm font-bold text-white drop-shadow-lg hover:border-2 hover:bg-white hover:text-[#19AFFB]'
           }
-        />
-
+        >
+          S’inscrire
+        </button>
         <Link
           className={
             'min-w-fit rounded-xl border-2 bg-gray-100 px-6 py-2 text-sm font-bold drop-shadow-lg hover:bg-black hover:text-white'
           }
-          href={'/flucks/login'}
+          href={'/flucks/signin'}
         >
           J'ai déjà un compte
         </Link>
       </div>
-    </form>
+    </div>
   );
 }
