@@ -3,8 +3,8 @@ import stream from "./stream.js";
 import record from "./record.js";
 import end from "./end.js";
 
-export default (wss) => {
-    wss.on("connection", (socket) => {
+export function event(ws)  {
+    ws.on("connection", (socket) => {
         console.log("Connection")
 
         let user = {}
